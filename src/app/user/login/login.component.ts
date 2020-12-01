@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { GlobalConstants } from 'src/app/core/constants/global-constants';
 import { UserService } from '../user.service';
 
 @Component({
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
      console.log(user);
       sessionStorage.setItem('userId',user._id);
       sessionStorage.setItem('email',user.email);
+      GlobalConstants.isLogged = true;
       this.router.navigate(['home']);
      },
      err=>{

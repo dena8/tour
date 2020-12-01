@@ -4,6 +4,7 @@ import { IUserRegister } from 'src/app/model/user-register';
 import { confirmCustomValidator } from './confirm.validator';
 import {UserService} from '../user.service'
 import { Router } from '@angular/router';
+import { GlobalConstants } from '../../core/constants/global-constants';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class RegisterComponent implements OnInit {
       .subscribe((user) => {        
         sessionStorage.setItem('userId',user._id);
         sessionStorage.setItem('email',user.email);
+        GlobalConstants.isLogged = true;
         this.router.navigate(['home']);
       });
           
