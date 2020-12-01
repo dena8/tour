@@ -1,0 +1,22 @@
+<!-- <p>category works!</p> -->
+<h1>Treks</h1>
+<div class="row">
+    <div class="col-lg-2"  *ngFor="let tour of firstCategory" >   
+      
+       <app-tour-card  [tour]="tour" ></app-tour-card>
+    </div>   
+</div>
+<div class="row">
+    <div class="col-lg-2"  *ngFor="let tour of secondCategory" >   
+      
+       <app-tour-card  [tour]="tour" ></app-tour-card>
+    </div>   
+</div>
+<!-- <h1 class="second">Alpinism</h1> -->
+<!-- <div class="row">
+    <div class="col-lg-2"  >
+      
+       <app-tour-card></app-tour-card>
+    </div>   
+</div> -->
+
