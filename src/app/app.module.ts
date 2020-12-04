@@ -11,7 +11,10 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 //import { CreateComponent } from './tour/create/create.component';
 import {TourModule} from './tour/tour.module';
-import { ReactiveFormsModule } from '@angular/forms';
+//import { ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {HTTP_INTERCEPTORS,} from '@angular/common/http';
+import {JwtInterceptorService} from './core/interceptors/jwt-interceptor.service'
 
 
 
@@ -29,10 +32,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     TourModule,
+    FontAwesomeModule,
    // ReactiveFormsModule
    
   ],  
-  providers: [],
+  providers: [[{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true }],],
   bootstrap: [AppComponent,HeaderComponent,FooterComponent]
 })
 export class AppModule { }

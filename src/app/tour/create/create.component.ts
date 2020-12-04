@@ -31,7 +31,10 @@ export class CreateComponent implements OnInit {
   }
 
   create() {
+   const token= localStorage.getItem('token')
+   console.log(token);
     this.tourService.postCreate(this.form.value).subscribe(data=>{
+      console.log(data);
        this.router.navigate(['home'])
     },err=>{
       console.log(err);

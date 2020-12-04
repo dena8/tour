@@ -4,7 +4,9 @@ export interface ICreateTour {
     description:string,
     category:string,
     startAndEnd:string,
-    properties:string,
+    season:string
+    numberDaysAndNights:string
+    difficulty:string
     image:string,
     creator:string
 }

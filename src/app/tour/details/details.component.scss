@@ -1,0 +1,22 @@
+
+.container{
+    display: flex;
+    flex-direction: column;
+   // justify-content: space-between;
+    
+}
+
+button{
+    display: inline-block;
+    height: 50px;   
+  margin: 10px;
+    text-decoration: solid;
+}
+.bf{
+    display: flex;
+    flex-direction:column ;   
+   
+    position: relative;
+    border: 1px solid black;
+    margin: 15px;
+}

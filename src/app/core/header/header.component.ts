@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { GlobalConstants } from '../constants/global-constants';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/user/user.service';
+
 
 @Component({
   selector: 'app-header',
@@ -8,11 +10,16 @@ import { GlobalConstants } from '../constants/global-constants';
 })
 export class HeaderComponent implements OnInit {
 
-  isLogged: boolean = GlobalConstants.isLogged
 
-  constructor() { }
+
+  constructor(public userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  logout() {
+    this.userService.logout();
+    this.router.navigate(['home']);
   }
 
 }

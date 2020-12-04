@@ -10,14 +10,20 @@
         <li class="nav-item active">
           <a class="nav-link"  [routerLink]="['/home']">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item" *ngIf="isLogged">
-          <a class="nav-link" [routerLink]="['/about']"  >About</a>
+        <li class="nav-item"  >
+          <a class="nav-link" [routerLink]="['/about']">About</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!userService.isAuthenticated()">
           <a class="nav-link" [routerLink] ="['/user','register']">Register</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!userService.isAuthenticated()">
           <a class="nav-link" [routerLink]="['/user','login']" >Login</a>
+        </li>  
+        <li class="nav-item" *ngIf="userService.isAuthenticated()">
+          <a class="nav-link" (click)="logout()" >Logout</a>
+        </li>  
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/tour','category']">Category</a>
         </li>  
      
       </ul>       

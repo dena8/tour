@@ -13,22 +13,30 @@ export class CategoryComponent implements OnInit {
   categories: string[];
   firstCategory: ICreateTour[];
   secondCategory: ICreateTour[];
-  tourSub:Subscription
+  tourSub: Subscription
 
   constructor(private tourService: TourService, private router: Router) {
 
   }
 
-  ngOnInit(): void {    
-        
-      this.tourSub=  this.tourService.getToursByCategory('trek').subscribe(tours => {          
-          this.firstCategory = tours;
-          console.log(this.firstCategory);
-        })
-        this.tourSub=  this.tourService.getToursByCategory('treking').subscribe(tours => {          
-          this.secondCategory = tours;
-        })     
-    
+  ngOnInit(): void {
+    this.tourSub = this.tourService.getCategories().subscribe(data => {
+      this.categories = data;
+      this.tourSub = this.tourService.getToursByCategory(this.categories[0]).subscribe(tours => {
+        this.firstCategory = tours;
+      })
+      this.tourSub = this.tourService.getToursByCategory(this.categories[1]).subscribe(tours => {
+        this.secondCategory = tours;
+      })
+    })
+    // this.tourSub=  this.tourService.getToursByCategory('trek').subscribe(tours => {          
+    //     this.firstCategory = tours;
+    //     console.log(this.firstCategory);
+    //   })
+    // this.tourSub = this.tourService.getToursByCategory('treking').subscribe(tours => {
+    //   this.secondCategory = tours;
+    // })
+
   }
 
   ngOnDestroy() {

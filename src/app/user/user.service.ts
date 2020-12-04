@@ -21,5 +21,15 @@ export class UserService {
        return this.http.post<ILogin>('http://localhost:3000/login',user)
   }
 
+  isAuthenticated():boolean{
+    return localStorage.getItem('token')!==null;
+  }
+
+  logout(){
+    localStorage.removeItem('token');
+    localStorage.removeItem('email');     
+     localStorage.removeItem('userId');  
+  }
+
 
 }
