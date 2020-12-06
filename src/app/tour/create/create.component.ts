@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { CategoryService } from 'src/app/category/category.service';
+import { ICategory } from 'src/app/model/category';
 
 import {TourService} from '../tour.service'
 
@@ -11,9 +14,17 @@ import {TourService} from '../tour.service'
 })
 export class CreateComponent implements OnInit {
   form: FormGroup;
-  constructor(private fb: FormBuilder, private tourService:TourService,private router:Router) { }
+  categories$: Observable<ICategory[]>;
+
+  
+  constructor(private fb: FormBuilder,
+     private tourService:TourService,
+     private router:Router,
+     private categoryService:CategoryService) { }
 
   ngOnInit(): void {
+  this.categories$=  this.categoryService.getAllCategories();  
+
     this.form = this.fb.group({
       name: ['', [Validators.required]],
       description: ['', Validators.required],
@@ -31,14 +42,13 @@ export class CreateComponent implements OnInit {
   }
 
   create() {
-   const token= localStorage.getItem('token')
-   console.log(token);
-    this.tourService.postCreate(this.form.value).subscribe(data=>{
-      console.log(data);
-       this.router.navigate(['home'])
-    },err=>{
+   console.log(this.form.value);
+   this.tourService.createTour(this.form.value).subscribe(tour=>{
+     console.log(tour);
+       this.router.navigate(['home']);
+   },err=>{
       console.log(err);
-    })
+   })
   }
 
 }

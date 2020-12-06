@@ -40,7 +40,7 @@
             <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
           </div>
           <select formControlName="phoneCode" class="custom-select" style="max-width: 120px;">
-            <option  *ngFor="let phoneCode of phoneCodes" value="{{phoneCode}}">{{phoneCode}}</option> 
+            <option  *ngFor="let phoneCode of phoneCodes" value="{{phoneCode}}">{{phoneCode}}</option>           
                     
           </select>
           <div class="alert alert-danger" *ngIf="f.phoneCode.errors?.required && f.phoneCode.touched" >

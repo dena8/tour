@@ -14,7 +14,11 @@ import {TourModule} from './tour/tour.module';
 //import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {HTTP_INTERCEPTORS,} from '@angular/common/http';
-import {JwtInterceptorService} from './core/interceptors/jwt-interceptor.service'
+import {JwtInterceptorService} from './core/interceptors/jwt-interceptor.service';
+import {CategoryModule} from './category/category.module'
+
+
+
 
 
 
@@ -23,6 +27,7 @@ import {JwtInterceptorService} from './core/interceptors/jwt-interceptor.service
     AppComponent,
     HomeComponent,
     
+       
      
   ],
   imports: [
@@ -33,6 +38,8 @@ import {JwtInterceptorService} from './core/interceptors/jwt-interceptor.service
     HttpClientModule,
     TourModule,
     FontAwesomeModule,
+    CategoryModule
+    
    // ReactiveFormsModule
    
   ],  

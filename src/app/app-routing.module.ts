@@ -4,7 +4,7 @@ import { Route, RouterModule } from '@angular/router';
 import { AboutComponent } from './core/about/about.component';
 import { HomeComponent } from './home/home.component';
 
-//import {} from './user/user.module'
+
 
 
 const routes: Route[] = [
@@ -12,7 +12,9 @@ const routes: Route[] = [
   {path:'home',component:HomeComponent},
   {path:'user',loadChildren:'./user/user.module#UserModule'}, 
   {path:'about', component:AboutComponent},
-  {path:'tour',loadChildren:'./tour/tour.module#TourModule'}
+  {path:'tour',loadChildren:'./tour/tour.module#TourModule'},
+  {path:'category',loadChildren:'./category/category.module#CategoryModule'}
+  
   
 ];
 

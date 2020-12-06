@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ICreateTour } from 'src/app/model/tour-create';
+import { ITour } from 'src/app/model/tour-create';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -12,7 +12,7 @@ export class TourCardComponent implements OnInit {
   faCoffee = faCoffee
 
   @Input()
-  tour:ICreateTour;
+  tour:ITour;
   constructor() { }
 
   ngOnInit(): void {

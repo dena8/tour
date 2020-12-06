@@ -22,8 +22,8 @@
         </div>
         <div class="alert alert-danger" *ngIf="f.description.errors?.required&&f.description.touched">
           Field is required!
-        </div>
-        <div class="form-group input-group">
+        </div>        
+        <!-- <div class="form-group input-group">
           <div class="input-group-prepend">
             <span class="input-group-text"> <i class="fa fa-user"></i> </span>
           </div>
@@ -31,7 +31,25 @@
         </div>
         <div class="alert alert-danger" *ngIf="f.category.errors?.required&&f.category.touched">
           Field is required!
+        </div> -->
+
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+          </div>
+          <select formControlName="category" class="custom-select" style="max-width: 120px;">
+            <option>Choose</option>  
+            <option *ngFor="let category of categories$ | async" >{{category.name}}</option>  
+                    
+          </select>
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+          </div>
+          <!-- <input class="form-control" formControlName="category" placeholder="Or Create Category"> -->
+          <button [routerLink]="['/category','create']" >Create Category</button>
         </div>
+          
+
         <div class="form-group input-group">
           <div class="input-group-prepend">
             <span class="input-group-text"> <i class="fa fa-user"></i> </span>

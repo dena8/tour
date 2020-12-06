@@ -5,7 +5,7 @@ import {CreateComponent} from './create/create.component'
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-import { CategoryComponent } from './category/category.component';
+
 import { TourCardComponent } from './tour-card/tour-card.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -15,7 +15,7 @@ import { RandomComponent } from './random/random.component';
 
 
 @NgModule({
-  declarations: [CreateComponent,  CategoryComponent, TourCardComponent, DetailsComponent, RandomComponent],
+  declarations: [CreateComponent,  TourCardComponent, DetailsComponent, RandomComponent],
   imports: [
     CommonModule,
    // FormsModule,
@@ -24,14 +24,14 @@ import { RandomComponent } from './random/random.component';
     RouterModule.forChild([
       {path:'create',component:CreateComponent},    
       {path:'card',component:TourCardComponent},
-      {path:'category',component:CategoryComponent},
+   
       {path:'details',component:DetailsComponent},
 
     ])
   ],
   exports:[
     CreateComponent,   
-    CategoryComponent,
+
     TourCardComponent    
   ]
 })
