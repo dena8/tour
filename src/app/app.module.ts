@@ -9,14 +9,12 @@ import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-//import { CreateComponent } from './tour/create/create.component';
 import {TourModule} from './tour/tour.module';
-//import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {HTTP_INTERCEPTORS,} from '@angular/common/http';
 import {JwtInterceptorService} from './core/interceptors/jwt-interceptor.service';
 import {CategoryModule} from './category/category.module'
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -38,12 +36,15 @@ import {CategoryModule} from './category/category.module'
     HttpClientModule,
     TourModule,
     FontAwesomeModule,
-    CategoryModule
-    
-   // ReactiveFormsModule
+    CategoryModule,
+    BrowserAnimationsModule,
+   
    
   ],  
-  providers: [[{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true }],],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
+   // {provide:HTTP_INTERCEPTORS,useClass: ResponseHandlerInterceptorService, multi:true}
+  ],  
   bootstrap: [AppComponent,HeaderComponent,FooterComponent]
 })
 export class AppModule { }

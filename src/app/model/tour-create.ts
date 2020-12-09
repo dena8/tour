@@ -1,12 +1,12 @@
-export interface ITour {
-    _id:string;
-    name: string;
+import {IBase} from './base';
+export interface ITour<T=string> extends IBase {   
     description:string;
-    category:string;
+    category:T;
     startAndEnd:string;
-    season:string;
-    numberDaysAndNights:string;
+    participants:number;
     difficulty:string;
     image:string;
-    creator:string    
+    price:number 
+   
+      
 }

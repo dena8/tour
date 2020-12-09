@@ -1,27 +1,28 @@
+
 <div class="container">
-<div class="card bg-dark text-white">
-    <img src="../../../assets/image/DSC01503.JPG" class="card-img" alt="...">
-    <div class="card-img-overlay">
-        <h1 class="card-title">Card title</h1>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+    <div class="card bg-dark text-white">
+        <img src="{{tour.image}}" class="card-img" alt="...">
+        <div class="card-img-overlay">
+            <h1 class="card-title"></h1>
+            <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
             content. This content is a little bit longer.</p>
-        <p class="card-text">Last updated 3 mins ago</p>
+        <p class="card-text">Last updated 3 mins ago</p> -->
+        </div>
     </div>
+
+    <ul class="list-group">
+        <li class="list-group-item">{{tour.name}}</li>
+        <li class="list-group-item">Description: {{tour.description}}</li>
+        <li class="list-group-item">Category: {{tour.category.name}}</li>
+        <li class="list-group-item">Difficulty level: {{tour.difficulty}}</li>
+        <li class="list-group-item">Vacant place: {{tour.participants}}</li>
+        <li class="list-group-item">Start day: {{tour.startAndEnd.split(" ")[0]}}</li>
+    </ul>
+<div style="width: 50%; word-wrap: break-word; padding: 2%; ">
+    <p style="width: 100%; word-wrap: break-word;" class="lead">
+    </p>
+    <button [routerLink]="['/tour','description',tour._id]" class="btn btn-danger">Description</button>
+    <!-- <button *ngIf="true" type="button" class="btn btn-info">Already join. Don't be late</button> -->
+    
 </div>
 
-<ul class="list-group">
-    <li class="list-group-item">Cras justo odio</li>
-    <li class="list-group-item">Dapibus ac facilisis in</li>
-    <li class="list-group-item">Morbi leo risus</li>
-    <li class="list-group-item">Porta ac consectetur ac</li>
-    <li class="list-group-item">Vestibulum at eros</li>
-</ul>
-<!-- <button type="button" class="btn btn-primary">Primary</button>
-<button type="button" class="btn btn-primary">Primary</button> -->
-
-</div>
-<!-- <button type="button" class="btn btn-primary">Primary</button> -->
-<div class="bf">
-<button type="button" class="btn btn-outline-primary">Primary</button>
-<button type="button" class="btn btn-outline-primary">Primary</button>
-</div>

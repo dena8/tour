@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-
 import {IUserRegister} from '../model/user-register';
 import {ILogin} from '../model/user-login';
 import {Observable} from 'rxjs'
+
+const DB_URL ='http://localhost:3000/api/user'
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +14,11 @@ export class UserService {
   constructor(private http:HttpClient) { }
 
   postRegister(user:IUserRegister): Observable<IUserRegister>{
-      return this.http.post<IUserRegister>('http://localhost:3000/register',user);
+      return this.http.post<IUserRegister>(DB_URL+'/register',user);
   }
 
   postLogin(user:ILogin):Observable<ILogin>{
-       return this.http.post<ILogin>('http://localhost:3000/login',user)
+       return this.http.post<ILogin>(DB_URL+'/login',user)
   }
 
   isAuthenticated():boolean{
@@ -29,6 +29,10 @@ export class UserService {
     localStorage.removeItem('token');
     localStorage.removeItem('email');     
      localStorage.removeItem('userId');  
+  }
+
+  getToken(){
+    return localStorage.getItem('token');
   }
 
 

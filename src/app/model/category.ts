@@ -1,5 +1,5 @@
-export interface ICategory {
-    _id:string;
-    name:string; 
-    creator:string;   
+import {IBase} from './base';
+
+export interface ICategory extends IBase {
+    
 }

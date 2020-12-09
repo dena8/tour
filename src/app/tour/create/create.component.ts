@@ -29,11 +29,11 @@ export class CreateComponent implements OnInit {
       name: ['', [Validators.required]],
       description: ['', Validators.required],
       category: ['', Validators.required],
-      startAndEnd: ['', Validators.required],
-      season: ['', [Validators.required]],      
-      numberDaysAndNights: ['', [Validators.required]],
+      startAndEnd: ['', Validators.required],          
+      participants: ['', [Validators.required]],
       difficulty: ['', [Validators.required]],
-      image:['',Validators.required]
+      image:['',Validators.required],
+      price:['',Validators.required],
     })
   }
 

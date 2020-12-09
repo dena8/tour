@@ -1,0 +1,32 @@
+
+  
+    <!-- <div  class="cart" *ngIf="isCart">
+        <app-cart ></app-cart>
+    </div> -->
+  
+    <div class="container">
+        <div class="card bg-dark text-white">
+            <img src="{{(tour$|async).image}}" class="card-img" alt="...">
+            <div class="card-img-overlay">
+                <h1 class="card-title"></h1>
+                <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+            content. This content is a little bit longer.</p>
+        <p class="card-text">Last updated 3 mins ago</p> -->
+            </div>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item">{{(tour$ | async).name}}</li>
+            <li class="list-group-item">Category:{{(tour$ |async).category.name}}</li>
+            <li class="list-group-item">Difficulty level : {{(tour$ |async).difficulty}}</li>
+            <li class="list-group-item">Vacant place: {{(tour$ |async).participants}}</li>
+            <li class="list-group-item">Start day: {{(tour$ |async).startAndEnd.split(" ")[0]}}</li>
+        </ul>
+        <div style="width: 50%; word-wrap: break-word; padding: 2%; ">
+            <p style="width: 100%; word-wrap: break-word;" class="lead">
+            </p>
+            <button [routerLink]="['/tour','details']" class="btn btn-danger">Close this tripp</button>
+            <button type="button" (click)="clickJoin()" class="btn btn-danger">Join</button>
+            <button *ngIf="true" type="button" class="btn btn-info">Already join. Don't be late</button>
+        </div>
+    </div>
+   

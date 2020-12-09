@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ITour } from 'src/app/model/tour-create';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { ICategory } from 'src/app/model/category';
+import { ITour } from '../../model/tour-create';
+import { TourService } from '../tour.service';
+import {Observable} from 'rxjs'
+
 
 @Component({
   selector: 'app-tour-card',
@@ -8,15 +11,21 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./tour-card.component.scss']
 })
 export class TourCardComponent implements OnInit {
+ // tours$:Observable<any>;
+ tours:ITour<ICategory>[]
 
-  faCoffee = faCoffee
-
-  @Input()
-  tour:ITour;
-  constructor() { }
+  
+  constructor(private tourService:TourService) { }
 
   ngOnInit(): void {
-    console.log(this.tour.name);
+  //  this.tours$ = this.tourService.getPopulatedTours();
+  //  console.log(this.tours$);
+  this.tourService.getPopulatedTours().subscribe((data)=>{    
+    this.tours=data
+  },err=>{
+    console.log(err);
+  })
+ 
   }
 
 }

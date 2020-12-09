@@ -9,14 +9,21 @@
 button{
     display: inline-block;
     height: 50px;   
-  margin: 10px;
+    margin: 10px;
+   // padding: 0px;
     text-decoration: solid;
-}
-.bf{
-    display: flex;
-    flex-direction:column ;   
+   // background-color:#007bff;
    
-    position: relative;
-    border: 1px solid black;
-    margin: 15px;
 }
+// .bf{
+//     display: flex;
+    
+    
+//    // flex-direction:column ;   
+   
+//    // position: relative;
+//    // border: 1px solid black;
+//     margin: 15px;
+//     padding-right: 100px;
+// }
+
