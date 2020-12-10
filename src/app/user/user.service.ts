@@ -25,10 +25,14 @@ export class UserService {
     return localStorage.getItem('token')!==null;
   }
 
+  isAdmin():boolean{
+    return JSON.parse(localStorage.getItem('admin'));
+  }
+
   logout(){
     localStorage.removeItem('token');
-    localStorage.removeItem('email');     
-     localStorage.removeItem('userId');  
+    localStorage.removeItem('admin');
+    
   }
 
   getToken(){

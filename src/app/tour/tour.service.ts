@@ -35,5 +35,8 @@ export class TourService {
     return this.http.get<IUser<ITour>>('http://localhost:3000/api/user/get');
  }
   
+  makeOrder():Observable<Object> {
+   return this.http.put('http://localhost:3000/api/cart/order',[]);
+ }
 
 }

@@ -42,8 +42,12 @@ export class RegisterComponent implements OnInit {
         }
         
         localStorage.setItem('token', user['token']);
-         localStorage.setItem('email', user['user']['email']);
-         localStorage.setItem('userId', user['user']['_id']);
+        //  localStorage.setItem('email', user['user']['email']);
+        //  localStorage.setItem('userId', user['user']['_id']);
+         localStorage.setItem('admin',JSON.stringify(user['isAdmin']))
+        
+      
+         
         this.router.navigate(['home']);
       });
 

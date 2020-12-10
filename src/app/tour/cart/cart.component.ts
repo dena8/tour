@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ITour } from 'src/app/model/tour-create';
 import {IUser} from '../../model/user';
@@ -15,7 +16,7 @@ export class CartComponent implements OnInit {
   // tours:ITour[]
   tourSum:number
 
-  constructor(private tourService:TourService) { }
+  constructor(private tourService:TourService, private router:Router) { }
 
   ngOnInit(): void {
      this.user$ = this.tourService.getCurrentUser();
@@ -26,6 +27,15 @@ export class CartComponent implements OnInit {
     // })
     this.tourService.getCurrentUser().subscribe(user=>{
       this.tourSum = user.tours.reduce((acc,{price})=>acc+price,0);     
+    },err=>{
+      console.log(err);
+    })
+  }
+
+  order(){
+    this.tourService.makeOrder().subscribe(data=>{
+      console.log(data);
+        this.router.navigate(['tour','tour-card']); 
     },err=>{
       console.log(err);
     })

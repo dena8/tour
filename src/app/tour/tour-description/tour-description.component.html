@@ -24,9 +24,9 @@
         <div style="width: 50%; word-wrap: break-word; padding: 2%; ">
             <p style="width: 100%; word-wrap: break-word;" class="lead">
             </p>
-            <button [routerLink]="['/tour','details']" class="btn btn-danger">Close this tripp</button>
-            <button type="button" (click)="clickJoin()" class="btn btn-danger">Join</button>
-            <button *ngIf="true" type="button" class="btn btn-info">Already join. Don't be late</button>
+            <button *ngIf="userService.isAdmin()" (click)="deleteTour()" class="btn btn-danger">Delete</button>
+            <button *ngIf="!userService.isAdmin()&& userService.isAuthenticated()" type="button" (click)="clickJoin()" class="btn btn-danger">Join</button>
+            <button *ngIf="false" type="button" class="btn btn-info">Already join. Don't be late</button>
         </div>
     </div>
    

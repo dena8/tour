@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { UserService } from 'src/app/user/user.service';
 import { ICategory } from '../../model/category';
 import { ITour } from '../../model/tour-create';
 import { TourService } from '../tour.service';
@@ -16,7 +17,7 @@ export class TourDescriptionComponent implements OnInit {
   isCart: boolean = false;
 
 
-  constructor(private tourService: TourService, private activatedRoute: ActivatedRoute,private router:Router) { }
+  constructor(private tourService: TourService,public userService:UserService, private activatedRoute: ActivatedRoute,private router:Router) { }
 
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.params.id;
@@ -34,7 +35,10 @@ export class TourDescriptionComponent implements OnInit {
         console.log(err);
       })
     })
+  }
 
+  deleteTour(){
+    
   }
 
 }

@@ -1,15 +1,8 @@
 <div class="main">
   <h2>Tours portfolio </h2>
   <div class="col" *ngFor="let tour of tours">
-    <div class="col-lg-4">
-      <!-- <p>{{tour.name}}</p> -->
+    <div class="col-lg-4">   
       <app-details [tour] = "tour"></app-details>    
     </div>
   </div>
-  <!-- <h4>Theatre Movies</h4>
-  <div class="row">
-    <div class="col-lg-3">
-      <app-details></app-details>
-    </div>
-  </div> -->
 </div>

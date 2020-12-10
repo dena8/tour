@@ -7,7 +7,7 @@
         <p *ngFor="let tour of (user$|async).tours"><a>{{tour.name}}: article.price</a><button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></p>
         <footer class="blockquote-footer">Total amount: {{tourSum}}  <cite
           title="Source Title">Total amount </cite>
-          Place order:<button class="btn btn-outline-success" >Order</button>
+          Place order:<button class="btn btn-outline-success" (click)="order()" >Order</button>
         </footer>
       </blockquote>
     </div>  
