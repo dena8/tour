@@ -19,8 +19,7 @@ export class CreateCategoryComponent implements OnInit {
     })
   }
 
-  createCategory() {
-    console.log(this.form.value);
+  createCategory() {   
     if (this.form.invalid) { return; }
      this.categoryService.createCategory(this.form.value).subscribe(data=>{
     

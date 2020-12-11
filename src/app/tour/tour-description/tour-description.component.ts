@@ -14,10 +14,10 @@ import { TourService } from '../tour.service';
 export class TourDescriptionComponent implements OnInit {
 
   tour$: Observable<ITour<ICategory>>;
-  isCart: boolean = false;
+  
 
 
-  constructor(private tourService: TourService,public userService:UserService, private activatedRoute: ActivatedRoute,private router:Router) { }
+  constructor(private tourService: TourService, public userService: UserService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.params.id;
@@ -25,20 +25,30 @@ export class TourDescriptionComponent implements OnInit {
   }
 
   clickJoin() {
-
-    this.isCart = true;
-    this.tour$.subscribe((data) => {
-
+    // this.isCart = true;
+    this.tour$.subscribe((data) => {      
+      if(data.participants>0){
       this.tourService.addTourToCart(data).subscribe(data => {
-          this.router.navigate(['home']);
+        this.router.navigate(['home']);
+      }, err => {
+        console.log(err);
+      });
+      this.tourService.updateParticipants(this.activatedRoute.snapshot.params.id).subscribe(data => {
+        console.log(data);
       }, err => {
         console.log(err);
       })
-    })
+    }
+    });
+   
   }
 
-  deleteTour(){
-    
+  deleteTour() {
+    this.tourService.deleteTour(this.activatedRoute.snapshot.params.id).subscribe(data => {
+      this.router.navigate(['tour-card']);
+    }, err => {
+      console.log("delete err", err);
+    });
   }
 
 }

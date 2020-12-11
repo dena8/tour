@@ -5,6 +5,7 @@ import { ITour } from 'src/app/model/tour-create';
 import {IUser} from '../../model/user';
 import { TourService } from '../tour.service';
 
+
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -35,10 +36,14 @@ export class CartComponent implements OnInit {
   order(){
     this.tourService.makeOrder().subscribe(data=>{
       console.log(data);
-        this.router.navigate(['tour','tour-card']); 
+        this.router.navigate(['tour-card']); 
     },err=>{
       console.log(err);
     })
+  }
+
+  removeItem(tourName:string){
+   
   }
 
 }

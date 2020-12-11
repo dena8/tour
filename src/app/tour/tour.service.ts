@@ -39,4 +39,12 @@ export class TourService {
    return this.http.put('http://localhost:3000/api/cart/order',[]);
  }
 
+ deleteTour(id):Observable<string>{
+   return this.http.get<string>(dbUrl+'/remove'+`/${id}`);
+ }
+
+ updateParticipants(id):Observable<string>{
+   return this.http.put<string>(dbUrl+"/update-participants/"+id,{});
+ }
+
 }

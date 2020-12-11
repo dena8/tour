@@ -3,18 +3,21 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {UserModule} from '../app/user/user.module'
-import {CoreModule} from '../app/core/core.module'
+import { UserModule } from '../app/user/user.module'
+import { CoreModule } from '../app/core/core.module'
 import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import {TourModule} from './tour/tour.module';
+import { TourModule } from './tour/tour.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {HTTP_INTERCEPTORS,} from '@angular/common/http';
-import {JwtInterceptorService} from './core/interceptors/jwt-interceptor.service';
-import {CategoryModule} from './category/category.module'
+import { HTTP_INTERCEPTORS, } from '@angular/common/http';
+import { JwtInterceptorService } from './core/interceptors/jwt-interceptor.service';
+import { CategoryModule } from './category/category.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { NotificationHandlerService } from './core/service/notification-handler.service'
+
 
 
 
@@ -24,27 +27,28 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   declarations: [
     AppComponent,
     HomeComponent,
-    
-       
-     
+
+
+
   ],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     UserModule,
-    CoreModule,    
+    CoreModule,
     AppRoutingModule,
     HttpClientModule,
     TourModule,
     FontAwesomeModule,
     CategoryModule,
     BrowserAnimationsModule,
-   
-   
-  ],  
+    ToastrModule.forRoot()
+
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
-   // {provide:HTTP_INTERCEPTORS,useClass: ResponseHandlerInterceptorService, multi:true}
-  ],  
-  bootstrap: [AppComponent,HeaderComponent,FooterComponent]
+    { provide: HTTP_INTERCEPTORS, useClass: NotificationHandlerService, multi: true },
+  
+  ],
+  bootstrap: [AppComponent, HeaderComponent, FooterComponent]
 })
 export class AppModule { }
