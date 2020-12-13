@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ITour } from 'src/app/model/tour-create';
-import { UserService } from 'src/app/user/user.service';
-import { IUser } from '../../model/user';
-import { TourService } from '../tour.service';
+import { ITour } from '../../core/model/tour-create';
+import { UserService } from '../../core/service/user.service';
+import { IUser } from '../../core/model/user';
+import { TourService } from '../../core/service/tour.service';
 
 
 @Component({

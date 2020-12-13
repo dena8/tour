@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 
-import { AboutComponent } from './core/about/about.component';
-import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './sample/about/about.component';
+import { HomeComponent } from './sample/home/home.component';
 import {AuthGuardGuard} from './core/gards/auth-guard.guard'
 import { TourCardComponent } from './tour/tour-card/tour-card.component';
 

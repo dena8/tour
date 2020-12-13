@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CategoryService } from 'src/app/category/category.service';
-import { ICategory } from 'src/app/model/category';
+import { CategoryService } from 'src/app/core/service/category.service';
+import { ICategory } from '../../core/model/category';
 
-import {TourService} from '../tour.service'
+import {TourService} from '../../core/service/tour.service'
 
 @Component({
   selector: 'app-create',

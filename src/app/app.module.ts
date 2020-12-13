@@ -5,9 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserModule } from '../app/user/user.module'
 import { CoreModule } from '../app/core/core.module'
-import { HeaderComponent } from './core/header/header.component';
-import { FooterComponent } from './core/footer/footer.component';
-import { HomeComponent } from './home/home.component';
+// import { HeaderComponent } from './shared/footer/header/header.component';
+// import { FooterComponent } from './shared/footer/footer.component';
+//import { HomeComponent } from './sample/home/home.component';
+import {SampleModule} from './sample/sample.module';
+import {SharedModule} from './shared/shared.module'
 import { HttpClientModule } from '@angular/common/http';
 import { TourModule } from './tour/tour.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -26,13 +28,14 @@ import { NotificationHandlerService } from './core/interceptors/notification-han
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent,
+    AppComponent,    
     ],
   imports: [
     BrowserModule,
     UserModule,
     CoreModule,
+    SampleModule,
+    SharedModule,
     AppRoutingModule,
     HttpClientModule,
     TourModule,
@@ -51,6 +54,6 @@ import { NotificationHandlerService } from './core/interceptors/notification-han
     { provide: HTTP_INTERCEPTORS, useClass: NotificationHandlerService, multi: true },
     
   ],
-  bootstrap: [AppComponent, HeaderComponent, FooterComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

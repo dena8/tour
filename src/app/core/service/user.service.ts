@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {IUserRegister} from '../model/user-register';
-import {ILogin} from '../model/user-login';
+import {IUserRegister} from '../../core/model/user-register';
+import {ILogin} from '../../core/model/user-login';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';

@@ -24,7 +24,7 @@ export class NotificationHandlerService implements HttpInterceptor {
       }
         
     }),catchError((err)=>{    
-      const msg = err.error.msg ||err.error.message
+      const msg = err.error.msg ||err.error.message||'server not work'
      this.toastr.error(msg,'Error!');     
              throw err; 
   

@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ICategory } from 'src/app/model/category';
-import { ITour } from '../../model/tour-create';
-import { TourService } from '../tour.service';
-import {Observable} from 'rxjs'
+import { ICategory } from '../../core/model/category';
+import { ITour } from '../../core/model/tour-create';
+import { TourService } from '../../core/service/tour.service';
+
 
 
 @Component({

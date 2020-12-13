@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UserService } from 'src/app/user/user.service';
-import { ICategory } from '../../model/category';
-import { ITour } from '../../model/tour-create';
-import { TourService } from '../tour.service';
+import { UserService } from '../../core/service/user.service';
+import { ICategory } from '../../core/model/category';
+import { ITour } from '../../core/model/tour-create';
+import { TourService } from '../../core/service/tour.service';
 
 @Component({
   selector: 'app-tour-description',

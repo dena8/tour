@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IUserRegister } from 'src/app/model/user-register';
+import { IUserRegister } from '../../core/model/user-register';
 import { confirmCustomValidator } from './confirm.validator';
-import { UserService } from '../user.service'
+import { UserService } from '../../core/service/user.service'
 import { Router } from '@angular/router';
 
 

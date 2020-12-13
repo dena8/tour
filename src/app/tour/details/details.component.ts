@@ -1,8 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
-import { faCoffee,faGlobe,faMountain,faTree,faCloudMoon,faCompass,faCalendarTimes } from '@fortawesome/free-solid-svg-icons';
-import { ITour } from '../../model/tour-create';
-import {ICategory} from '../../model/category';
-import { UserService } from 'src/app/user/user.service';
+import { ITour } from '../../core/model/tour-create';
+import { UserService } from '../../core/service/user.service';
 
 @Component({
   selector: 'app-details',
