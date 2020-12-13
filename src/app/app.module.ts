@@ -15,8 +15,9 @@ import { HTTP_INTERCEPTORS, } from '@angular/common/http';
 import { JwtInterceptorService } from './core/interceptors/jwt-interceptor.service';
 import { CategoryModule } from './category/category.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { NotificationHandlerService } from './core/service/notification-handler.service'
+import { ToastrModule } from 'ngx-toastr';
+import { NotificationHandlerService } from './core/interceptors/notification-handler.service'
+
 
 
 
@@ -27,10 +28,7 @@ import { NotificationHandlerService } from './core/service/notification-handler.
   declarations: [
     AppComponent,
     HomeComponent,
-
-
-
-  ],
+    ],
   imports: [
     BrowserModule,
     UserModule,
@@ -41,13 +39,17 @@ import { NotificationHandlerService } from './core/service/notification-handler.
     FontAwesomeModule,
     CategoryModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      positionClass: 'toast-top-right',
+      preventDuplicates:true
+    }),
 
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: NotificationHandlerService, multi: true },
-  
+    
   ],
   bootstrap: [AppComponent, HeaderComponent, FooterComponent]
 })

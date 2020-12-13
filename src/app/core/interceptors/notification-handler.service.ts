@@ -13,19 +13,20 @@ export class NotificationHandlerService implements HttpInterceptor {
   constructor(public toastr:ToastrService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(tap((success)=>{
-     console.log(success);
+      
+     console.log("HttpResponse from success:",success);
+ 
       if(success instanceof HttpResponse){        
         if(success['body']['msg']){
-          this.toastr.success(success.body.msg)        
+          this.toastr.success(success.body.msg);      
         
         }
       }
         
-    }),catchError((err)=>{
-      console.log(err);
-      console.log(err.error.message);
-     this.toastr.error(err.error.message,'Error!');     
-             throw err;  
+    }),catchError((err)=>{    
+      const msg = err.error.msg ||err.error.message
+     this.toastr.error(msg,'Error!');     
+             throw err; 
   
     }))
   }
