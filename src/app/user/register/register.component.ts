@@ -34,29 +34,13 @@ export class RegisterComponent implements OnInit {
   register() {
     const newUser: IUserRegister = { ...this.form.value };
     this.userService.postRegister(newUser)
-      .subscribe((user) => {
-        console.log(user);
-        if(!user['token']){
-          this.router.navigate(['home']);
-          return;
-        }
-        
-        localStorage.setItem('token', user['token']);
-        //  localStorage.setItem('email', user['user']['email']);
-        //  localStorage.setItem('userId', user['user']['_id']);
-         localStorage.setItem('admin',JSON.stringify(user['isAdmin']))
-        
-      
-         
-        this.router.navigate(['home']);
+      .subscribe(() => {       
+        this.router.navigate(['login']);
       });
-
-
   }
 
   get f() {
     return this.form.controls;
   }
-
-
+  
 }
