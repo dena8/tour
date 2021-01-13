@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {IUserRegister} from '../../core/model/user-register';
 import {ILogin} from '../../core/model/user-login';
@@ -20,8 +20,8 @@ export class UserService {
       return this.http.post<IUserRegister>(DB_URL+'/users/register',user);    
   }
 
-  postLogin(user:string):Observable<string>{
-       return this.http.post<string>(DB_URL+'/users/login',user);    
+  postLogin(user:string):Observable<HttpResponse<ILogin>>{
+       return this.http.post<any>(DB_URL+'/users/login',user,{observe:'response'});    
   }
 
   isAuthenticated():boolean{
