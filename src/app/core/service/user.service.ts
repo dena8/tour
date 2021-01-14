@@ -29,12 +29,22 @@ export class UserService {
   }
 
   isAdmin():boolean{
+    console.log("IS ADMIN:",localStorage.getItem('admin'));
     return JSON.parse(localStorage.getItem('admin'));
+  }
+
+  hasAdminRole():boolean{
+    return this.isAuthenticated() && localStorage.getItem('roles').includes('ADMIN_ROLE');
+  }
+
+  hasUserRole():boolean{    
+    return this.isAuthenticated() && localStorage.getItem('roles').includes('USER_ROLE');
   }
 
   logout(){
     localStorage.removeItem('token');
-    localStorage.removeItem('admin');    
+    localStorage.removeItem('admin'); 
+    localStorage.removeItem('roles');   
     this.toastr.success('Successful logout');
     
   }

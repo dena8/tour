@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     })
 
   }
-  
+
   get f() {
     return this.form.controls;
   }
@@ -30,8 +30,8 @@ export class LoginComponent implements OnInit {
     this.userService.postLogin(this.form.value).subscribe(data => {
       const token = data.headers.get('Authorization');
       const decodeToken = this.jwtHelperService.decodeToken(token);
-      localStorage.setItem('token', data.headers.get('Authorization'));
-      localStorage.setItem('admin', decodeToken['roles'].includes('ADMIN_ROLE'));
+      localStorage.setItem('token', data.headers.get('Authorization'));     
+      localStorage.setItem('roles', decodeToken['roles']);    
       this.router.navigate(['home']);
     },
       err => {
