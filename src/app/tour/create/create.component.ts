@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CategoryService } from 'src/app/core/service/category.service';
 import { ICategory } from '../../core/model/category';
-
-import {TourService} from '../../core/service/tour.service'
+import {TourService} from '../../core/service/tour.service';
 
 @Component({
   selector: 'app-create',
@@ -31,7 +30,7 @@ export class CreateComponent implements OnInit {
       category: ['', Validators.required],
       startAndEnd: ['', Validators.required],          
       participants: ['', [Validators.required]],
-      difficulty: ['', [Validators.required]],
+      difficultyLevel: ['', [Validators.required]],
       image:['',Validators.required],
       price:['',Validators.required],
     })

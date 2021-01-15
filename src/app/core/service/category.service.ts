@@ -10,7 +10,7 @@ import {tap} from 'rxjs/operators'
 })
 export class CategoryService {
   category: ICategory;
-  dbUrl:string = 'http://localhost:3000/api/category'
+  dbUrl:string = 'http://localhost:5000/categories'
   constructor(private http: HttpClient, public toastr:ToastrService) {
   }
 

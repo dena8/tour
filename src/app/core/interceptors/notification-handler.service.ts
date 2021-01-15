@@ -18,11 +18,13 @@ export class NotificationHandlerService implements HttpInterceptor {
  
       if(success instanceof HttpResponse){   
         console.log("HttpResponse from success:ONE",success);     
-        if(success['body']['msg']){
-          console.log("HttpResponse from success:TWO",success);
-          this.toastr.success(success.body.msg);      
+        // if(success['body']['msg']){
+        //   console.log("HttpResponse from success:TWO",success);
+        //   this.toastr.success(success.body.msg);           
         
-        }
+        // }
+        this.toastr.success("TO DO SUCCESS MASSAGE");
+
       }
         
     }),catchError((err)=>{  

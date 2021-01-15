@@ -5,7 +5,7 @@ import { ITour } from '../model/tour-create';
 import { ICategory } from '../model/category';
 import {IUser} from '../model/user';
 
-const dbUrl = 'http://localhost:3000/api/tour'
+const dbUrl = 'http://localhost:5000/tours'
 
 @Injectable({
   providedIn: 'root'

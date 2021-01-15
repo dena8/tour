@@ -24,7 +24,7 @@ export class UserService {
        return this.http.post<any>(DB_URL+'/users/login',user,{observe:'response'});    
   }
 
-  isAuthenticated():boolean{
+  isAuthenticated():boolean{ 
     return localStorage.getItem('token')!==null;
   }
 
@@ -33,7 +33,7 @@ export class UserService {
     return JSON.parse(localStorage.getItem('admin'));
   }
 
-  hasAdminRole():boolean{
+  hasAdminRole():boolean{   
     return this.isAuthenticated() && localStorage.getItem('roles').includes('ADMIN_ROLE');
   }
 
