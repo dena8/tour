@@ -19,8 +19,7 @@ export class TourService {
   }
 
   getPopulatedTours():Observable<ITour<ICategory>[]>{
-    return this.http.get<Array<ITour<ICategory>>>(dbUrl+'/all-populated-category')
-    //.pipe(map())
+    return this.http.get<Array<ITour<ICategory>>>(dbUrl+'/all');    
   }
 
   getTourById(id:string):Observable<ITour<ICategory>>{

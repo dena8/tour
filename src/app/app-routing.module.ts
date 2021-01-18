@@ -17,6 +17,7 @@ const routes: Route[] = [
   {path:'tour',loadChildren:'./tour/tour.module#TourModule',canActivateChild:[AuthGuardGuard]},
   {path:'tour-card',component:TourCardComponent},  
   {path:'category',loadChildren:'./category/category.module#CategoryModule',canActivateChild:[AuthGuardGuard]},
+  {path:'buy',loadChildren:'./buy/buy.module#BuyModule'},
 
   { path: '**', redirectTo: '' } 
   

@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NotificationHandlerService } from './core/interceptors/notification-handler.service';
 import{JwtModule} from '@auth0/angular-jwt';
+import {BuyModule} from './buy/buy.module';
  
 
 @NgModule({
@@ -35,6 +36,7 @@ import{JwtModule} from '@auth0/angular-jwt';
     FontAwesomeModule,
     CategoryModule,
     BrowserAnimationsModule,
+    BuyModule,
     ToastrModule.forRoot({
       timeOut: 2000,
       positionClass: 'toast-top-right',

@@ -17,11 +17,17 @@ export class UserService {
   constructor(private http:HttpClient, public toastr:ToastrService) { }
 
   postRegister(user:IUserRegister): Observable<IUserRegister>{
-      return this.http.post<IUserRegister>(DB_URL+'/users/register',user);    
+      return this.http.post<IUserRegister>(DB_URL+'/users/register',user)
+      .pipe(
+        tap((data)=>this.toastr.success("Successful register!"))
+      );   
   }
 
   postLogin(user:string):Observable<HttpResponse<ILogin>>{
-       return this.http.post<any>(DB_URL+'/users/login',user,{observe:'response'});    
+       return this.http.post<any>(DB_URL+'/users/login',user, {observe:'response'})
+       .pipe(
+         tap((data)=>this.toastr.success("Successful login!"))
+       );
   }
 
   isAuthenticated():boolean{ 

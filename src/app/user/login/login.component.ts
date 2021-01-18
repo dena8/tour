@@ -30,9 +30,10 @@ export class LoginComponent implements OnInit {
     this.userService.postLogin(this.form.value).subscribe(data => {
       const token = data.headers.get('Authorization');
       const decodeToken = this.jwtHelperService.decodeToken(token);
-      localStorage.setItem('token', data.headers.get('Authorization'));     
-     // localStorage.setItem('roles', decodeToken['roles']);    
-      localStorage.setItem('roles',JSON.stringify(["ADMIN_ROLE"]));    
+      console.log(decodeToken);
+      localStorage.setItem('token', data.headers.get('Authorization'));      
+      localStorage.setItem('roles',JSON.stringify(["ADMIN_ROLE"])); 
+     // localStorage.setItem('userId',decodeToken[])   
       this.router.navigate(['home']);
     },
       err => {

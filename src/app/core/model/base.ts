@@ -1,5 +1,5 @@
 export interface IBase{
-    _id:string;
+    id:string;
     name:string; 
     creator:string; 
     

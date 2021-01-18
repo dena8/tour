@@ -40,7 +40,7 @@ export class CartComponent implements OnInit {
     this.user$.subscribe(data=>{
       const userId = data._id;
       const item = data.tours.find(i=>i.name==tourName);       
-      this.userService.removeItemFromCart(userId,item._id).subscribe(data=>{
+      this.userService.removeItemFromCart(userId,item.id).subscribe(data=>{
         this.router.navigate(['home']);
       },err=>{
         console.log(err);

@@ -1,17 +1,9 @@
 
-  
-    <!-- <div  class="cart" *ngIf="isCart">
-        <app-cart ></app-cart>
-    </div> -->
-  
     <div class="container">
         <div class="card bg-dark text-white">
             <img src="{{(tour$|async).image}}" class="card-img" alt="...">
             <div class="card-img-overlay">
-                <h1 class="card-title"></h1>
-                <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-            content. This content is a little bit longer.</p>
-        <p class="card-text">Last updated 3 mins ago</p> -->
+                <h1 class="card-title"></h1>    
             </div>
         </div>
         <ul class="list-group">
@@ -25,9 +17,9 @@
             <p style="width: 100%; word-wrap: break-word;" class="lead">
             </p>
             <button *ngIf="userService.isAdmin()" (click)="deleteTour()" class="btn btn-danger">Delete</button>
-            <button *ngIf="!userService.isAdmin()&&(tour$|async).participants>0" type="button" (click)="clickJoin()" class="btn btn-danger">Join</button>
+            <button *ngIf="!userService.isAdmin()&&(tour$|async).participants>0&& !isAdded" type="button" (click)="clickJoin()" class="btn btn-danger">Join</button>
             <button *ngIf="userService.isAuthenticated()" [routerLink]="['/tour-card']" type="button" class="btn btn-info">Back</button>
-            <button *ngIf="false" type="button" class="btn btn-info">Already join.</button>
+            <button *ngIf="isAdded" type="button"  class="btn btn-info">Already join.</button>
             <button *ngIf="(tour$|async).participants<1&&!userService.isAdmin()" type="button" class="btn btn-info">No vacant place.</button>
         </div>
     </div>

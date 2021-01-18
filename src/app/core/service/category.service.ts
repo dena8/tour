@@ -5,12 +5,15 @@ import { Observable } from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
 import {tap} from 'rxjs/operators'
 
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
   category: ICategory;
-  dbUrl:string = 'http://localhost:5000/categories'
+  dbUrl:string = 'http://localhost:5000/categories';
+
   constructor(private http: HttpClient, public toastr:ToastrService) {
   }
 
@@ -21,6 +24,6 @@ export class CategoryService {
   }))
   }
   getAllCategories():Observable<ICategory[]>{
-    return this.http.get<ICategory[]>(this.dbUrl+'/all');
+    return this.http.get<ICategory[]>(this.dbUrl+'/all');    
   }
 }

@@ -5,6 +5,7 @@ import { UserService } from '../../core/service/user.service';
 import { ICategory } from '../../core/model/category';
 import { ITour } from '../../core/model/tour-create';
 import { TourService } from '../../core/service/tour.service';
+import {BuyService} from '../../core/service/buy.service';
 
 @Component({
   selector: 'app-tour-description',
@@ -14,41 +15,24 @@ import { TourService } from '../../core/service/tour.service';
 export class TourDescriptionComponent implements OnInit {
 
   tour$: Observable<ITour<ICategory>>;
+  id:string;
+ public isAdded:Boolean; 
   
+  constructor(private tourService: TourService, public userService: UserService, private activatedRoute: ActivatedRoute, private router: Router, private buyService: BuyService ) { }
 
-
-  constructor(private tourService: TourService, public userService: UserService, private activatedRoute: ActivatedRoute, private router: Router) { }
-
-  ngOnInit(): void {
-    const id = this.activatedRoute.snapshot.params.id;
-    this.tour$ = this.tourService.getTourById(id);
+  ngOnInit(): void {  
+    this.id = this.activatedRoute.snapshot.params.id;
+    this.tour$ = this.tourService.getTourById(this.id); 
+    this.buyService.checkIfAdded(this.id).subscribe((data)=>this.isAdded=data); 
   }
 
-  clickJoin() {
-    // this.isCart = true;
-    this.tour$.subscribe((data) => {      
-      if(data.participants>0){
-      this.tourService.addTourToCart(data).subscribe(data => {
-        this.router.navigate(['home']);
-      }, err => {
-        console.log(err);
-      });
-      this.tourService.updateParticipants(this.activatedRoute.snapshot.params.id).subscribe(data => {
-        console.log(data);
-      }, err => {
-        console.log(err);
-      })
-    }
-    });
-   
-  }
-
-  deleteTour() {
-    this.tourService.deleteTour(this.activatedRoute.snapshot.params.id).subscribe(data => {
-      this.router.navigate(['tour-card']);
-    }, err => {
-      console.log("delete err", err);
-    });
+  clickJoin() {    
+    this.buyService.addTourToCart(this.id)
+    .subscribe(()=> this.router.navigate(['tour-card']));
+  } 
+  
+  deleteTour(){
+    
   }
 
 }

@@ -20,8 +20,9 @@ export class TourCardComponent implements OnInit {
   ngOnInit(): void {
   //  this.tours$ = this.tourService.getPopulatedTours();
   //  console.log(this.tours$);
-  this.tourService.getPopulatedTours().subscribe((data)=>{    
+  this.tourService.getPopulatedTours().subscribe((data)=>{      
     this.tours=data
+    console.log("THIS TOURCE:",this.tours);
   },err=>{
     console.log(err);
   })

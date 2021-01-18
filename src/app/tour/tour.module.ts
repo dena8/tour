@@ -32,7 +32,6 @@ import {AdminGuard} from '../core/gards/admin.guard';
     DetailsComponent,
     TourCardComponent,
     CartComponent,
-
   ]
 })
 export class TourModule { }
