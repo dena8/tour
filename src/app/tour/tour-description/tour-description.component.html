@@ -16,11 +16,11 @@
         <div style="width: 50%; word-wrap: break-word; padding: 2%; ">
             <p style="width: 100%; word-wrap: break-word;" class="lead">
             </p>
-            <button *ngIf="userService.isAdmin()" (click)="deleteTour()" class="btn btn-danger">Delete</button>
-            <button *ngIf="!userService.isAdmin()&&(tour$|async).participants>0&& !isAdded" type="button" (click)="clickJoin()" class="btn btn-danger">Join</button>
+            <button *ngIf="userService.hasAdminRole()" (click)="deleteTour()" class="btn btn-danger">Delete</button>
+            <button *ngIf="!userService.hasAdminRole()&& !userService.hasGuideRole()&&(tour$|async).participants>0&& !isAdded" type="button" (click)="clickJoin()" class="btn btn-danger">Join</button>
             <button *ngIf="userService.isAuthenticated()" [routerLink]="['/tour-card']" type="button" class="btn btn-info">Back</button>
             <button *ngIf="isAdded" type="button"  class="btn btn-info">Already join.</button>
-            <button *ngIf="(tour$|async).participants<1&&!userService.isAdmin()" type="button" class="btn btn-info">No vacant place.</button>
+            <button *ngIf="(tour$|async).participants<1&&!userService.hasAdminRole()" type="button" class="btn btn-info">No vacant place.</button>
         </div>
     </div>
    

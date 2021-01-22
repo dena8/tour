@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       const decodeToken = this.jwtHelperService.decodeToken(token);
       console.log(decodeToken);
       localStorage.setItem('token', data.headers.get('Authorization'));      
-      localStorage.setItem('roles',JSON.stringify(["ADMIN_ROLE"])); 
+      localStorage.setItem('roles',JSON.stringify(decodeToken['roles'])); 
      // localStorage.setItem('userId',decodeToken[])   
       this.router.navigate(['home']);
     },

@@ -5,6 +5,8 @@ export interface IUser<T>{
     username:string
     email:string
     password:string
+    createdTours:T[]
+    cart:T[]
     tours:T[]
     admin:boolean
 }
