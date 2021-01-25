@@ -15,8 +15,8 @@ export class NotificationHandlerService implements HttpInterceptor {
     return next.handle(req).pipe(tap((data)=>(console.log("Toastr work")))    
     ,catchError((err)=>{  
       console.log("HttpResponse from success:THREE");
-      console.log(err);  
-      const msg = err.error.msg ||err.error.message||'server not work'
+      console.log("ERROR FROM NOTIF-INTERCEPT:",err);  
+      const msg = err['error'];
      this.toastr.error(msg,'Error!');     
              throw err; 
   
