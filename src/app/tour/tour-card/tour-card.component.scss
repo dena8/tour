@@ -1,12 +1,46 @@
-// #card-link{
 
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   background-color: #007bff;
-//   color: aliceblue;
- 
+.d-flex{
+    width: 80%;
+    background-color:  rgb(241, 241, 241);
+    padding: 50px;
+    margin: auto;  
+    margin-bottom: 50px;
+    margin-top: 50px;
+    border: 1px solid rgb(194, 190, 226);
+    
+}
+
+ .row{
   
-// }
+margin-top: 20px;
+margin-bottom: 20px;
+}
+
+h2{
+    margin: auto;
+    width: 80%;
+  text-align: left;
+  color:#530B0D; 
+ // border-bottom: 1px solid #530B0D;
+  border-bottom: 1px solid rgb(194, 190, 226);
+  padding-bottom: 10px;
+ 
+}
+
+.col-md-3{
+ // background-color: aqua;
+ // background-color:#bfbbdf;
+ background-color: #E0E0E0;
+  padding: 3%;
+
+  
+}
+.asd{
+    padding: 20px;
+    background-color: orange;  
+   // margin-bottom:auto, 10%;
+    
+}
+
 
 

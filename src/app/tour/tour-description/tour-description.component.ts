@@ -22,8 +22,10 @@ export class TourDescriptionComponent implements OnInit {
 
   ngOnInit(): void {  
     this.id = this.activatedRoute.snapshot.params.id;
-    this.tour$ = this.tourService.getTourById(this.id); 
+    this.tour$ = this.tourService.getTourById(this.id);   
+    if(this.userService.hasUserRole()){
     this.buyService.checkIfAdded(this.id).subscribe((data)=>this.isAdded=data); 
+    }
   }
 
   clickJoin() {    

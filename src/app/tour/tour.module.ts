@@ -21,7 +21,7 @@ import {AdminGuard} from '../core/gards/admin.guard';
     FontAwesomeModule,
     ReactiveFormsModule,
     RouterModule.forChild([
-      { path: 'create', component: CreateComponent,canActivate:[AdminGuard] },
+      { path: 'create', component: CreateComponent },
       { path: 'random', component: RandomComponent },
       { path: 'description/:id', component: TourDescriptionComponent },
       { path: 'basket', component: CartComponent },

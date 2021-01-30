@@ -1,8 +1,11 @@
-<div class="main">
-  <h2>Tours portfolio </h2>
-  <div class="col" *ngFor="let tour of tours">
-    <div class="col-lg-4">   
-      <app-details [tour] = "tour"></app-details>    
+<h2>Tours portfolio </h2>
+<div class="d-flex flex-column justify-content-center">
+  <!-- <h2>Tours portfolio </h2> -->
+  <div class="row">
+
+    <div class="col-md-3" *ngFor="let tour of tours">
+      <!-- <div class="asd"> -->
+        <app-details [tour]="tour"></app-details>
+      <!-- </div> -->
     </div>
   </div>
-</div>

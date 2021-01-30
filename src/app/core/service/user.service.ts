@@ -49,7 +49,9 @@ export class UserService {
     return this.isAuthenticated() && localStorage.getItem('roles').includes('USER_ROLE');
   }
 
-  hasGuideRole():boolean{    
+  hasGuideRole():boolean{ 
+  console.log(localStorage.getItem('roles').includes('GUIDE_ROLE')); 
+  console.log(this.isAuthenticated());  
     return this.isAuthenticated() && localStorage.getItem('roles').includes('GUIDE_ROLE');
   }
 
