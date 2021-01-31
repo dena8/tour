@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http'
+import {HttpClient, HttpHeaders} from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { ITour } from '../model/tour-create';
 import { ICategory } from '../model/category';
@@ -14,8 +14,8 @@ export class TourService {
 
   constructor(private http:HttpClient) { }
 
-  createTour(tour:ITour):Observable<ITour>{
-   return this.http.post<ITour>(dbUrl+'/create',tour);
+  createTour(tour:FormData):Observable<ITour>{
+   return this.http.post<ITour>(dbUrl+'/create',tour)//,{headers:new HttpHeaders({'Content-Type':"multipart/form-data;charset=utf-8; boundary=yy;"})});
   }
 
   getPopulatedTours():Observable<ITour<ICategory>[]>{

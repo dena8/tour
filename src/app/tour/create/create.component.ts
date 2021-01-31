@@ -40,10 +40,26 @@ export class CreateComponent implements OnInit {
     return this.form.controls;
   }
 
+  upload(event){   
+      const file = (event.target as HTMLInputElement).files[0];
+      this.form.get("image").setValue(file); 
+      console.log(file);
+  }
+
   create() {
-   console.log(this.form.value);
-   this.tourService.createTour(this.form.value).subscribe(tour=>{
-     console.log(tour);
+    const formDate= new FormData();
+   // Object.entries(this.form).forEach(o=>formDate.append(o[0],o[1]));
+    for (const [k,v] of Object.entries(this.form.value)) {
+      console.log("kay",k,"value",v);
+      formDate.append(k,v as any);   
+    }
+    console.log("NAME",this.form.get("image").value);
+    // formDate.append('image',this.form.get("image").value);
+    // formDate.append('name',this.form.get('name').value);
+   console.log("FORM VALUE FEOM CREATE TOUR",this.form.value);
+   console.log("FROM FORM DATA OBJECT", formDate);
+   this.tourService.createTour(formDate).subscribe(tour=>{
+     console.log("TOUR FROM SUBSCRIBE",tour);
        this.router.navigate(['home']);
    },err=>{
       console.log(err);

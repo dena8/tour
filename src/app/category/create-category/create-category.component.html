@@ -1,5 +1,5 @@
 
-<form [formGroup]='form' (submit)="createCategory()" > 
+<form enctype="multipart/form-data" [formGroup]='form' (submit)="createCategory()" > 
       <h2>Create category</h2> 
 
     <div class="form-group input-group">    
@@ -8,6 +8,11 @@
       </div>     
       <input class="form-control" formControlName="name" placeholder="Category name">
     </div> 
+    <div >
+      <label>Upload picture</label>
+      <input accept="image/png, image/jpeg" class="form-control" type="file" formControlName="image"  id="image">
+     
+    </div>
      
       <div class="form-group form-check">
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
