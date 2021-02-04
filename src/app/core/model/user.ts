@@ -1,7 +1,7 @@
 
 
 export interface IUser<T>{
-    _id:string
+    id:string
     username:string
     email:string
     password:string

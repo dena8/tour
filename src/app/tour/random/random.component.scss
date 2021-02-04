@@ -1,4 +1,31 @@
-fa-icon {
-    font-size: 50px;
-}
-
+.first{
+    padding: 10%;
+    }
+    
+    .row{
+    
+        background-color:gray ;
+        display: flex;
+        justify-content: center;
+        justify-content: space-between;   
+    
+    }
+    
+    .coll-md-3{
+        background-color: aqua;
+      //  margin: 10%;
+        display: flex;
+        justify-content: space-between;
+      
+    }
+    
+    ul{
+        display: flex;
+        flex-direction: column;
+        list-style: none;  
+        justify-content:center; 
+    }
+    
+    li{
+       background-color: black;  
+    }

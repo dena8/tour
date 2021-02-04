@@ -11,7 +11,7 @@
             <li class="list-group-item">{{tour.name}}</li>
             <!-- <li class="list-group-item">Description: {{tour.description}}</li> -->
             <li class="list-group-item">Category: {{tour.category.name}}</li>
-            <li class="list-group-item">Difficulty level: {{tour.difficulty}}</li>
+            <!-- <li class="list-group-item">Difficulty level: {{tour.difficulty}}</li> -->
             <li class="list-group-item">Vacant place: {{tour.participants}}</li>
             <li class="list-group-item">Start day: {{tour.startAndEnd.split("-")[0]}}</li>
             <li class="list-group-item"> 
@@ -21,11 +21,5 @@
             </li>
         </ul> 
             
-    </div>
-   
-    <!-- <div *ngIf="userService.isAuthenticated()" style="width: 50%; word-wrap: break-word; padding: 2%; ">
-    <p style="width: 100%; word-wrap: break-word;" class="lead">
-    </p>
-    <button [routerLink]="['/tour','description',tour.id]" class="btn btn-danger">Description</button> -->
-    <!-- <button *ngIf="true" type="button" class="btn btn-info">Already join. Don't be late</button> -->
+    </div>   
 </div>

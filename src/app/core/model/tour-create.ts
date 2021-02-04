@@ -5,7 +5,7 @@ export interface ITour<T=string> extends IBase {
     category:T;
     startAndEnd:string;
     participants:number;
-    difficulty:string;
+    difficultyLevel:string;
     image:string;
     price:number 
    

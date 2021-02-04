@@ -34,7 +34,7 @@ export class TourDescriptionComponent implements OnInit {
   } 
   
   deleteTour(){
-    
+    this.tourService.deleteTour(this.id).subscribe();    
   }
 
 }

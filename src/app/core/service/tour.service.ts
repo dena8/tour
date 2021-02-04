@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { ITour } from '../model/tour-create';
 import { ICategory } from '../model/category';
 import {IUser} from '../model/user';
+import {tap} from 'rxjs/operators';
+import {ToastrService} from 'ngx-toastr';
 
 const dbUrl = 'http://localhost:5000/tours'
 
@@ -12,7 +14,7 @@ const dbUrl = 'http://localhost:5000/tours'
 })
 export class TourService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private toastr:ToastrService) { }
 
   createTour(tour:FormData):Observable<ITour>{
    return this.http.post<ITour>(dbUrl+'/create',tour)//,{headers:new HttpHeaders({'Content-Type':"multipart/form-data;charset=utf-8; boundary=yy;"})});
@@ -39,11 +41,10 @@ export class TourService {
  }
 
  deleteTour(id):Observable<string>{
-   return this.http.get<string>(dbUrl+'/remove'+`/${id}`);
- }
-
- updateParticipants(id):Observable<string>{
-   return this.http.put<string>(dbUrl+"/update-participants/"+id,{});
+   return this.http.get<string>(dbUrl+'/remove'+`/${id}`)
+   .pipe(
+    tap((data)=>this.toastr.success("Successful delete tour!"))
+  );
  }
 
 }

@@ -1,28 +1,33 @@
-<div class="d-flex flex-row justify-content-center tour-information">
-    <div>
-        <img class="tour-image" src="{{(tour$|async).image}}" alt="">
-    </div>
-    <div>
-        <div class="tour-description">
-            <h1>{{(tour$ | async).name}}</h1>
-            <h6>Description:</h6>
-            <ul class="tour-list">
-                <li>Category: {{(tour$ |async).category.name}}</li>
-                <li>Difficulty level : {{(tour$ |async).difficulty}}</li>
-                <li>Vacant place: {{(tour$ |async).participants}}</li>
-                <li>Start day: {{(tour$ |async).startAndEnd.split("-")[0]}}</li>
-                <li></li>
-            </ul>
+
+    <div class="d-flex flex-row justify-content-center tour-information">
+        <div>
+            <img class="tour-image" src="{{(tour$|async).image}}" alt="">
         </div>
-        <div class="buttons-box">
-            <a href=""  class="btn-tour del"  *ngIf="userService.hasAdminRole()" (click)="deleteTour()">Delete</a>
-            <a href=""  class="btn-tour" *ngIf="!userService.hasAdminRole()&& !userService.hasGuideRole()&&(tour$|async).participants>0&& !isAdded" type="button" (click)="clickJoin()">Already join</a>
-            <a href=""  class="btn-tour" *ngIf="userService.isAuthenticated()" [routerLink]="['/tour-card']" type="button">Back</a>
-            <a href=""  class="btn-tour" *ngIf="isAdded" type="button" >Join</a>
-            <a href="" class="btn-tour violet"  *ngIf="(tour$|async).participants<1&&!userService.hasAdminRole()" type="button" >No vacant place</a>
-            <!-- <a href="" class="btn-tour">Edit</a> -->
+        <div>
+            <div class="tour-description">
+                <h1>{{(tour$ | async).name}}</h1>
+                <!-- <h6>Description:</h6> -->
+                <ul class="tour-list">
+                    <li>Category: {{(tour$ |async).category.name}}</li>
+                    <li>Difficulty level : {{(tour$ |async).difficultyLevel}}</li>
+                    <li>Vacant place: {{(tour$ |async).participants}}</li>
+                    <li>Start day: {{(tour$ |async).startAndEnd.split("-")[0]}}</li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="buttons-box">
+                <a href="" class="btn-tour del" *ngIf="userService.hasAdminRole()" (click)="deleteTour()">Delete</a>
+                <a href="" class="btn-tour"
+                    *ngIf="!userService.hasAdminRole()&& !userService.hasGuideRole()&&(tour$|async).participants>0&& !isAdded"
+                    type="button" (click)="clickJoin()">Join</a>
+                <a href="" class="btn-tour" *ngIf="userService.isAuthenticated()" [routerLink]="['/tour-card']"
+                    type="button">Back</a>
+                <a href="" class="btn-tour" *ngIf="isAdded" type="button">Already join</a>
+                <a href="" class="btn-tour violet"
+                    *ngIf="!userService.hasGuideRole()&&(tour$|async).participants<1&&!userService.hasAdminRole()"
+                    type="button">No vacant place</a>
+                <!-- <a href="" class="btn-tour">Edit</a> -->
+            </div>
         </div>
+
     </div>
-    
-    
-</div>

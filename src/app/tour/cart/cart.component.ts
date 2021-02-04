@@ -38,7 +38,7 @@ export class CartComponent implements OnInit {
 
   removeItem(tourName: string) {
     this.user$.subscribe(data=>{
-      const userId = data._id;
+      const userId = data.id;
       const item = data.tours.find(i=>i.name==tourName);       
       this.userService.removeItemFromCart(userId,item.id).subscribe(data=>{
         this.router.navigate(['home']);

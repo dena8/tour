@@ -12,7 +12,8 @@ import { TourService } from '../../core/service/tour.service';
 })
 export class TourCardComponent implements OnInit {
  // tours$:Observable<any>;
- tours:ITour<ICategory>[]
+ tours:ITour<ICategory>[];
+ isTours:boolean;
 
   
   constructor(private tourService:TourService) { }
@@ -22,6 +23,7 @@ export class TourCardComponent implements OnInit {
   //  console.log(this.tours$);
   this.tourService.getPopulatedTours().subscribe((data)=>{      
     this.tours=data
+    this.isTours= !!data.length;
     console.log("THIS TOURCE:",this.tours);
   },err=>{
     console.log(err);
