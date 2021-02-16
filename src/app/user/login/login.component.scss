@@ -1,21 +1,5 @@
    
-// @import url('https://fonts.googleapis.com/css?family=Mukta');
-// body{
-//   font-family: 'Mukta', sans-serif;
-// 	height:100vh;
-// 	min-height:550px;
-// 	background-image: url(http://www.planwallpaper.com/static/images/Free-Wallpaper-Nature-Scenes.jpg);
-// 	background-repeat: no-repeat;
-// 	background-size:cover;
-// 	background-position:center;
-// 	position:relative;
-//     overflow-y: hidden;
 
-// }
-// a{
-//   text-decoration:none;
-//   color:#444444;
-// }
 .login-reg-panel{
     position: relative;
     top: 50%;
@@ -24,8 +8,7 @@
     width:70%;
 	right:0;left:0;
     margin:auto;
-    height:400px;
-   // background-color: rgba(236, 48, 20, 0.9);
+    height:400px;  
    background-color: #007BFF;
     margin-top: 20%;
     
@@ -51,8 +34,7 @@
     display:none;
 }
 .login-reg-panel{
-    color:rgba(255,255, 255, 1)
-  // color:  #530B0D;
+    color:rgba(255,255, 255, 1)  
 }
 .login-reg-panel #label-login, 
 .login-reg-panel #label-register{

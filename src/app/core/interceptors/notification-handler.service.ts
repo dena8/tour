@@ -14,12 +14,12 @@ export class NotificationHandlerService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(tap((data)=>(console.log("Toastr work")))    
     ,catchError((err)=>{  
-      console.log("HttpResponse from success:THREE");
+      //console.log("HttpResponse from success:THREE");
       console.log("ERROR FROM NOTIF-INTERCEPT:",err);  
       const msg = err['error'];
-     this.toastr.error(msg,'Error!');     
-             throw err; 
-  
+      console.log("MSG",msg);
+     this.toastr.error(msg,'Error!');  
+                throw err;   
     }));
   }
 }

@@ -27,13 +27,11 @@ export class LoginComponent implements OnInit {
 
   postLogin() {
 
-    this.userService.postLogin(this.form.value).subscribe(data => {
+    this.userService.postLogin(this.form.value).subscribe(data => {     
       const token = data.headers.get('Authorization');
-      const decodeToken = this.jwtHelperService.decodeToken(token);
-      console.log(decodeToken);
+      const decodeToken = this.jwtHelperService.decodeToken(token);     
       localStorage.setItem('token', data.headers.get('Authorization'));      
-      localStorage.setItem('roles',JSON.stringify(decodeToken['roles'])); 
-     // localStorage.setItem('userId',decodeToken[])   
+      localStorage.setItem('roles',JSON.stringify(decodeToken['roles']));     
       this.router.navigate(['home']);
     },
       err => {

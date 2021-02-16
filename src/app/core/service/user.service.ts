@@ -26,9 +26,9 @@ export class UserService {
   }
 
   postLogin(user:string):Observable<HttpResponse<ILogin>>{
-       return this.http.post<any>(DB_URL+'/login',user, {observe:'response'})
+       return this.http.post<any>(DB_URL+'/login',user, {observe:'response'} )
        .pipe(
-         tap((data)=>this.toastr.success("Successful login!"))
+         tap((data)=>this.toastr.success("Successful login!"))        
        );
   }
 
