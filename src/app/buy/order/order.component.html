@@ -1,0 +1,14 @@
+<div class="main">
+<div class="d-flex flex-column justify-content-start">
+    <div class="first" *ngFor="let order of orders"> 
+        <ul  >
+            <li>{{order.id}}                                
+                <a type="button"  [routerLink]="['/buy','order-details',order.id]" class="btn btn-outline-primary" style="border:none;">See order</a>
+            </li>           
+            <li id="second">Order number</li>
+           
+        </ul>
+    </div> 
+
+</div>
+</div>
