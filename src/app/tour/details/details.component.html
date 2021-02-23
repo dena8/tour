@@ -13,7 +13,7 @@
             <li class="list-group-item">Category: {{tour.category.name}}</li>
             <!-- <li class="list-group-item">Difficulty level: {{tour.difficulty}}</li> -->
             <li class="list-group-item">Vacant place: {{tour.participants}}</li>
-            <li class="list-group-item">Start day: {{tour.startAndEnd.split("-")[0]}}</li>
+            <li class="list-group-item">Start day: {{tour.startDate}}</li>
             <li class="list-group-item"> 
                 <div *ngIf="userService.isAuthenticated()">
                     <button [routerLink]="['/tour','description',tour.id]" class="btn btn-danger">Description</button>

@@ -17,7 +17,7 @@ export class TourService {
   constructor(private http:HttpClient, private toastr:ToastrService) { }
 
   createTour(tour:FormData):Observable<ITour>{
-   return this.http.post<ITour>(dbUrl+'/create',tour)//,{headers:new HttpHeaders({'Content-Type':"multipart/form-data;charset=utf-8; boundary=yy;"})});
+   return this.http.post<ITour>(dbUrl+'/create',tour);
   }
 
   getPopulatedTours():Observable<ITour<ICategory>[]>{

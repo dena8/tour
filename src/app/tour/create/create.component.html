@@ -1,98 +1,64 @@
-<div class="container">
-  <div class="row">
-    <div class="col-lg-4"></div>
-    <div class="col-lg-4">
-      <h1>Create Tour</h1>
+<div class="log">
+  <div class="login-reg-panel">
+    <div class="register-info-box">
+      <h2>You need a new category?</h2>
+      <p>Click this button</p>
+      <button [routerLink]="['/category','create']" type="button" class="btn btn-outline-secondary"
+        style="color: white;">Create category</button>
+    </div>
+    <div class="white-panel">
+      <h3>Create tour</h3>
       <form enctype="multipart/form-data" [formGroup]="form" (submit)="create()">
-        <div class="form-group input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+        <div class="form-group">
+          <input formControlName="name" type="text" class="form-control" id="exampleInputEmail1"
+            aria-describedby="emailHelp" placeholder="Tour title">
+          <div class="alert alert-danger" *ngIf="f.name.errors?.required&&f.name.touched">
+            Field is required!
           </div>
-          <input class="form-control" formControlName="name" placeholder="Tour name">
         </div>
-        <div class="alert alert-danger" *ngIf="f.name.errors?.required&&f.name.touched">
-          Field is required!
-        </div>
-        <div class="form-group input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+        <div class="form-group">
+          <input formControlName="description" type="text" class="form-control" id="exampleInputPassword1"
+            placeholder="Tour description">
+          <div class="alert alert-danger" *ngIf="f.description.errors?.required&&f.description.touched">
+            Field is required!
           </div>
-          <input class="form-control" formControlName="description" placeholder="Tour description">
         </div>
-        <div class="alert alert-danger" *ngIf="f.description.errors?.required&&f.description.touched">
-          Field is required!
-        </div>
-
-        <div class="form-group input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
-          </div>
-          <select formControlName="category" class="custom-select" style="max-width: 120px;">
-            <option>Choose</option>
+        <div class="form-group">
+          <select formControlName="category" class="form-control">
+            <option>Choose category</option>
             <option *ngFor="let category of categories$ | async">{{category.name}}</option>
-
           </select>
-          <div class="input-group-prepend">
-            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-          </div>
-          <!-- <input class="form-control" formControlName="category" placeholder="Or Create Category"> -->
-          <button [routerLink]="['/category','create']">Create Category</button>
         </div>
-
-
-        <div class="form-group input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-          </div>
-          <input class="form-control" formControlName="startAndEnd" placeholder="Start and end day">
+        <div class="form-group">
+          <input formControlName="participants" type="text" class="form-control" id="title"
+            placeholder="Number participants">
         </div>
-        <div class="alert alert-danger" *ngIf="f.startAndEnd.errors?.required&&f.startAndEnd.touched">
+        <div class="alert alert-danger" *ngIf="f.participants.errors?.required&&f.difficultyLevel.touched">
           Field is required!
         </div>
-
-        <div class="form-group input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-          </div>
-          <input class="form-control" formControlName="difficultyLevel" placeholder="Difficulty level">
+        <div class="form-group">
+          <input formControlName="difficultyLevel" type="text" class="form-control" placeholder="Difficulty level">
         </div>
         <div class="alert alert-danger" *ngIf="f.difficultyLevel.errors?.required&&f.difficultyLevel.touched">
           Field is required!
         </div>
 
-        <div class="form-group input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-          </div>
-          <input class="form-control" formControlName="participants" placeholder="Number participants">
-        </div>
-        <div class="alert alert-danger" *ngIf="f.participants.errors?.required&&f.participants.touched">
-          Field is required!
-        </div>
-
-        <div class="form-group input-group">
-          <!-- <label>Upload picture</label> -->
+        <div class="form-group">
+          <!-- Upload -->
           <input accept="image/png, image/jpeg" class="form-control" type="file" (change)="upload($event)" id="image">
         </div>
-        <div class="alert alert-danger" *ngIf="f.image.errors?.required&&f.image.touched">
-          Field is required!
-        </div>
-        <div class="form-group input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+        <div class="form-group">
+          <input formControlName="price" type="text" class="form-control" placeholder="Price">
+          <div class="alert alert-danger" *ngIf="f.price.errors?.required&&f.price.touched">
+            Field is required!
           </div>
-          <input class="form-control" formControlName="price" placeholder="Price">
-        </div>
-        <div class="alert alert-danger" *ngIf="f.price.errors?.required&&f.price.touched">
-          Field is required!
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-primary btn-block" [disabled]="form.invalid"> Create Tour </button>
+          <!-- Date input -->
+          <input formControlName="startDate" class="form-control" type="date" id="pickyDate" placeholder="date" />
         </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
       </form>
-
-      <p class="text-center">Have an account? <a href="">Log In</a> </p>
-
     </div>
-    <div class="col-lg-4"></div>
   </div>
+</div>

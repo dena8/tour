@@ -27,12 +27,12 @@ export class CreateComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', [Validators.required]],
       description: ['', Validators.required],
-      category: ['', Validators.required],
-      startAndEnd: ['', Validators.required],          
+      category: ['', Validators.required],         
       participants: ['', [Validators.required]],
       difficultyLevel: ['', [Validators.required]],
       image:['',Validators.required],
       price:['',Validators.required],
+      startDate: ['', Validators.required],   
     })
   }
 
@@ -47,15 +47,11 @@ export class CreateComponent implements OnInit {
   }
 
   create() {
-    const formDate= new FormData();
-   // Object.entries(this.form).forEach(o=>formDate.append(o[0],o[1]));
-    for (const [k,v] of Object.entries(this.form.value)) {
-      console.log("kay",k,"value",v);
+    const formDate= new FormData();  
+    for (const [k,v] of Object.entries(this.form.value)) {     
       formDate.append(k,v as any);   
     }
-    console.log("NAME",this.form.get("image").value);
-    // formDate.append('image',this.form.get("image").value);
-    // formDate.append('name',this.form.get('name').value);
+    console.log("NAME",this.form.get("image").value);   
    console.log("FORM VALUE FEOM CREATE TOUR",this.form.value);
    console.log("FROM FORM DATA OBJECT", formDate);
    this.tourService.createTour(formDate).subscribe(tour=>{
