@@ -9,7 +9,6 @@ import {SampleModule} from './sample/sample.module';
 import {SharedModule} from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { TourModule } from './tour/tour.module';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HTTP_INTERCEPTORS, } from '@angular/common/http';
 import { JwtInterceptorService } from './core/interceptors/jwt-interceptor.service';
 import { CategoryModule } from './category/category.module';
@@ -32,8 +31,7 @@ import {BuyModule} from './buy/buy.module';
     SharedModule,
     AppRoutingModule,
     HttpClientModule,
-    TourModule,
-    FontAwesomeModule,
+    TourModule,  
     CategoryModule,
     BrowserAnimationsModule,
     BuyModule,

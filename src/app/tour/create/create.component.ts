@@ -27,6 +27,7 @@ export class CreateComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', [Validators.required]],
       description: ['', Validators.required],
+      region:['',Validators.required],
       category: ['', Validators.required],         
       participants: ['', [Validators.required]],
       difficultyLevel: ['', [Validators.required]],

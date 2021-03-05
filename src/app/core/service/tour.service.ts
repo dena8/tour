@@ -6,6 +6,7 @@ import { ICategory } from '../model/category';
 import {IUser} from '../model/user';
 import {tap} from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';
+import { IForecast } from '../model/forecast';
 
 const dbUrl = 'http://localhost:5000/tours'
 
@@ -45,6 +46,11 @@ export class TourService {
    .pipe(
     tap((data)=>this.toastr.success("Successful delete tour!"))
   );
+ }
+
+ getWeatherForecast(location):Observable<IForecast>{
+   return this.http.get<IForecast>(dbUrl+`/weather-forecast?region=${location}`);
+  // return this.http.get<IForecast>(dbUrl+'/weather-forecast?region=Pirin');
  }
 
 }

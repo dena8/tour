@@ -10,6 +10,7 @@ import { RandomComponent } from './random/random.component';
 import { TourDescriptionComponent } from './tour-description/tour-description.component';
 import { CartComponent } from './cart/cart.component';
 import {AdminGuard} from '../core/gards/admin.guard';
+import {SampleModule} from '../sample/sample.module';
 
 
 
@@ -20,6 +21,7 @@ import {AdminGuard} from '../core/gards/admin.guard';
     CommonModule,
     FontAwesomeModule,
     ReactiveFormsModule,
+    SampleModule,
     RouterModule.forChild([
       { path: 'create', component: CreateComponent },
       { path: 'random', component: RandomComponent },
@@ -32,6 +34,7 @@ import {AdminGuard} from '../core/gards/admin.guard';
     DetailsComponent,
     TourCardComponent,
     CartComponent,
+    
   ]
 })
 export class TourModule { }

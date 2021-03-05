@@ -24,6 +24,13 @@
           </div>
         </div>
         <div class="form-group">
+          <input formControlName="region" type="text" class="form-control" id="region"
+            placeholder="Tour region">
+          <div class="alert alert-danger" *ngIf="f.region.errors?.required&&f.region.touched">
+            Field is required!
+          </div>
+        </div>
+        <div class="form-group">
           <select formControlName="category" class="form-control">
             <option>Choose category</option>
             <option *ngFor="let category of categories$ | async">{{category.name}}</option>

@@ -1,62 +1,13 @@
-<div class="log">
-  <div class="login-reg-panel">
-		<div class="login-info-box">
-			<h2>Have an account?</h2>
-			<p>Lorem ipsum dolor sit amet</p>
-			<label id="label-register" for="log-reg-show">Login</label>
-			<input type="radio" name="active-log-panel" id="log-reg-show"  checked="checked">
-		</div>							
-		<div class="register-info-box">
-			<h2>You need a new category?</h2>
-			<p>Click this button</p>
-      <button type="button" class="btn btn-outline-secondary" style="color: white;">Create category</button>
-      
-		</div>
-							
-		<div class="white-panel">		
-      <h3>Create tour</h3>
-      <form id="forma" [formGroup]="form" >
-        <div class="form-group">
-          <!-- <label for="exampleInputEmail1"></label> -->
-          <input  formControlName="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Tour title">     
-         </div>
-        <div class="form-group">
-          <!-- <label for="exampleInputPassword1"></label> -->
-          <input formControlName="password" type="text" class="form-control" id="exampleInputPassword1" placeholder="Tour description">          
-        </div>
-        <div class="form-group">
-          <!-- <label for="exampleInputPassword1">Title</label> -->
-          <input formControlName="password" type="text" class="form-control" id="title" placeholder="Difficulty level">          
-        </div>
-        <div class="form-group">
-          <!-- <label for="exampleInputPassword1"></label> -->
-        <select formControlName="category" class="form-control" >
-          <option>Choose category</option>
-          <option >Some category </option>
-        </select>
-        </div>
-        <div class="form-group">
-          <!-- <label for="exampleInputPassword1"></label> -->
-          <input formControlName="" type="text" class="form-control" id="title" placeholder="Number participants">          
-        </div>
-        <div class="form-group">
-           <!-- Upload -->          
-          <input type="file" class="form-control" id="customFile" />
-        </div>
-        <div class="form-group">
-          <!-- <label for="exampleInputPassword1"></label> -->
-          <input formControlName="" type="text" class="form-control" id="title" placeholder="Price">          
-        </div>
-        <div class="form-group"> <!-- Date input -->
-          <!-- <label class="control-label" for="pickyDate">Date</label> -->
-          <input class="form-control" type="date" id="pickyDate" name="date" placeholder="MM/DD/YYY" />
-        </div>      
-               
-
-        
-     
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>	
-		</div>
+<div class='box'>
+  <div class='wave -one'></div>
+  <div class='wave -two'></div>
+  <div class='wave -three'></div>
+  <div class="weathercon"><fa-icon [icon]="faCloudSunRain" class='fas fa-cloud-moon' style='color: #d36326;'></fa-icon></div>  
+  <div class="info">
+    <h4 class="location">SUNNYVILLE</h4>
+    <!-- <p class="date">MONDAY | SEP 12 | 12:34</p> -->
+    <p class="date">CLOUD COVER 12 | WIND SPEED 12</p>
+    <p class="date">2021-02-25 16:06</p>
+    <h3 class="temp">25 &deg;C | 77 &deg;Pa</h3>
   </div>
 </div>

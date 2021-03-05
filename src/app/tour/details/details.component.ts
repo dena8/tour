@@ -1,4 +1,5 @@
 import { Component, OnInit,Input } from '@angular/core';
+import { ICategory } from 'src/app/core/model/category';
 import { ITour } from '../../core/model/tour-create';
 import { UserService } from '../../core/service/user.service';
 
@@ -11,7 +12,7 @@ export class DetailsComponent implements OnInit {
 
  
  @Input()
-  tour:ITour<any>;
+  tour:ITour<ICategory>;
 
   constructor(public userService:UserService) { }
 

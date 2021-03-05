@@ -16,9 +16,7 @@ export class BuyService {
 
   constructor(private httpClient:HttpClient, private toaster:ToastrService) { }
 
-  // addTourToCart(tour:ITour<ICategory>):Observable<ITour<ICategory>>{
-  //   return this.httpClient.post<ITour<ICategory>>(dbUrl+'/all',tour);
-  // }
+ 
   addTourToCart(id:string):Observable<any>{
   return this.httpClient.get(dbUrl+'/cart/add/'+id)
   .pipe(tap((data)=> this.toaster.success("Added tour to cart")))
@@ -27,6 +25,7 @@ export class BuyService {
   checkIfAdded(id:string):Observable<Boolean>{
     return this.httpClient.get<boolean>(dbUrl+'/cart/contain/'+ id);
   }
+
    // RETURN TYPE NOT ANY
   makeOrder(username:Object):Observable<String>{
     return this.httpClient.post<String>(dbUrl+'/cart/order',username).pipe(

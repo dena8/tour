@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { faCoffee,faGlobe,faMountain,faTree,faCloudMoon,faCompass,faCalendarTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCoffee,faGlobe,faMountain,faTree,faCloudMoon,faCompass,faCalendarTimes,faCloudSunRain } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-random',
@@ -16,6 +16,7 @@ export class RandomComponent implements OnInit {
   faTree=faTree
   faCompass=faCompass
   faCalendarTimes=faCalendarTimes
+  faCloudSunRain=faCloudSunRain
 
   constructor() { }
 
