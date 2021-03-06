@@ -23,7 +23,6 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.user$ = this.userService.getCurrentUser();
-   // this.userService.getCurrentUser().subscribe((data)=>console.log("CURRENT USER DATA:",data));
     this.userService.getCurrentUser().subscribe(user => {
       this.userId = user.id;  
       this.username=user.username; 
@@ -37,18 +36,9 @@ export class CartComponent implements OnInit {
     this.buyService.makeOrder({username:this.username}).subscribe((data)=>this.router.navigate(['tour-card']));   
   }
 
-  removeItem(tourName: string) {
-    this.user$.subscribe(data=>{
-      const userId = data.id;
-      const item = data.tours.find(i=>i.name==tourName);       
-      this.userService.removeItemFromCart(userId,item.id).subscribe(data=>{
-        this.router.navigate(['home']);
-      },err=>{
-        console.log(err);
-      })        
-    });  
-    
-  }
+  removeItem(tourId: string) {
+    this.buyService.removeItemFromCart(this.userId,tourId).subscribe(()=>  this.ngOnInit());
+    }
 
  
 }

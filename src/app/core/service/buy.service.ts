@@ -41,4 +41,11 @@ export class BuyService {
      return this.httpClient.get<IOrder>(dbUrl+'/orders/'+id)
   }
 
+  removeItemFromCart(userId,tourId):Observable<any>{
+    return this.httpClient.put<any>(dbUrl+`/cart/remove-item?userId=${userId}&tourId=${tourId}`,{})
+    .pipe(
+      tap((data)=>this.toaster.success("Successful remove tour!"))
+    );
+  }
+
 }

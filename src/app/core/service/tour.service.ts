@@ -29,9 +29,9 @@ export class TourService {
     return this.http.get<ITour<ICategory>>(dbUrl+`/${id}`);
   }
 
-  addTourToCart(tour:ITour<ICategory>):Observable<any>{
-  return  this.http.put('http://localhost:3000/api/user/add-tours',tour)
-  }
+//   addTourToCart(tour:ITour<ICategory>):Observable<any>{
+//   return  this.http.put('http://localhost:3000/api/user/add-tours',tour)
+//   }
 
   getCurrentUser():Observable<IUser<ITour>>{
     return this.http.get<IUser<ITour>>('http://localhost:3000/api/user/get');
