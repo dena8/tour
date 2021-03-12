@@ -11,15 +11,17 @@ import { UserService } from '../../core/service/user.service';
 })
 export class HeaderComponent implements OnInit {
 
-
+ username:string;
 
   constructor(public userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
+   this.username= localStorage.getItem('username');
   }
 
   logout() {
     this.userService.logout();
+    //this.ngOnInit();
     this.router.navigate(['home']);
   }
 

@@ -17,6 +17,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NotificationHandlerService } from './core/interceptors/notification-handler.service';
 import{JwtModule} from '@auth0/angular-jwt';
 import {BuyModule} from './buy/buy.module';
+
  
 
 @NgModule({
@@ -34,7 +35,7 @@ import {BuyModule} from './buy/buy.module';
     TourModule,  
     CategoryModule,
     BrowserAnimationsModule,
-    BuyModule,
+    BuyModule,  
     ToastrModule.forRoot({
       timeOut: 2000,
       positionClass: 'toast-top-right',

@@ -21,10 +21,10 @@ export class CreateCategoryComponent implements OnInit {
 
   createCategory() {   
     if (this.form.invalid) { return; }
-     this.categoryService.createCategory(this.form.value).subscribe(data=>{
-    
+     this.categoryService.createCategory(this.form.value).subscribe(data=>{    
      this.form.reset()
-     },err=>{       
+     },err=>{  
+           
            console.log("ERROR",err);
           
      })

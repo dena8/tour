@@ -5,7 +5,8 @@ import {AboutComponent} from './about/about.component';
 import {HomeComponent} from './home/home.component';
 import { WeatherComponent } from './weather/weather.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { TourModule } from '../tour/tour.module';
+import { RouterModule } from '@angular/router';
+
 
 
 
@@ -13,7 +14,12 @@ import { TourModule } from '../tour/tour.module';
   declarations: [AboutComponent,HomeComponent, WeatherComponent],
   imports: [
     CommonModule,
-    FontAwesomeModule,    
+    FontAwesomeModule,
+    RouterModule.forChild([
+      {path:'about',component:AboutComponent},
+      {path:'home',component:HomeComponent},
+     
+    ])    
   ],
   exports:[
     WeatherComponent

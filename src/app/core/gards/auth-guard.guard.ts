@@ -6,12 +6,13 @@ import {UserService} from '../../core/service/user.service'
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardGuard implements CanActivateChild {
+export class AuthGuardGuard implements CanActivateChild, CanActivate {
 
  constructor(private userService: UserService, private router: Router){}
 
   canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean  {
     if(this.userService.getToken()){
+      console.log("FROM AUTH GUARD",this.userService.getToken());
           return true;
         }
         this.router.navigate(['home']);
@@ -19,12 +20,12 @@ export class AuthGuardGuard implements CanActivateChild {
   }
 
 
-  // canActivate():boolean {
-  //   if(this.userService.getToken()){
-  //     return true;
-  //   }
-  //   this.router.navigate(['home']);
-  //   return false;
-  // }
+  canActivate():boolean {
+    if(this.userService.getToken()){
+      return true;
+    }
+    this.router.navigate(['home']);
+    return false;
+  }
 
 }

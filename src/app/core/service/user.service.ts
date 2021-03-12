@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';
 
-//const DB_URL ='http://localhost:3000/api/user'
+
 const DB_URL = 'http://localhost:5000/users'
 
 @Injectable({
@@ -57,10 +57,9 @@ export class UserService {
 
   logout(){
     localStorage.removeItem('token');
-    localStorage.removeItem('admin'); 
-    localStorage.removeItem('roles');   
-    this.toastr.success('Successful logout');
-    
+    localStorage.removeItem('username'); 
+    localStorage.removeItem('roles');    
+    this.toastr.success('Successful logout');        
   }
 
   getToken(){
@@ -74,6 +73,5 @@ export class UserService {
   getCurrentUser():Observable<IUser<ITour>>{
     return this.http.get<IUser<ITour>>(DB_URL+'/get/current');
  }
-
 
 }

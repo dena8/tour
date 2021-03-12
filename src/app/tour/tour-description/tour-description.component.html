@@ -19,7 +19,7 @@
             <a href="" class="btn-tour"
                 *ngIf="!userService.hasAdminRole()&& !userService.hasGuideRole()&&(tour$|async).participants>0&& !isAdded"
                 type="button" (click)="clickJoin()">Join</a>
-            <a href="" class="btn-tour" *ngIf="userService.isAuthenticated()" [routerLink]="['/tour-card']"
+            <a href="" class="btn-tour" *ngIf="userService.isAuthenticated()" [routerLink]="['/tour','tour-card']"
                 type="button">Back</a>
             <a href="" class="btn-tour" *ngIf="isAdded" type="button">Already join</a>
             <a href="" class="btn-tour violet"
