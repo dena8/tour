@@ -11,14 +11,14 @@
           <a class="nav-link" [routerLink]="['/home']">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active" >
-          <a class="nav-link" [routerLink]="['/about']">About</a>
+          <a class="nav-link" [routerLink]="['/sample','about']">About</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['tour-card']">Tours</a>
+          <a class="nav-link" [routerLink]="['/tour','tour-card']">Tours</a>
         </li>
         <li class="nav-item active" *ngIf="userService.isAuthenticated() && userService.hasGuideRole()">
           <a class="nav-link" [routerLink]="['/tour','create']">Create tours</a>
-        </li>
+        </li>   
         <li class="nav-item active" *ngIf="userService.isAuthenticated()&& userService.hasUserRole()">
           <a class="nav-link" [routerLink]="['/buy','cart']">Cart</a>
         </li>
@@ -36,9 +36,12 @@
         </li>         
       </ul>
     </div>
-    <form class="form-inline">
+    <div *ngIf="userService.isAuthenticated()">
+      <p style="color: aliceblue;">Hello, {{username()}}</p>
+    </div>
+    <!-- <form class="form-inline">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    </form> -->
   </nav>
 </div>

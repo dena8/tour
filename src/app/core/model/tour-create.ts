@@ -1,6 +1,5 @@
 import {IBase} from './base';
-export interface ITour<T=string> extends IBase { 
-   // id:string;  
+export interface ITour<T=string> extends IBase {    
     description:string;
     category:T;    
     participants:number;
@@ -8,6 +7,6 @@ export interface ITour<T=string> extends IBase {
     image:string;
     price:number;
     startDate: Date; 
-    region:string;  
+    region:string; 
       
 }
