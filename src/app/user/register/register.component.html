@@ -11,10 +11,10 @@
           <input class="form-control" formControlName="username" placeholder="User name">
         </div>
         <div class="alert alert-danger" *ngIf="f.username.errors?.required&&f.username.touched" >
-          Моля, попълнете полето!
+          Field is required!
         </div>  
         <div class="alert alert-danger" *ngIf="f.username.errors?.minlength && f.username.touched" >
-          Моля, въведете 3 символа!
+          Username must be at least 3 letters!
         </div>  
         <div class="alert alert-danger" *ngIf="f.username.errors?.maxlength && f.username.touched" >
           Максимална дължина десет символа!

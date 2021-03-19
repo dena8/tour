@@ -26,7 +26,9 @@ export class TourDescriptionComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params.id;
     this.tour$ = this.tourService.getTourById(this.id);
-    this.tourService.getTourById(this.id).subscribe(data => this.mLocation = data.region);
+    this.tourService.getTourById(this.id).subscribe(data => {     
+      this.mLocation = data.region    
+    });
     if (this.userService.hasUserRole()) {
       this.buyService.checkIfAdded(this.id).subscribe((data) => this.isAdded = data);
     }
@@ -34,17 +36,19 @@ export class TourDescriptionComponent implements OnInit {
 
   emitClick(event) {
     this.fromWeather = event;
+    console.log("EVENT", event);
+    console.log("FROM-WEATHER WEATHER COMPONENT", this.fromWeather);
   }
 
 
 
   clickJoin() {
     this.buyService.addTourToCart(this.id)
-      .subscribe(() => this.router.navigate(['tour-card']));
+      .subscribe(() => this.router.navigate(['tour/tour-card']));
   }
 
   deleteTour() {
-    this.tourService.deleteTour(this.id).subscribe();
+    this.tourService.deleteTour(this.id).subscribe(()=>this.router.navigate(['tour/tour-card']) );
   }
 
 }

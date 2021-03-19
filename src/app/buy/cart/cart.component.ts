@@ -33,7 +33,7 @@ export class CartComponent implements OnInit {
   }
 
   order() {  
-    this.buyService.makeOrder({username:this.username}).subscribe((data)=>this.router.navigate(['tour-card']));   
+    this.buyService.makeOrder({username:this.username}).subscribe((data)=>this.router.navigate(['home']));   
   }
 
   removeItem(tourId: string) {
