@@ -28,13 +28,18 @@ export class TourService {
     return this.http.get<ITour<ICategory>>(dbUrl + `/${id}`);
   }
 
+<<<<<<< HEAD
   deleteTour(id:string): Observable<string> {
+=======
+  deleteTour(id): Observable<string> {
+>>>>>>> ba570204d9c5fa6c78a3ef0f98379330685212bd
     return this.http.get<string>(dbUrl + '/remove' + `/${id}`)
       .pipe(
         tap((data) => this.toastr.success("Successful delete tour!"))
       );
   }
 
+<<<<<<< HEAD
   getWeatherForecast(location:string): Observable<IForecast> {
     return this.http.get<IForecast>(dbUrl + `/weather-forecast?region=${location}`);
   }
@@ -42,5 +47,10 @@ export class TourService {
   updateTour(id:string,formDate:FormData):Observable<any>{
       return this.http.put(dbUrl +`/update/${id}`,formDate);
   }
+=======
+  getWeatherForecast(location): Observable<IForecast> {
+    return this.http.get<IForecast>(dbUrl + `/weather-forecast?region=${location}`);
+  }
+>>>>>>> ba570204d9c5fa6c78a3ef0f98379330685212bd
 
 }

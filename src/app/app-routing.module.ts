@@ -13,7 +13,10 @@ const routes: Route[] = [
   {path:'tour',loadChildren:'./tour/tour.module#TourModule'},
   {path:'category',loadChildren:'./category/category.module#CategoryModule',canActivateChild:[AuthGuardGuard,GuideGuard]},
   {path:'buy',loadChildren:'./buy/buy.module#BuyModule',canActivateChild:[AuthGuardGuard]},
+<<<<<<< HEAD
   
+=======
+>>>>>>> ba570204d9c5fa6c78a3ef0f98379330685212bd
 
   { path: '**', redirectTo: '' } 
   
