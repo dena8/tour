@@ -12,20 +12,13 @@ import {AdminGuard} from '../core/gards/admin.guard';
 import {SampleModule} from '../sample/sample.module';
 import { AuthGuardGuard } from '../core/gards/auth-guard.guard';
 import {GuideGuard} from '../core/gards/guide.guard';
-<<<<<<< HEAD
 import { UpdateComponent } from './update/update.component';
-=======
->>>>>>> ba570204d9c5fa6c78a3ef0f98379330685212bd
 
 
 
 
 @NgModule({
-<<<<<<< HEAD
   declarations: [CreateComponent, TourCardComponent, DetailsComponent, RandomComponent, TourDescriptionComponent, UpdateComponent],
-=======
-  declarations: [CreateComponent, TourCardComponent, DetailsComponent, RandomComponent, TourDescriptionComponent],
->>>>>>> ba570204d9c5fa6c78a3ef0f98379330685212bd
   imports: [
     CommonModule,
     FontAwesomeModule,
@@ -35,12 +28,8 @@ import { UpdateComponent } from './update/update.component';
       { path: 'create', component: CreateComponent,canActivate:[AuthGuardGuard,GuideGuard],  },
       { path: 'random', component: RandomComponent },
       {path:'tour-card', component:TourCardComponent},
-<<<<<<< HEAD
       { path: 'description/:id', component: TourDescriptionComponent,canActivate:[AuthGuardGuard] },
       {path:'update/:id',component: UpdateComponent, canActivate:[AuthGuardGuard,GuideGuard]}      
-=======
-      { path: 'description/:id', component: TourDescriptionComponent,canActivate:[AuthGuardGuard] },      
->>>>>>> ba570204d9c5fa6c78a3ef0f98379330685212bd
     ])
   ],
   exports: [

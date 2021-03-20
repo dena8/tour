@@ -1,0 +1,77 @@
+<div class="log">
+    <div class="login-reg-panel">
+      <div class="register-info-box">
+        <h2>You need a new category?</h2>
+        <p>Click this button</p>
+        <button [routerLink]="['/category','create']" type="button" class="btn btn-outline-secondary"
+          style="color: white;">Create category</button>
+      </div>
+      <div class="white-panel">
+        <h3>Update tour</h3>        
+        <form enctype="multipart/form-data" [formGroup]="form" (submit)="create()" >
+          <div class="form-group">
+            <input formControlName="name" type="text" class="form-control" id="exampleInputEmail1"
+              value="{{(tour$|async)?.name}}"
+              aria-describedby="emailHelp" placeholder="Tour title">
+            <div class="alert alert-danger" *ngIf="f.name.errors?.required&&f.name.touched">
+              Field is required!
+            </div>
+          </div>
+          <div class="form-group">
+            <input formControlName="description" type="text" class="form-control" id="exampleInputPassword1"
+              placeholder="Tour description"
+              value="{{(tour$|async)?.description}}">
+            <div class="alert alert-danger" *ngIf="f.description.errors?.required&&f.description.touched">
+              Field is required!
+            </div>
+          </div>
+          <div class="form-group">
+            <input formControlName="region" type="text" class="form-control" id="region"
+              placeholder="Tour region"
+              value="{{(tour$|async)?.region}}">
+            <div class="alert alert-danger" *ngIf="f.region.errors?.required&&f.region.touched">
+              Field is required!
+            </div>
+          </div>
+          <div class="form-group">
+            <select formControlName="category" class="form-control">
+              <option>{{(tour$|async)?.category?.name}}</option>              
+              <option *ngFor="let category of categories$ | async">{{category.name}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input formControlName="participants" type="text" class="form-control" id="title"
+              placeholder="Number participants"
+              value="{{(tour$|async)?.participants}}">
+          </div>
+          <div class="alert alert-danger" *ngIf="f.participants.errors?.required&&f.difficultyLevel.touched">
+            Field is required!
+          </div>
+          <div class="form-group">
+            <input formControlName="difficultyLevel" type="text" class="form-control" placeholder="Difficulty level"
+            value="{{(tour$|async)?.difficultyLevel}}">
+          </div>
+          <div class="alert alert-danger" *ngIf="f.difficultyLevel.errors?.required&&f.difficultyLevel.touched">
+            Field is required!
+          </div>
+  
+          <div class="form-group">
+            <!-- Upload -->
+            <input accept="image/png, image/jpeg" (change)="upload($event)" class="form-control" type="file"  id="image">
+          </div>
+          <div class="form-group">
+            <input formControlName="price" type="text" class="form-control" placeholder="Price"
+            value="{{(tour$|async)?.price}}">
+            <div class="alert alert-danger" *ngIf="f.price.errors?.required&&f.price.touched">
+              Field is required!
+            </div>
+          </div>
+          <div class="form-group">
+            <!-- Date input -->
+            <input formControlName="startDate" class="form-control" type="date" id="pickyDate" placeholder="date" />
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
