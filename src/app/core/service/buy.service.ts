@@ -6,6 +6,7 @@ import {tap} from 'rxjs/operators';
 import { IUser } from '../model/user';
 import { ITour } from '../model/tour-create';
 import { IOrder } from '../model/order';
+import { ILog } from '../model/log';
 
 const dbUrl = 'http://localhost:5000'
 
@@ -47,5 +48,10 @@ export class BuyService {
       tap((data)=>this.toaster.success("Successful remove tour!"))
     );
   }
+
+  getLogs():Observable<ILog[]>{
+   return this.httpClient.get<ILog[]>(dbUrl+'/logs/all');
+  }
+
 
 }

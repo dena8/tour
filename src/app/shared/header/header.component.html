@@ -31,9 +31,12 @@
         <li class="nav-item" *ngIf="userService.isAuthenticated()">
           <a class="nav-link" (click)="logout()">Logout</a>
         </li>
-        <li class="nav-item" *ngIf="userService.isAuthenticated()">
+        <li class="nav-item" *ngIf="userService.isAuthenticated() && userService.hasAdminRole()">
           <a class="nav-link" [routerLink]="['/buy','order']" >Order</a>
-        </li>         
+        </li>
+        <li class="nav-item" *ngIf="userService.isAuthenticated() && userService.hasAdminRole()">
+          <a class="nav-link" [routerLink]="['/buy','statistic']" >Statistic</a>
+        </li>            
       </ul>
     </div>
     <div *ngIf="userService.isAuthenticated()">

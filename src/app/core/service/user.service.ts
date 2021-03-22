@@ -35,12 +35,7 @@ export class UserService {
   isAuthenticated():boolean{ 
     return localStorage.getItem('token')!==null;
   }
-
-  isAdmin():boolean{
-    console.log("IS ADMIN:",localStorage.getItem('admin'));
-    return JSON.parse(localStorage.getItem('admin'));
-  }
-
+  
   hasAdminRole():boolean{   
     return this.isAuthenticated() && localStorage.getItem('roles').includes('ADMIN_ROLE');
   }
