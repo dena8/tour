@@ -5,5 +5,5 @@ export interface ILog extends IBase {
     customer: string;
     error: string;
     stacktrace: string;
-    date: Date;
+    date: string;
 }

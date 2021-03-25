@@ -7,6 +7,7 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
 import { AdminGuard } from '../core/gards/admin.guard';
 import {CustomerGuard} from '../core/gards/customer.guard';
 import { StatisticComponent } from './statistic/statistic.component';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -14,6 +15,8 @@ import { StatisticComponent } from './statistic/statistic.component';
   declarations: [OrderComponent, CartComponent, OrderDetailsComponent, StatisticComponent],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {path:'cart',component:CartComponent, canActivate:[CustomerGuard]},
       {path:'order',component:OrderComponent, canActivate:[AdminGuard]},

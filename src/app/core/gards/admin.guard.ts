@@ -13,11 +13,9 @@ export class AdminGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
     if (!this.userService.hasAdminRole()) {
-      console.log("FROM ADMIN GUARD", this.userService.hasAdminRole());
       this.router.navigate(['home']);
       return false;
     }
-    console.log("FROM ADMIN GUARD return TRUE");
     return true;
   }
 

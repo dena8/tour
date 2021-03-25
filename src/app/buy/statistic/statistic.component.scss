@@ -1,19 +1,20 @@
 .login-reg-panel{
-    width: 80%;
+    width: 80%;   
     margin: auto;  
-    padding: 10px;
+    padding: 10px;   
 }
 
 
 h4{
   color: #530B0D;
   font-size: 26px; 
-  border-bottom: 1px solid gray;
+ // border-bottom: 1px solid gray;
   display: inline-block;
-  text-align: center;
+  text-align: left;
   width:500px;
   margin-left: 30%;
   margin-bottom: 2%; 
+  
 }
 
 p{
@@ -26,4 +27,34 @@ p{
   margin-left: 30%;
   margin-bottom: 2%; 
 }
+
+button{ 
+  top: 3;
+  right: 3;  
+  border: 1px solid #dbdbdb;
+}
+
+.col2{
+  display: flex;
+  justify-content: flex-end;
+}
+
+ .log{
+    margin-top: 10%;
+ }
+.container{
+  display: flex;
+  flex-direction: column;
+}
+.fay{
+  margin-top: 15%;
+  // width: 30%;
+  // height: 30%;
+}
+
+th{
+  text-align: center;
+}
+
+
 

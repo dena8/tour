@@ -14,9 +14,9 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private jwtHelperService: JwtHelperService) { }
  
   ngOnInit(): void {
-    this.form = this.fb.group({
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required]]
+    this.form = this.fb.group({     
+      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[A-Za-z\\s]+$')]],    
+      password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
     })
 
   }

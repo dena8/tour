@@ -9,7 +9,7 @@ import {tap} from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';
 
 
-const DB_URL = 'http://localhost:5000/users'
+const BE_URL = 'http://localhost:5000/users'
 
 @Injectable({
   providedIn: 'root'
@@ -19,14 +19,14 @@ export class UserService {
   constructor(private http:HttpClient, public toastr:ToastrService) { }
 
   postRegister(user:IUserRegister): Observable<IUserRegister>{
-      return this.http.post<IUserRegister>(DB_URL+'/register',user)
+      return this.http.post<IUserRegister>(BE_URL+'/register',user)
       .pipe(
         tap((data)=>this.toastr.success("Successful register!"))
       );   
   }
 
   postLogin(user:string):Observable<HttpResponse<ILogin>>{
-       return this.http.post<any>(DB_URL+'/login',user, {observe:'response'} )
+       return this.http.post<any>(BE_URL+'/login',user, {observe:'response'} )
        .pipe(
          tap((data)=>this.toastr.success("Successful login!"))        
        );
@@ -60,11 +60,22 @@ export class UserService {
   }
 
   removeItemFromCart(userId:string,itemId:string):Observable<string>{
-    return this.http.put<string>(DB_URL+'/api/cart/clear',{userId,itemId});    
+    return this.http.put<string>(BE_URL+'/api/cart/clear',{userId,itemId});    
   }
 
   getCurrentUser():Observable<IUser<ITour>>{
-    return this.http.get<IUser<ITour>>(DB_URL+'/get/current');
- }
+    return this.http.get<IUser<ITour>>(BE_URL+'/get/current');
+  }
+
+  getAuthorities():Observable<string[]>{
+    return this.http.get<string[]>(BE_URL+'/authorities');
+  }
+
+  updateAuthority(body:FormData):Observable<any>{
+    return this.http.put<any>(BE_URL + '/update/authority',body)
+    .pipe(
+      tap(()=>this.toastr.success("Successful update authority!"))        
+    );
+  }
 
 }

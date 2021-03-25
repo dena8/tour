@@ -25,14 +25,14 @@ export class CreateComponent implements OnInit {
   this.categories$=  this.categoryService.getAllCategories();  
 
     this.form = this.fb.group({
-      name: ['', [Validators.required]],
-      description: ['', Validators.required],
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[A-Za-z\\s]+$')]],
+      description: ['', [Validators.required,Validators.minLength(3), Validators.maxLength(200),]],
       region:['',Validators.required],
       category: ['', Validators.required],         
-      participants: ['', [Validators.required]],
+      participants: ['', [Validators.required, Validators.min(1)]],
       difficultyLevel: ['', [Validators.required]],
       image:['',Validators.required],
-      price:['',Validators.required],
+      price:['',[Validators.required, Validators.min(0)]],
       startDate: ['', Validators.required],   
     })
   }
@@ -43,8 +43,7 @@ export class CreateComponent implements OnInit {
 
   upload(event){   
       const file = (event.target as HTMLInputElement).files[0];
-      this.form.get("image").setValue(file); 
-      
+      this.form.get("image").setValue(file);      
   }
 
   create() {
