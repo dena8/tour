@@ -5,6 +5,7 @@ import { ILog } from '../../core/model/log';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { UserService } from '../../core/service/user.service';
 import { GalleryService } from '../../core/service/gallery.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-statistic',
@@ -24,7 +25,8 @@ export class StatisticComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private buyService: BuyService,
     private userService: UserService,
-    private galleryService: GalleryService
+    private galleryService: GalleryService,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
@@ -46,13 +48,12 @@ export class StatisticComponent implements OnInit {
     return this.form.controls;
   }
 
-  seeStack(i: number) {
-    this.logs$.subscribe(l => new alert(l[i].stacktrace));
+  get fg() {
+    return this.galleryForm.controls;
   }
 
-  selectAuthority(e) {
-    console.log("EVENT: ", e);
-    console.log("TARGET", e.target.value);
+  seeStack(i: number) {
+    this.logs$.subscribe(l => new alert(l[i].stacktrace));
   }
 
   changeAuthority() {
@@ -77,8 +78,8 @@ export class StatisticComponent implements OnInit {
       formDate.append("images", this.selectedFiles[i]);
     }
 
-    this.galleryService.createTour(formDate)
-      .subscribe(() => this.ngOnInit());
+    this.galleryService.createGallery(formDate)
+      .subscribe(() => this.router.navigate(['sample/gallery']));
   }
 
 }
