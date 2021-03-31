@@ -4,6 +4,7 @@ import { IUserRegister } from '../../core/model/user-register';
 import { confirmCustomValidator } from './confirm.validator';
 import { UserService } from '../../core/service/user.service'
 import { Router } from '@angular/router';
+import {usernameAsyncValidator} from '../../core/validator/async-username-validator';
 
 
 
@@ -22,7 +23,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[A-Za-z\\s]+$')]],
+      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[A-Za-z\\s]+$')],[usernameAsyncValidator(this.userService)], {updateOn: 'blur'} ],
       email: ['', [Validators.required, Validators.email]],      
       password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       confirmPassword: ['', [Validators.required]]
@@ -37,10 +38,15 @@ export class RegisterComponent implements OnInit {
       .subscribe(() => {       
         this.router.navigate(['login']);
       });
+     
   }
 
   get f() {
     return this.form.controls;
+  }
+
+  get av (){
+    return this.form.get('username');
   }
   
 }

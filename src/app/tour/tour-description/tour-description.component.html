@@ -16,7 +16,7 @@
         </div>
         <div class="buttons-box">
             <a class="btn-tour del" *ngIf="userService.hasAdminRole()" (click)="deleteTour()">Delete</a>
-            <a  class="btn-tour del" *ngIf="userService.hasGuideRole()" style="background-color: rgb(87, 165, 42);" [routerLink]="['/tour','update',(tour$ | async)?.id]" >Update</a>
+            <a  class="btn-tour del" *ngIf="userService.hasGuideRole()&&isCreator" style="background-color: rgb(87, 165, 42);" [routerLink]="['/tour','update',(tour$ | async)?.id]" >Update</a>
             <a class="btn-tour"
                 *ngIf="!userService.hasAdminRole()&& !userService.hasGuideRole()&&(tour$|async)?.participants>0&& !isAdded"
                 type="button" (click)="clickJoin()">Join</a>

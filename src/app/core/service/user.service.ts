@@ -78,4 +78,8 @@ export class UserService {
     );
   }
 
+  findUserByUsername(username:string):Observable<any>{
+    return this.http.get<any>(BE_URL+`/find?username=${username}`)
+  }
+
 }

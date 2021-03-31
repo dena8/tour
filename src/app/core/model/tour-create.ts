@@ -1,5 +1,7 @@
 import {IBase} from './base';
-export interface ITour<T=string> extends IBase {    
+import { ILogin } from './user-login';
+export interface ITour<T=string> extends IBase { 
+    name:string;   
     description:string;
     category:T;    
     participants:number;
@@ -8,5 +10,6 @@ export interface ITour<T=string> extends IBase {
     price:number;
     startDate: Date; 
     region:string; 
+    creator:ILogin;
       
 }

@@ -7,6 +7,7 @@ import { ITour } from '../../core/model/tour-create';
 import { TourService } from '../../core/service/tour.service';
 import { BuyService } from '../../core/service/buy.service';
 import { WeatherComponent } from 'src/app/sample/weather/weather.component';
+import { async } from 'rxjs/internal/scheduler/async';
 
 @Component({
   selector: 'app-tour-description',
@@ -20,6 +21,7 @@ export class TourDescriptionComponent implements OnInit {
   public isAdded: Boolean;
   mLocation: string; 
   fromWeather: boolean;
+  isCreator:boolean;
 
   constructor(private tourService: TourService, public userService: UserService, private activatedRoute: ActivatedRoute, private router: Router, private buyService: BuyService) { }
 
@@ -27,7 +29,8 @@ export class TourDescriptionComponent implements OnInit {
     this.id = this.activatedRoute.snapshot.params.id;
     this.tour$ = this.tourService.getTourById(this.id);
     this.tourService.getTourById(this.id).subscribe(data => {     
-      this.mLocation = data.region    
+      this.mLocation = data.region;
+      this.isCreator = data.creator.username==localStorage.getItem('username');    
     });
     if (this.userService.hasUserRole()) {
       this.buyService.checkIfAdded(this.id).subscribe((data) => this.isAdded = data);
@@ -40,6 +43,9 @@ export class TourDescriptionComponent implements OnInit {
     console.log("FROM-WEATHER WEATHER COMPONENT", this.fromWeather);
   }
 
+  // isCreator(){
+  //   return 
+  // }
 
 
   clickJoin() {

@@ -8,7 +8,10 @@
           <div class="input-group-prepend">
             <span class="input-group-text"> <i class="fa fa-user"></i> </span>
           </div>
-          <input class="form-control" formControlName="username" placeholder="Username">
+          <input class="form-control" formControlName="username"   placeholder="Username">
+        </div>
+        <div class="alert alert-danger" *ngIf="av.errors?.userNotExist" >
+         This username is already taken!
         </div>
         <div class="alert alert-danger" *ngIf="f.username.errors?.required&&f.username.touched" >
           Field is required!

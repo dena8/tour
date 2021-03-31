@@ -1,55 +1,75 @@
 <div class="container">
-<form [formGroup]="form" (submit)="changeAuthority()">
+  <form [formGroup]="form" (submit)="changeAuthority()">
     <div class="row">
       <div class="col">
         <input formControlName="username" type="text" class="form-control" placeholder="Username">
-        <div class="alert alert-danger" *ngIf="f.username.errors?.required && f.username.touched" >
-          Username is required! 
+        <div class="alert alert-danger" *ngIf="f.username.errors?.required && f.username.touched">
+          Username is required!
         </div>
       </div>
-    
+
       <div class="col col2">
         <!-- <input formControlName="authority" type="text" class="form-control" placeholder="Authority"> -->
-        <select (change)="selectAuthority($event)"  formControlName="authority" class="form-control" >         
-          <option >Choose authority</option>
-          <option  *ngFor="let authority of authorities$|async">{{authority}}</option>          
+        <select (change)="selectAuthority($event)" formControlName="authority" class="form-control">
+          <option>Choose authority</option>
+          <option *ngFor="let authority of authorities$|async">{{authority}}</option>
         </select>
-        <div class="alert alert-danger" *ngIf="f.authority.errors?.required && f.authority.touched" >
-          Authority is required! 
-         </div>
+        <div class="alert alert-danger" *ngIf="f.authority.errors?.required && f.authority.touched">
+          Authority is required!
+        </div>
         <button type="submit" class="btn btn-light">Change_authority</button>
       </div>
-    </div>    
-  </form> 
-  <div class="log">   
-    <div class="login-reg-panel">       
-        <div class="table-responsive text-light">        
-            <h4>Statistic for create order errors</h4>
-            <p *ngIf="(logs$|async)?.length==0">No errors here</p>
-            <p *ngIf="(logs$|async)?.length==0">Good job!</p>
-            <p *ngIf="(logs$|async)?.length==0">Go to drink beer! ;)</p>
-            <table *ngIf="(logs$|async)?.length>0" class="table table-striped table-sm">
-                <thead>
-                    <tr>
-                        <th>Customer</th>
-                        <th>Error</th>
-                        <th>Date and Time</th>
-                        <!-- <th>Stack</th> -->
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let log of logs$|async; let i=index">
-                        <td>{{log.customer}}</td>
-                        <td>{{log.error}}</td>
-                        <td>{{log.date.substring(0,16)}}</td>
-                        <td (click)="seeStack(i)">See stacktrace
-                        <td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
-</div>
-<div class="fay"></div>
-</div>
+  </form>
 
+  <div class="log">
+    <div class="login-reg-panel">
+      <div class="table-responsive text-light">
+        <h4>Statistic for create order errors</h4>
+        <p *ngIf="(logs$|async)?.length==0">No errors here</p>
+        <p *ngIf="(logs$|async)?.length==0">Go to drink beer! ;)</p>
+        <table *ngIf="(logs$|async)?.length>0" class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th>Customer</th>
+              <th>Error</th>
+              <th>Date and Time</th>
+              <!-- <th>Stack</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let log of logs$|async; let i=index">
+              <td>{{log.customer}}</td>
+              <td>{{log.error}}</td>
+              <td>{{log.date.substring(0,16)}}</td>
+              <td (click)="seeStack(i)">See stacktrace
+              <td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="fay"></div>
+  <p>Change gallery</p>
+ <form id="second" enctype="multipart/form-data" [formGroup]="galleryForm" (submit)="galleryCreate()"> 
+  <div class="form-group">
+    <!-- Upload -->    
+    <input multiple formControlName="images" (change)="onFileChange($event)" accept="image/png, image/jpeg" class="form-control" type="file" id="image">
+  </div>
+  <div class="form-group">    
+    <input formControlName="description" type="text" class="form-control" id="exampleInputPassword1"
+      placeholder="Tour description">
+    <!-- <div class="alert alert-danger" *ngIf="f.description.errors?.required&&f.description.touched">
+      Field is required!
+    </div>
+    <div class="alert alert-danger" *ngIf="f.description.errors?.minlength && f.description.touched" >
+      Tour description must be at least 3 letters!
+    </div>
+    <div class="alert alert-danger" *ngIf="f.description.errors?.maxlength && f.description.touched" >
+      Tour description be no more than 200 letters!
+    </div> -->
+  </div>
+  <button  type="submit"  class="btn btn-primary btn-lg btn-block">Submit</button>
+</form>
+</div>

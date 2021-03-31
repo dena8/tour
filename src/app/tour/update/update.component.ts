@@ -31,7 +31,7 @@ export class UpdateComponent implements OnInit {
     this.categories$=  this.categoryService.getAllCategories();
     this.tourService.getTourById(this.activatedRoute.snapshot.params.id).subscribe(data=>{
       this.form = this.fb.group({
-        name: [data.name, [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[A-Za-z\\s]+$')]],
+        name: [data.name, [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[A-Za-z0-9\\s]+$')]],
         description: [data.description, [Validators.required,Validators.minLength(3), Validators.maxLength(200)]],
         region:[data.region,Validators.required],
         category: [data.category.name, Validators.required],         

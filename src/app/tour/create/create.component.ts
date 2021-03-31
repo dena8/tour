@@ -25,7 +25,7 @@ export class CreateComponent implements OnInit {
   this.categories$=  this.categoryService.getAllCategories();  
 
     this.form = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[A-Za-z\\s]+$')]],
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[A-Za-z0-9\\s]+$')]],
       description: ['', [Validators.required,Validators.minLength(3), Validators.maxLength(200),]],
       region:['',Validators.required],
       category: ['', Validators.required],         

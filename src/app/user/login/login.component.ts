@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserService } from '../../core/service/user.service';
+import {invalidUsernameAsyncValidator} from '../../core/validator/async-username-not-exist-validator';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
  
   ngOnInit(): void {
     this.form = this.fb.group({     
-      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[A-Za-z\\s]+$')]],    
+      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[A-Za-z\\s]+$')],[invalidUsernameAsyncValidator(this.userService)], {updateOn: 'blur'}],    
       password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
     })
 
@@ -23,6 +24,10 @@ export class LoginComponent implements OnInit {
 
   get f() {
     return this.form.controls;
+  }
+
+  get av (){
+    return this.form.get('username');
   }
 
   postLogin() {
