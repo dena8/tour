@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http'
-import { Observable } from 'rxjs';
+import { concat, Observable } from 'rxjs';
 import {catchError, tap} from "rxjs/operators"
 import {ToastrService} from 'ngx-toastr';
 
@@ -14,8 +14,8 @@ export class NotificationHandlerService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(tap(()=>(""))    
     ,catchError((err)=>{    
-      console.log("ERROR FROM NOTIF-INTERCEPT:",err);  
-      let msg = err['error']['message'];    
+      console.log("ERROR FROM NOTIF-INTERCEPT:",err);     
+      let msg = err['error']['message'];       
       console.log("MSG",msg);
      this.toastr.error(msg,'Error!');  
                 throw err;   

@@ -6,7 +6,7 @@ import { ICategory } from '../../core/model/category';
 import { CategoryService } from 'src/app/core/service/category.service';
 import { ITour } from 'src/app/core/model/tour-create';
 import { TourService } from 'src/app/core/service/tour.service';
-
+import {dateInTheFutureValidator} from '../../core/validator/custom-date-validator';
 
 @Component({
   selector: 'app-update',
@@ -35,11 +35,13 @@ export class UpdateComponent implements OnInit {
         description: [data.description, [Validators.required,Validators.minLength(3), Validators.maxLength(200)]],
         region:[data.region,Validators.required],
         category: [data.category.name, Validators.required],         
-        participants: [data.participants, [Validators.required, Validators.min(1)]],
+        participants: [data.participants, [Validators.required, Validators.min(1),Validators.pattern('[0-9]+')]],
         difficultyLevel: [data.difficultyLevel, [Validators.required]],
         image:[data.image,Validators.required],
         price:[data.price,[Validators.required, Validators.min(0)]],
         startDate: [data.startDate, Validators.required],   
+      }, {
+        validators: dateInTheFutureValidator('startDate')
       })
    })
     this.tour$ = this.tourService.getTourById(this.activatedRoute.snapshot.params.id);

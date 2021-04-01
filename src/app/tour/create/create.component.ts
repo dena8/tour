@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { CategoryService } from 'src/app/core/service/category.service';
 import { ICategory } from '../../core/model/category';
 import {TourService} from '../../core/service/tour.service';
+import {dateInTheFutureValidator} from '../../core/validator/custom-date-validator';
 
 @Component({
   selector: 'app-create',
@@ -29,11 +30,13 @@ export class CreateComponent implements OnInit {
       description: ['', [Validators.required,Validators.minLength(3), Validators.maxLength(200),]],
       region:['',Validators.required],
       category: ['', Validators.required],         
-      participants: ['', [Validators.required, Validators.min(1)]],
+      participants: ['', [Validators.required, Validators.min(1),Validators.pattern('[0-9]+')]],
       difficultyLevel: ['', [Validators.required]],
       image:['',Validators.required],
       price:['',[Validators.required, Validators.min(0)]],
       startDate: ['', Validators.required],   
+    }, {
+      validators: dateInTheFutureValidator('startDate')
     })
   }
 

@@ -62,8 +62,11 @@
               placeholder="Number participants"
               value="{{(tour$|async)?.participants}}">
           </div>
-          <div class="alert alert-danger" *ngIf="f.participants.errors?.required&&f.difficultyLevel.touched">
+          <div class="alert alert-danger" *ngIf="f.participants.errors?.required&&f.participants.touched">
             Field is required!
+          </div>
+          <div class="alert alert-danger" *ngIf="f.participants.errors?.pattern&&f.participants.touched">
+            Enter integer number, please!
           </div>
           <div class="alert alert-danger" *ngIf="f.participants.errors?.min && f.participants.touched" >
             Number participants must be greater than 0!
@@ -93,6 +96,9 @@
           <div class="form-group">
             <!-- Date input -->
             <input formControlName="startDate" class="form-control" type="date" id="pickyDate" placeholder="date" />
+            <div class="alert alert-danger" *ngIf="f.startDate.errors?.startDateMismatch && f.startDate?.touched" >
+              Date must be in the future!
+            </div>
           </div>
           <button [disabled]="!form.valid" [ngStyle]="{'cursor': (!form.valid? 'not-allowed':'pointer')}" type="submit" class="btn btn-primary">Submit</button>
         </form>
