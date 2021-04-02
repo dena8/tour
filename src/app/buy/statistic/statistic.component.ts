@@ -37,11 +37,9 @@ export class StatisticComponent implements OnInit {
     this.galleryForm = this.fb.group({
       images: [this.fb.array([])],
       description: ['', Validators.required]
-    })
-    console.log("FORM GALLERY", this.galleryForm.value);
+    })   
     this.logs$ = this.buyService.getLogs();
-    this.authorities$ = this.userService.getAuthorities();
-    this.authorities$.subscribe(a => console.log("AUTHORITIES", a))
+    this.authorities$ = this.userService.getAuthorities();    
   }
 
   get f() {
@@ -69,8 +67,7 @@ export class StatisticComponent implements OnInit {
   }
 
   galleryCreate() {
-    const formDate = new FormData();
-    console.log("THIS FORM VALUE", this.galleryForm.value);
+    const formDate = new FormData();   
     for (const [k, v] of Object.entries(this.galleryForm.value)) {
       formDate.append(k, v as any);
     }

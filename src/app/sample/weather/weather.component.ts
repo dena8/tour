@@ -20,12 +20,9 @@ export class WeatherComponent implements OnInit {
 
   constructor(private tourService: TourService) { }
 
-  ngOnInit(): void {
-    console.log("LOCATION FROM WEATHER",this.mLocation);
+  ngOnInit(): void {  
     this.forecast$ = this.tourService.getWeatherForecast(this.mLocation);
-    this.tourService.getWeatherForecast(this.mLocation).subscribe(data => {
-      console.log("DATA.SUCCESS FROM EMITER", data.success);
-      console.log(data);
+    this.tourService.getWeatherForecast(this.mLocation).subscribe(data => {    
       this.isDateEmitter.emit(data.success);
     });
   }

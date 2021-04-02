@@ -38,9 +38,7 @@ export class TourDescriptionComponent implements OnInit {
   }
 
   emitClick(event) {
-    this.fromWeather = event;
-    console.log("EVENT", event);
-    console.log("FROM-WEATHER WEATHER COMPONENT", this.fromWeather);
+    this.fromWeather = event;   
   }
 
   // isCreator(){

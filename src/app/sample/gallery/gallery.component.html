@@ -2,7 +2,7 @@
 
     <h2>Gallery</h2>
        
-    <div *ngFor="let image of (gallery$|async).images" class="responsive">
+    <div *ngFor="let image of (gallery$|async)?.images" class="responsive">
       <div class="gallery">
         <a target="_blank" href="img_forest.jpg">
           <img src="{{image}}" alt="Forest" width="600" height="400">
@@ -14,7 +14,7 @@
     <!-- <div class="clearfix"></div> -->
     
     <div style="padding:6px;">
-      <p>{{(gallery$|async).description}}</p>      
+      <p>{{(gallery$|async)?.description}}</p>      
     </div>    
 </div>
 

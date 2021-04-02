@@ -6,11 +6,9 @@ import { map } from 'rxjs/operators';
 
 export function invalidUsernameAsyncValidator(userService: UserService): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      console.log("CONTROL", control.value);
-      return userService.findUserByUsername(control.value).pipe(
+          return userService.findUserByUsername(control.value).pipe(
         map(
-          v => {
-            console.log("LOG VALUE", v);
+          v => {            
             return v == false ? { userNotExist: true } : null;
           }
         ));

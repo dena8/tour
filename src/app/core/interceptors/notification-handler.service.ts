@@ -13,11 +13,9 @@ export class NotificationHandlerService implements HttpInterceptor {
   constructor(public toastr:ToastrService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(tap(()=>(""))    
-    ,catchError((err)=>{    
-      console.log("ERROR FROM NOTIF-INTERCEPT:",err);     
-      let msg = err['error']['message'];       
-      console.log("MSG",msg);
-     this.toastr.error(msg,'Error!');  
+    ,catchError((err)=>{   
+      let msg = err['error']['message'];   
+        this.toastr.error(msg,'Error!');  
                 throw err;   
     }));
   }

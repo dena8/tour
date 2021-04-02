@@ -50,8 +50,7 @@ export class CreateComponent implements OnInit {
   }
 
   create() {
-    const formDate= new FormData();  
-    console.log("THIS FORM VALUE",this.form.value);
+    const formDate= new FormData();    
     for (const [k,v] of Object.entries(this.form.value)) {     
       formDate.append(k,v as any);   
     }

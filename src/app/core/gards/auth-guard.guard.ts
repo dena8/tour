@@ -11,8 +11,7 @@ export class AuthGuardGuard implements CanActivateChild, CanActivate {
  constructor(private userService: UserService, private router: Router){}
 
   canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean  {
-    if(this.userService.getToken()){
-      console.log("FROM AUTH GUARD",this.userService.getToken());
+    if(this.userService.getToken()){      
           return true;
         }
         this.router.navigate(['home']);

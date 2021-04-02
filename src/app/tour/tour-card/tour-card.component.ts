@@ -26,20 +26,16 @@ export class TourCardComponent implements OnInit {
 
     this.tourService.getPopulatedTours().subscribe((data) => {
       this.isTours = !!data.length;
-      if (this.userService.hasGuideRole()) {
-        console.log("HAS GUIDE ROLE");
+      if (this.userService.hasGuideRole()) {      
         this.myGuideTours = data.filter(function (d) {
           return d.creator.username === localStorage.getItem('username')
         });
 
         this.otherGuideTours = data.filter(function (d) {
           return d.creator.username !== localStorage.getItem('username')
-        })
-        console.log("MYGUIDE : OTHER : LENGTH", this.myGuideTours, this.otherGuideTours, this.otherGuideTours.length==0);
+        })      
       } else {
-        this.tours = data
-        //this.isTours = !!data.length;
-        console.log("THIS TOURCE:", this.tours);
+        this.tours = data       
       }
     }, err => {
       console.log(err);

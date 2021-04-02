@@ -32,8 +32,7 @@ export class LoginComponent implements OnInit {
 
   postLogin() {
 
-    this.userService.postLogin(this.form.value).subscribe(data => { 
-      console.log("Data from POST LOGIN",data);    
+    this.userService.postLogin(this.form.value).subscribe(data => {        
       const token = data.headers.get('Authorization');
       const decodeToken = this.jwtHelperService.decodeToken(token);     
       localStorage.setItem('token', data.headers.get('Authorization'));      
