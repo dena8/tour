@@ -19,7 +19,7 @@ export class OrderDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.rout.snapshot.paramMap.get('id'); 
 
-    this.buyService.getOrder(this.id).subscribe(data=>{     
+    this.buyService.getOrder(this.id).subscribe(data=>{       
       this.order=data;
       this.tourSum = this.order.buyingProducts.filter(u=>u.price).reduce((acc, { price }) => acc + price, 0);    
     })

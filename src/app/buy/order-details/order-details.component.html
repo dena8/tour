@@ -4,8 +4,8 @@
 
     <div id="identity">
 
-        <textarea id="address"> {{order.customer.username}},
-{{order.customer.email}}
+        <textarea id="address"> {{order?.customer?.username}},
+{{order?.customer?.email}}
 
 
 Phone: (***) ***-****</textarea>
@@ -19,12 +19,12 @@ c/o Pegasus Medea</textarea>
             <table id="meta">
                 <tr>
                     <td class="meta-head">Invoice #</td>
-                    <td><textarea>000{{order.id.substring(0,5)}}</textarea></td>
+                    <td><textarea>000{{order?.id?.substring(0,5)}}</textarea></td>
                 </tr>
                 <tr>
 
                     <td class="meta-head">Date</td>
-                    <td><textarea id="date">{{order.buyDate.substring(0,order.buyDate.indexOf("T"))}}</textarea></td>
+                    <td><textarea id="date">{{order?.buyDate?.substring(0,order.buyDate.indexOf("T"))}}</textarea></td>
                 </tr>
                 <tr>
                     <td class="meta-head">Amount Due</td>
@@ -47,7 +47,7 @@ c/o Pegasus Medea</textarea>
                 <th></th>                
             </tr>
 
-            <tr *ngFor="let tour of order.buyingProducts" class="item-row">
+            <tr *ngFor="let tour of order?.buyingProducts" class="item-row">
                 <td class="description"><textarea>{{tour.name}}</textarea></td>
                 <td><textarea class="qty"></textarea></td>
                 <td><span class="price">{{tour.price}} lv.</span></td>

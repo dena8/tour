@@ -100,7 +100,11 @@
               Date must be in the future!
             </div>
           </div>
-          <button [disabled]="!form.valid" [ngStyle]="{'cursor': (!form.valid? 'not-allowed':'pointer')}" type="submit" class="btn btn-primary">Submit</button>
+          <button [disabled]="!form.valid" [ngStyle]="{'cursor': (!form.valid? 'not-allowed':'pointer')}" type="submit" class="btn btn-primary">
+            Submit
+            <span *ngIf="loading" class="spinner-border spinner-border-sm"> </span>     
+          </button>
+          
         </form>
       </div>
     </div>

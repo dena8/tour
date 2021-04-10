@@ -18,6 +18,7 @@ export class UpdateComponent implements OnInit {
   categories$: Observable<ICategory[]>;
   tour$: Observable<ITour<ICategory>>;
   id:string = this.activatedRoute.snapshot.params.id;
+  loading:boolean = false;
  
 
   constructor(private fb:FormBuilder,
@@ -64,6 +65,7 @@ export class UpdateComponent implements OnInit {
     for (const [k,v] of Object.entries(this.form.value)) {     
       formDate.append(k,v as any);   
     } 
+    this.loading=true;
     
     this.tourService.updateTour(this.id,formDate).subscribe(()=>this.router.navigate(['tour/tour-card']));
 

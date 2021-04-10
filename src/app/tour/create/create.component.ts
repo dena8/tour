@@ -7,6 +7,7 @@ import { ICategory } from '../../core/model/category';
 import {TourService} from '../../core/service/tour.service';
 import {dateInTheFutureValidator} from '../../core/validator/custom-date-validator';
 
+
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -15,6 +16,7 @@ import {dateInTheFutureValidator} from '../../core/validator/custom-date-validat
 export class CreateComponent implements OnInit {
   form: FormGroup;
   categories$: Observable<ICategory[]>;
+  loading:boolean =false; 
 
   
   constructor(private fb: FormBuilder,
@@ -34,9 +36,10 @@ export class CreateComponent implements OnInit {
       difficultyLevel: ['', [Validators.required]],
       image:['',Validators.required],
       price:['',[Validators.required, Validators.min(0)]],
-      startDate: ['', Validators.required],   
+      startDate: ['',[Validators.required]],   
     }, {
       validators: dateInTheFutureValidator('startDate')
+      
     })
   }
 
@@ -50,10 +53,12 @@ export class CreateComponent implements OnInit {
   }
 
   create() {
+    
     const formDate= new FormData();    
     for (const [k,v] of Object.entries(this.form.value)) {     
       formDate.append(k,v as any);   
     }
+    this.loading=true;
  
    this.tourService.createTour(formDate).subscribe(tour=>{     
        this.router.navigate(['tour/tour-card']);

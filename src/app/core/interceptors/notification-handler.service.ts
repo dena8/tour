@@ -13,8 +13,11 @@ export class NotificationHandlerService implements HttpInterceptor {
   constructor(public toastr:ToastrService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(tap(()=>(""))    
-    ,catchError((err)=>{   
-      let msg = err['error']['message'];   
+    ,catchError((err)=>{       
+      let msg = err['error']['message'];
+      if(err['message'].includes('http://localhost:5000/users/login')) {
+        msg = "Invalid credentials";
+      }   
         this.toastr.error(msg,'Error!');  
                 throw err;   
     }));

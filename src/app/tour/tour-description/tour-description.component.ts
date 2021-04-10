@@ -41,11 +41,6 @@ export class TourDescriptionComponent implements OnInit {
     this.fromWeather = event;   
   }
 
-  // isCreator(){
-  //   return 
-  // }
-
-
   clickJoin() {
     this.buyService.addTourToCart(this.id)
       .subscribe(() => this.router.navigate(['tour/tour-card']));
