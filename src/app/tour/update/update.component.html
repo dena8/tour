@@ -1,0 +1,111 @@
+<div class="log">
+    <div class="login-reg-panel">
+      <div class="register-info-box">
+        <h2>You need a new category?</h2>
+        <p>Click this button</p>
+        <button [routerLink]="['/category','create']" type="button" class="btn btn-outline-secondary"
+          style="color: white;">Create category</button>
+      </div>
+      <div class="white-panel">
+        <h3>Update tour</h3>        
+        <form enctype="multipart/form-data" *ngIf="form" [formGroup]="form" (submit)="create()" >
+          <div class="form-group">
+            <input formControlName="name" type="text" class="form-control" id="exampleInputEmail1"
+              value="{{(tour$|async)?.name}}"
+              aria-describedby="emailHelp" placeholder="Tour title">
+            <div class="alert alert-danger" *ngIf="f.name.errors?.required&&f.name.touched">
+              Field is required!
+            </div>
+            <div class="alert alert-danger" *ngIf="f.name.errors?.minlength && f.name.touched" >
+              Tour name must be at least 3 letters!
+            </div>  
+            <div class="alert alert-danger" *ngIf="f.name.errors?.maxlength && f.name.touched" >
+              Tour name must be no more than 20 letters!
+            </div> 
+            <div class="alert alert-danger" *ngIf="f.name.errors?.pattern && f.name.touched" >
+              Tour name must contain only digits and letters!
+            </div> 
+          </div>
+          <div class="form-group">
+            <input formControlName="description" type="text" class="form-control" id="exampleInputPassword1"
+              placeholder="Tour description"
+              value="{{(tour$|async)?.description}}">
+            <div class="alert alert-danger" *ngIf="f.description.errors?.required&&f.description.touched">
+              Field is required!
+            </div>
+            <div class="alert alert-danger" *ngIf="f.description.errors?.minlength && f.description.touched" >
+              Tour description must be at least 3 letters!
+            </div>
+            <div class="alert alert-danger" *ngIf="f.description.errors?.maxlength && f.description.touched" >
+              Tour description be no more than 20 letters!
+            </div>
+          </div>
+          <div class="form-group">
+            <input formControlName="region" type="text" class="form-control" id="region"
+              placeholder="Tour region"
+              value="{{(tour$|async)?.region}}">
+            <div class="alert alert-danger" *ngIf="f.region.errors?.required&&f.region.touched">
+              Field is required!
+            </div>
+          </div>
+          <div class="form-group">
+            <select formControlName="category" class="form-control">
+              <option>{{(tour$|async)?.category?.name}}</option>              
+              <option *ngFor="let category of categories$ | async">{{category.name}}</option>
+            </select>
+            <div class="alert alert-danger" *ngIf="f.category.errors?.required && f.category.touched" >
+              Category is required! 
+             </div>
+          </div>
+          <div class="form-group">
+            <input formControlName="participants" type="number" class="form-control" id="title"
+              placeholder="Number participants"
+              value="{{(tour$|async)?.participants}}">
+          </div>
+          <div class="alert alert-danger" *ngIf="f.participants.errors?.required&&f.participants.touched">
+            Field is required!
+          </div>
+          <div class="alert alert-danger" *ngIf="f.participants.errors?.pattern&&f.participants.touched">
+            Enter integer number, please!
+          </div>
+          <div class="alert alert-danger" *ngIf="f.participants.errors?.min && f.participants.touched" >
+            Number participants must be greater than 0!
+          </div>
+          <div class="form-group">
+            <input formControlName="difficultyLevel" type="text" class="form-control" placeholder="Difficulty level"
+            value="{{(tour$|async)?.difficultyLevel}}">
+          </div>
+          <div class="alert alert-danger" *ngIf="f.difficultyLevel.errors?.required&&f.difficultyLevel.touched">
+            Field is required!
+          </div>
+  
+          <div class="form-group">
+            <!-- Upload -->
+            <input accept="image/png, image/jpeg" (change)="upload($event)" class="form-control" type="file"  id="image">
+          </div>
+          <div class="form-group">
+            <input formControlName="price" type="number" class="form-control" placeholder="Price"
+            value="{{(tour$|async)?.price}}">
+            <div class="alert alert-danger" *ngIf="f.price.errors?.required&&f.price.touched">
+              Field is required!
+            </div>
+            <div class="alert alert-danger" *ngIf="f.price.errors?.min && f.price.touched" >
+              Price must be positive number!
+            </div>  
+          </div>
+          <div class="form-group">
+            <!-- Date input -->
+            <input formControlName="startDate" class="form-control" type="date" id="pickyDate" placeholder="date" />
+            <div class="alert alert-danger" *ngIf="f.startDate.errors?.startDateMismatch && f.startDate?.touched" >
+              Date must be in the future!
+            </div>
+          </div>
+          <button [disabled]="!form.valid" [ngStyle]="{'cursor': (!form.valid? 'not-allowed':'pointer')}" type="submit" class="btn btn-primary">
+            Submit
+            <span *ngIf="loading" class="spinner-border spinner-border-sm"> </span>     
+          </button>
+          
+        </form>
+      </div>
+    </div>
+  </div>

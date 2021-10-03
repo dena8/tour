@@ -1,0 +1,17 @@
+
+<form enctype="multipart/form-data" [formGroup]='form' (submit)="createCategory()" > 
+      <h2>Create category</h2> 
+
+    <div class="form-group input-group">    
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+      </div>     
+      <input  class="form-control" formControlName="name" placeholder="Category name">
+    </div>
+    <div class="alert alert-danger" *ngIf="f.name.errors?.required && f.name.touched" >
+      Category name is required! 
+    </div>
+   
+      <button [disabled]="!form.valid" [ngStyle]="{'cursor': (!form.valid? 'not-allowed':'pointer')}" type="submit" class="btn btn-primary">Submit</button>
+     
+    </form>

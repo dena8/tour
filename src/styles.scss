@@ -1,0 +1,19 @@
+// regular style toast
+@import '~ngx-toastr/toastr';
+
+app-root{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+// 1
+.container{
+    flex-grow: 1;
+}
+
+.top-center {
+    top: 12px;
+    left:50%;
+    margin:0 0 0 -150px;
+}

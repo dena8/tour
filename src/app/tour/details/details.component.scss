@@ -1,0 +1,41 @@
+
+.card-img{
+    width: 100%;
+    height: 150px;
+       
+}
+h6,li{
+    color: #590024;
+}
+
+
+
+button{
+    display: inline-block;
+    height: 50px;   
+    margin: 10px;
+    width: 80%;
+   // padding: 0px;
+   background-color: #590024;  
+    text-decoration: solid;
+  //  border: 3px solid #530B0D;
+    transition: all 1s;
+   // background-color:#007bff;
+   
+}
+
+button:hover{
+    color: #590024; 
+    background-color: azure; 
+    border: 1px solid  #590024; 
+    transform: scale(1.1);   
+}
+
+.d-flex{
+    background-color: orange;
+    box-shadow: inset -1px 3px 8px 5px #1F87FF, 2px 5px 16px 0px #0B325E, 5px 5px 36px 17px rgba(0,0,0,0.31);
+}
+
+
+
+

@@ -1,0 +1,96 @@
+<div id="page-wrap">
+
+    <textarea id="header"></textarea>
+
+    <div id="identity">
+
+        <textarea id="address"> {{order?.customer?.username}},
+{{order?.customer?.email}}
+
+
+Phone: (***) ***-****</textarea>
+        <!-- <div style="clear:both"></div> -->
+
+        <div id="customer">
+
+            <textarea id="customer-title">Travel agency.
+c/o Pegasus Medea</textarea>
+
+            <table id="meta">
+                <tr>
+                    <td class="meta-head">Invoice #</td>
+                    <td><textarea>000{{order?.id?.substring(0,5)}}</textarea></td>
+                </tr>
+                <tr>
+
+                    <td class="meta-head">Date</td>
+                    <td><textarea id="date">{{order?.buyDate?.substring(0,order.buyDate.indexOf("T"))}}</textarea></td>
+                </tr>
+                <tr>
+                    <td class="meta-head">Amount Due</td>
+                    <td>
+                        <div class="due">{{tourSum}} lv.</div>
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <table  id="items">
+
+            <tr>
+                <th>Tour</th>
+                <th></th>
+                <th>Price</th>
+                <th class="asd"></th>
+                <th></th>                
+            </tr>
+
+            <tr *ngFor="let tour of order?.buyingProducts" class="item-row">
+                <td class="description"><textarea>{{tour.name}}</textarea></td>
+                <td><textarea class="qty"></textarea></td>
+                <td><span class="price">{{tour.price}} lv.</span></td>
+            </tr>
+  
+
+            <tr id="hiderow">
+                <td colspan="5"><a id="addrow" href="javascript:;" title="Add a row"></a></td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="blank"> </td>
+                <td colspan="2" class="total-line">Subtotal</td>
+                <td class="total-value">
+                    <div id="subtotal">{{tourSum}} lv.</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="blank"> </td>
+                <td colspan="2" class="total-line">Total</td>
+                <td class="total-value">
+                    <div id="total">{{tourSum}} lv</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="blank"> </td>
+                <td colspan="2" class="total-line">Amount Paid</td>
+
+                <td class="total-value"><textarea id="paid">0.00 lv</textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="blank"> </td>
+                <td colspan="2" class="total-line balance">Balance Due</td>
+                <td class="total-value balance">
+                    <div class="due">{{tourSum}} lv</div>
+                </td>
+            </tr>
+
+        </table>
+
+        <div id="terms">
+            <h5>Terms</h5>
+            <textarea>NET 30 Days. Finance Charge of 1.5% will be made on unpaid balances after 30 days.</textarea>
+        </div>
+
+    </div>

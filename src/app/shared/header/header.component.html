@@ -1,0 +1,50 @@
+<div class="bs-component">
+  <nav class="navbar navbar-expand-lg navbar-dark " style="background:#007BFF;">
+    <a style="color: black;" class="navbar-brand" [routerLink]="['/home']">TRIPS</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+      aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/home']">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active" >
+          <a class="nav-link" [routerLink]="['/sample','gallery']">Gallery</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/tour','tour-card']">Tours</a>
+        </li>
+        <li class="nav-item active" *ngIf="userService.isAuthenticated() && userService.hasGuideRole()">
+          <a class="nav-link" [routerLink]="['/tour','create']">Create tours</a>
+        </li>   
+        <li class="nav-item active" *ngIf="userService.isAuthenticated()&& userService.hasUserRole()">
+          <a class="nav-link" [routerLink]="['/buy','cart']">Cart</a>
+        </li>
+        <li class="nav-item active" *ngIf="!userService.isAuthenticated()">
+          <a class="nav-link"  [routerLink]="['/user','register']">Register</a>
+        </li>
+        <li class="nav-item active" *ngIf="!userService.isAuthenticated()">
+          <a class="nav-link" [routerLink]="['/user','login']">Login</a>
+        </li>        
+        <li class="nav-item" *ngIf="userService.isAuthenticated() && userService.hasAdminRole()">
+          <a class="nav-link" [routerLink]="['/buy','order']" >Order</a>
+        </li>
+        <li class="nav-item" *ngIf="userService.isAuthenticated() && userService.hasAdminRole()">
+          <a class="nav-link" [routerLink]="['/buy','statistic']" >Statistic</a>
+        </li>
+        <li class="nav-item" *ngIf="userService.isAuthenticated()">
+          <a class="nav-link" (click)="logout()">Logout</a>
+        </li>            
+      </ul>
+    </div>
+    <div *ngIf="userService.isAuthenticated()">
+      <p style="color: aliceblue;">Hello, {{username()}}</p>
+    </div>
+    <!-- <form class="form-inline">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form> -->
+  </nav>
+</div>
