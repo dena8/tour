@@ -1,22 +1,23 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as item from './action';
-import {ITour} from '../model/buy';
+import {ITour} from '../model/index';
 
 const  initialState: ITour[] =[]
 
-const tourReducer = createReducer(
+const cart = createReducer(
     initialState, 
     on(item.addTourToCart,(state,{tour})=>{     
       return[...state,tour]
       }),
-    on(item.getAllTours,(state)=>({...state})),
+    on(item.getAllTours,(state)=>([...state])),
     on(item.removeTour,(state,{name})=>{     
      state= state.filter(t=>t.name!=name);
       return[...state]
     })
 );
 
+export const featureKey = 'cart';
 
 export function reducer(state:ITour[] , action: Action): ITour[]{
-    return tourReducer(state, action);
+    return cart(state, action);
 }

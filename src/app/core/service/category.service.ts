@@ -23,7 +23,12 @@ export class CategoryService {
       this.toastr.success('Successful created category');
   }))
   }
-  getAllCategories():Observable<ICategory[]>{
+  // getAllCategories():Observable<ICategory[]>{
+  //   return this.http.get<ICategory[]>(this.dbUrl+'/all');    
+  // }
+
+  getAllCategories(){
     return this.http.get<ICategory[]>(this.dbUrl+'/all');    
   }
+
 }

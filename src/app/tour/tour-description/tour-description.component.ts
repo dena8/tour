@@ -2,14 +2,16 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserService } from '../../core/service/user.service';
-import { ICategory } from '../../core/model/category';
 import { ITour } from '../../core/model/tour-create';
-import { TourService } from '../../core/service/tour.service';
-import { BuyService } from '../../core/service/buy.service';
 import { WeatherComponent } from 'src/app/sample/weather/weather.component';
 
 import { Store } from '@ngrx/store';
-import {addTourToCart} from '../../+store/buy/action'
+import {addTourToCart} from '../../+store/buy/action';
+import{deleteTour} from '../../+store/tour/action';
+import {tour} from '../../+store';
+import {cart} from '../../+store/buy/selector';
+
+import{TourService} from '../../core/service/tour.service'
 
 @Component({
   selector: 'app-tour-description',
@@ -18,31 +20,34 @@ import {addTourToCart} from '../../+store/buy/action'
 })
 export class TourDescriptionComponent implements OnInit {
 
-  tour$: Observable<ITour<ICategory>>;
+  tour$:any;
   id: string;
-  public isAdded: Boolean;
+  isAdded: Boolean;
   mLocation: string; 
   fromWeather: boolean;
   isCreator:boolean;
   name:string;
   price:number;
 
-  constructor(private tourService: TourService, public userService: UserService,
+  constructor( public userService: UserService,
      private activatedRoute: ActivatedRoute, private router: Router,
-     private buyService: BuyService, private store: Store ) { }
+     private store: Store,
+     private tourService:TourService ) { }
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params.id;
-    this.tour$ = this.tourService.getTourById(this.id);
-    this.tourService.getTourById(this.id).subscribe(data => {  
-      this.mLocation = data.region;
-      this.isCreator = data.creator.username==localStorage.getItem('username');    
+   this.tour$ = this.store.select(tour.selectById(this.id));
+  
+    this.store.select(tour.selectById(this.id)).subscribe(data=>{    
+    this.mLocation = data.region;
+    this.isCreator = data.creator.username==localStorage.getItem('username');    
 
-      this.name = data.name;
-      this.price=data.price;
-    });
-    if (this.userService.hasUserRole()) {
-      this.buyService.checkIfAdded(this.id).subscribe((data) => this.isAdded = data);
+    this.name = data.name;
+    this.price=data.price;
+   })
+
+    if (this.userService.hasUserRole()) {    
+      this.store.select(cart.findById(this.id)).subscribe(r=>this.isAdded=!!r);      
     }
   }
 
@@ -51,12 +56,13 @@ export class TourDescriptionComponent implements OnInit {
   }
 
   clickJoin() {
-    this.store.dispatch(addTourToCart({tour:{name:this.name,price:this.price}}));
+    this.store.dispatch(addTourToCart({tour:{id:this.id,name:this.name,price:this.price}}));
     this.router.navigate(['tour/tour-card']);  
   }
 
   deleteTour() {
-    this.tourService.deleteTour(this.id).subscribe(()=>this.router.navigate(['tour/tour-card']) );
+    this.tourService.deleteTour1(this.id).subscribe(t=>console.log(t));
+    this.store.dispatch(deleteTour({id:this.id}));  
   }
 
 }

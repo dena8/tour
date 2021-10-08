@@ -14,25 +14,33 @@ const dbUrl = 'http://localhost:5000/tours'
 })
 export class TourService {
 
-  constructor(private http: HttpClient, private toastr: ToastrService) { }
+  constructor(private http: HttpClient, private toastr: ToastrService) { } 
 
-  createTour(tour: FormData): Observable<ITour> {
+  createTour(tour: any) {
     return this.http.post<ITour>(dbUrl + '/create', tour);
   }
 
-  getPopulatedTours(): Observable<ITour<ICategory>[]> {
-    return this.http.get<Array<ITour<ICategory>>>(dbUrl + '/all');
+  // getPopulatedTours(): Observable<ITour<ICategory>[]> {
+  //   return this.http.get<Array<ITour<ICategory>>>(dbUrl + '/all');
+  // }
+
+  getPopulatedTours() {
+    return this.http.get<ITour[]>(dbUrl + '/all');
   }
 
   getTourById(id: string): Observable<ITour<ICategory>> {
     return this.http.get<ITour<ICategory>>(dbUrl + `/${id}`);
   }
 
-  deleteTour(id:string): Observable<string> {
+  deleteTour1(id:string): Observable<string> {
     return this.http.get<string>(dbUrl + '/remove' + `/${id}`)
       .pipe(
         tap((data) => this.toastr.success("Successful delete tour!"))
       );
+  }
+
+  deleteTour(id:string){
+    return this.http.get<string>(dbUrl + '/remove' + `/${id}`);
   }
 
   getWeatherForecast(location:string): Observable<IForecast> {

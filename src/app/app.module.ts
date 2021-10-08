@@ -19,11 +19,12 @@ import{JwtModule} from '@auth0/angular-jwt';
 import {BuyModule} from './buy/buy.module';
 
 import {StoreModule} from '@ngrx/store';
-import {reducer as buyReducer} from './+store/buy/reducer'
-import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import {reducer as cartReducer} from './+store/buy/reducer';
+import { EffectsModule } from '@ngrx/effects';
+import {TourEffects} from './+store/tour/effects';
+import {tourReducer} from './+store/tour/reducer';
 
-
- 
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'; 
 
 @NgModule({
   declarations: [
@@ -56,8 +57,12 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
       }
     }),
     StoreModule.forRoot({
-        buyReducer
+       cart: cartReducer,
+       'tour': tourReducer,
+      // 'global':globalReducer
     }),
+      EffectsModule.forRoot([TourEffects]),
+      //,GlobalEffects
     StoreDevtoolsModule.instrument({}),
 
   ],

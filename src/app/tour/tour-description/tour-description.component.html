@@ -27,6 +27,7 @@
                 *ngIf="!userService.hasGuideRole()&&(tour$|async)?.participants<1&&!userService.hasAdminRole()&&!isAdded"
                 type="button">No vacant place</a>
             <!-- <a href="" class="btn-tour">Edit</a> -->
+            
         </div>
     </div>
     <div *ngIf="isAdded">

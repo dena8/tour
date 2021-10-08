@@ -13,7 +13,10 @@ import {SampleModule} from '../sample/sample.module';
 import { AuthGuardGuard } from '../core/gards/auth-guard.guard';
 import {GuideGuard} from '../core/gards/guide.guard';
 import { UpdateComponent } from './update/update.component';
-
+import {StoreModule} from '@ngrx/store';
+import {globalReducer} from '../+store/global/reducer';
+import { EffectsModule } from '@ngrx/effects';
+import {GlobalEffects} from '../+store/global/effects';
 
 
 
@@ -28,9 +31,11 @@ import { UpdateComponent } from './update/update.component';
       { path: 'create', component: CreateComponent,canActivate:[AuthGuardGuard,GuideGuard],  },
       { path: 'random', component: RandomComponent },
       {path:'tour-card', component:TourCardComponent},
-      { path: 'description/:id', component: TourDescriptionComponent,canActivate:[AuthGuardGuard] },
+      {path: 'description/:id', component: TourDescriptionComponent,canActivate:[AuthGuardGuard] },
       {path:'update/:id',component: UpdateComponent, canActivate:[AuthGuardGuard,GuideGuard]}      
-    ])
+    ]),
+    StoreModule.forFeature('global',globalReducer),
+    EffectsModule.forFeature([GlobalEffects])
   ],
   exports: [
     CreateComponent,

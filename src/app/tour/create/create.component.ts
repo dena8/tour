@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms'
-import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { CategoryService } from 'src/app/core/service/category.service';
 import { ICategory } from '../../core/model/category';
-import {TourService} from '../../core/service/tour.service';
 import {dateInTheFutureValidator} from '../../core/validator/custom-date-validator';
+
+import { Store } from '@ngrx/store';
+import {createTour} from '../../+store/tour/action';
+import {getAllCategories} from '../../+store/global/action'
+import {global} from '../../+store/index';
 
 
 @Component({
@@ -15,19 +17,16 @@ import {dateInTheFutureValidator} from '../../core/validator/custom-date-validat
 })
 export class CreateComponent implements OnInit {
   form: FormGroup;
-  categories$: Observable<ICategory[]>;
+  categories$: Observable<ICategory[]>
   loading:boolean =false; 
 
   
-  constructor(private fb: FormBuilder,
-     private tourService:TourService,
-     private router:Router,
-     private categoryService:CategoryService) { }
+  constructor(private fb: FormBuilder, private store:Store) {this.store.dispatch(getAllCategories()) }
 
-  ngOnInit(): void {
-  this.categories$=  this.categoryService.getAllCategories();  
+  ngOnInit(): void {  
+    this.categories$= this.store.select(global.getAllCategories);
 
-    this.form = this.fb.group({
+      this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[A-Za-z0-9\\s]+$')]],
       description: ['', [Validators.required,Validators.minLength(3), Validators.maxLength(200),]],
       region:['',Validators.required],
@@ -59,12 +58,11 @@ export class CreateComponent implements OnInit {
       formDate.append(k,v as any);   
     }
     this.loading=true;
- 
-   this.tourService.createTour(formDate).subscribe(tour=>{     
-       this.router.navigate(['tour/tour-card']);
-   },err=>{
-      console.log(err);
-   })
+
+    this.store.dispatch(createTour({ tour: formDate }));
+   
   }
+
+  
 
 }

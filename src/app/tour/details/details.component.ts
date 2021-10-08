@@ -11,8 +11,7 @@ import { UserService } from '../../core/service/user.service';
 export class DetailsComponent implements OnInit {
 
  
- @Input()
-  tour:ITour<ICategory>;
+ @Input() tour:ITour<ICategory>;
 
   constructor(public userService:UserService) { }
 
