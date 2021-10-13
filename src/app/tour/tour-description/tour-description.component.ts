@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { UserService } from '../../core/service/user.service';
-import { ITour } from '../../core/model/tour-create';
 import { WeatherComponent } from 'src/app/sample/weather/weather.component';
 
 import { Store } from '@ngrx/store';

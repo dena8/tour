@@ -17,6 +17,8 @@ import {StoreModule} from '@ngrx/store';
 import {globalReducer} from '../+store/global/reducer';
 import { EffectsModule } from '@ngrx/effects';
 import {GlobalEffects} from '../+store/global/effects';
+import {TourEffects} from '../+store/tour/effects';
+import {tourReducer} from '../+store/tour/reducer';
 
 
 
@@ -35,7 +37,8 @@ import {GlobalEffects} from '../+store/global/effects';
       {path:'update/:id',component: UpdateComponent, canActivate:[AuthGuardGuard,GuideGuard]}      
     ]),
     StoreModule.forFeature('global',globalReducer),
-    EffectsModule.forFeature([GlobalEffects])
+    StoreModule.forFeature('tour',tourReducer),
+    EffectsModule.forFeature([GlobalEffects,TourEffects])
   ],
   exports: [
     CreateComponent,

@@ -1,52 +1,34 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../../core/service/user.service';
 import { ITour } from '../../core/model/tour-create';
 import { Observable } from 'rxjs';
 
-import {Store} from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { tour } from '../../+store';
-import {getAllTours} from '../../+store/tour/action';
+import { getAllTours, cancelRetrieve } from '../../+store/tour/action';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tour-card',
   templateUrl: './tour-card.component.html',
-  styleUrls: ['./tour-card.component.scss']
+  styleUrls: ['./tour-card.component.scss'],
 })
-export class TourCardComponent implements OnInit {
-  tours:ITour[];
-  tours$: Observable<ITour[]> = this.store.select(tour.getAll);
+export class TourCardComponent implements OnInit, OnDestroy {
+  tours$: Observable<ITour[]>; 
+  localUsername = localStorage.getItem('username');
+  myGuideTours$: Observable<ITour[]> = this.store.select(tour.getAll).pipe(map((t) => t.filter((d) => d.creator.username === this.localUsername)));
+  otherGuideTours$: Observable<ITour[]> = this.store.select(tour.getAll).pipe(map((t) => t.filter((d) => d.creator.username !== this.localUsername)));
+  hasGuideRole = this.userService.hasGuideRole();
 
-  isTours: boolean;
-  myGuideTours: ITour[];
-  otherGuideTours: ITour[];
-  hasGuideRole = this.userService.hasGuideRole()
-  constructor(public userService: UserService, private store:Store
-    ) {}
-
-    //{this.store.dispatch(getAllTours()); }
+  constructor(public userService: UserService, private store: Store) {
+    this.store.dispatch(getAllTours());
+  }
 
   ngOnInit(): void {
-    // this.tours$ = this.store.select(tour.getAll);
-    
-    //  this.store.select(tour.getAll).subscribe((data) => {
-    //   this.isTours = !!data.length;
-    //    if (this.userService.hasGuideRole()) {      
-    //     this.myGuideTours = data.filter(function (d) {
-    //       return d.creator.username === localStorage.getItem('username')
-    //     });
+    this.tours$ = this.store.select(tour.getAll);
+  }
 
-    //     this.otherGuideTours = data.filter(function (d) {
-    //       return d.creator.username !== localStorage.getItem('username')
-    //     })      
-    //   } else {
-    //     this.tours = data       
-    //   }
-    // }, err => {
-    //   console.log(err);
-    // });
-  
-  //  this.store.pipe(select(tour.getAll)).subscribe(t=> console.log(t));  
-  //          this.store.pipe(select(tour.selectById('ba8b628d-94b0-4df3-91b7-8b9ed2481c5d'))).subscribe(t=> console.log(t))
-      }
-
+  ngOnDestroy() {
+    // this.store.dispatch(cancelRetrieve());
+  }
 }

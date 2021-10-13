@@ -14,7 +14,8 @@ const reducer = createReducer(
     on(tourAction.deleteTourSuccess,(state, { id })=>{ 
         const tours = state.tour.filter(t=>t.id!==id);        
     return { ...state, tour:[...tours]};
-    })  
+    }),
+    on(tourAction.cancelRetrieve,(state)=>({...state,tour:[]})),  
 );
 
 export const featureKey = 'tour';
