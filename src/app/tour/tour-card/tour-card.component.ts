@@ -13,20 +13,18 @@ import { map } from 'rxjs/operators';
   templateUrl: './tour-card.component.html',
   styleUrls: ['./tour-card.component.scss'],
 })
-export class TourCardComponent implements OnInit, OnDestroy {
-  tours$: Observable<ITour[]>; 
+export class TourCardComponent implements OnDestroy {
+  tours$: Observable<ITour[]> = this.store.select(tour.getAll); 
   localUsername = localStorage.getItem('username');
   myGuideTours$: Observable<ITour[]> = this.store.select(tour.getAll).pipe(map((t) => t.filter((d) => d.creator.username === this.localUsername)));
   otherGuideTours$: Observable<ITour[]> = this.store.select(tour.getAll).pipe(map((t) => t.filter((d) => d.creator.username !== this.localUsername)));
-  hasGuideRole = this.userService.hasGuideRole();
+
 
   constructor(public userService: UserService, private store: Store) {
     this.store.dispatch(getAllTours());
   }
 
-  ngOnInit(): void {
-    this.tours$ = this.store.select(tour.getAll);
-  }
+
 
   ngOnDestroy() {
     // this.store.dispatch(cancelRetrieve());

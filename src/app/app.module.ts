@@ -20,7 +20,9 @@ import { BuyModule } from './buy/buy.module';
 
 import { StoreModule } from '@ngrx/store';
 import { reducer as cartReducer } from './+store/buy/reducer';
+import {authReducer} from './+store/auth/reducer'
 import { EffectsModule } from '@ngrx/effects';
+import {AuthEffects} from './+store/auth/effects'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
@@ -53,8 +55,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     }),
     StoreModule.forRoot({
       cart: cartReducer,
+      auth:authReducer,
     }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([AuthEffects]),
     StoreDevtoolsModule.instrument({}),
   ],
   providers: [

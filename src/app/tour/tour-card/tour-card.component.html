@@ -6,22 +6,26 @@
     </h2>
 
     <div class="col-md-3" *ngFor="let tour of tours$ | async">
-      <div *ngIf="!hasGuideRole">
+      <div *ngIf="!(userService.hasGuideRole$() | async)">
         <app-details [tour]="tour"></app-details>
       </div>
     </div>
 
     <div class="my">
-      <h2 *ngIf="(myGuideTours$ | async)?.length != 0 && hasGuideRole">
+      <h2
+        *ngIf="(myGuideTours$ | async) && (userService.hasGuideRole$() | async)"
+      >
         My tours
       </h2>
-      <div *ngIf="(myGuideTours$ | async)?.length != 0" class="row">
-        <div class="col-md-3" *ngFor="let tour of myGuideTours$ | async">
+      <div *ngIf="myGuideTours$ | async as myTours" class="row">
+        <div class="col-md-3" *ngFor="let tour of myTours">
           <app-details [tour]="tour"></app-details>
         </div>
       </div>
       <div
-        *ngIf="(otherGuideTours$ | async)?.length != 0 && hasGuideRole"
+        *ngIf="
+          (otherGuideTours$ | async) && (userService.hasGuideRole$() | async)
+        "
         class="my"
       >
         <h2>Other guide tours</h2>
@@ -30,7 +34,7 @@
             <app-details [tour]="tour"></app-details>
           </div>
         </div>
-      </div> 
+      </div>
     </div>
   </div>
 </div>

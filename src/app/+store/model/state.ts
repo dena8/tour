@@ -8,3 +8,10 @@ export interface ITourState {
 export interface IGlobalState {
     category : ICategory[];
 }
+
+export interface IAuthState {
+    id:string,
+    roles:string,
+    token:string,
+    username:string
+}

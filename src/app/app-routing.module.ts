@@ -6,7 +6,7 @@ import { GuideGuard } from './core/gards/guide.guard';
 
 
 const routes: Route[] = [
-  {path:'',pathMatch:'full',redirectTo:'home'},
+  {path:'',pathMatch:'full',redirectTo:'/home'},
   {path:'sample',loadChildren:() => import('./sample/sample.module').then(m => m.SampleModule)},  
   {path:'user',loadChildren: () => import('./user/user.module').then(m => m.UserModule) }, 
   {path:'tour',loadChildren:() => import('./tour/tour.module').then(m => m.TourModule)},

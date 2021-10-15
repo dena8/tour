@@ -45,7 +45,7 @@ export class TourEffects {
       ofType(ActionTypes.getAllTours),
       switchMap(() => {
         return this.tourService.getPopulatedTours().pipe(
-          takeUntil(this.actions$.pipe(ofType(globalActionTypes.getAllCategories))),
+          takeUntil(this.actions$.pipe(ofType(globalActionTypes.getAllCategories))), 
           map((tours) => ({ type: ActionTypes.getAllTourSuccess, tours })),
           catchError((err) =>
             of({ type: ActionTypes.getAllTourFailed, ...err })

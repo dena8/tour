@@ -30,7 +30,7 @@ import {tourReducer} from '../+store/tour/reducer';
     ReactiveFormsModule,
     SampleModule,
     RouterModule.forChild([
-      { path: 'create', component: CreateComponent,canActivate:[AuthGuardGuard,GuideGuard],  },
+      { path: 'create', pathMatch: 'full', component: CreateComponent,canActivate:[AuthGuardGuard,GuideGuard],  },
       { path: 'random', component: RandomComponent },
       {path:'tour-card', component:TourCardComponent},
       {path: 'description/:id', component: TourDescriptionComponent,canActivate:[AuthGuardGuard] },
