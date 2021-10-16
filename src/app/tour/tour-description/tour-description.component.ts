@@ -9,6 +9,9 @@ import { deleteTour } from '../../+store/tour/action';
 import { tour } from '../../+store';
 import { cart } from '../../+store/buy/selector';
 import { TourService } from '../../core/service/tour.service';
+import {map} from 'rxjs/operators';
+import { ITour } from 'src/app/core/model/tour-create';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tour-description',
@@ -16,14 +19,12 @@ import { TourService } from '../../core/service/tour.service';
   styleUrls: ['./tour-description.component.scss'],
 })
 export class TourDescriptionComponent implements OnInit {
-  tour$: any;
+  tour$:Observable<ITour>;
   id: string;
   isAdded: Boolean;
-  mLocation: string;
+  mLocation$:Observable<string>;
   fromWeather: boolean;
-  isCreator: boolean;
-  name: string;
-  price: number;
+  isCreator$: Observable<boolean>; 
 
   constructor(
     public userService: UserService,
@@ -36,21 +37,14 @@ export class TourDescriptionComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params.id;
     this.tour$ = this.store.select(tour.selectById(this.id));
+  
 
-    this.store.select(tour.selectById(this.id)).subscribe((data) => {
-      this.mLocation = data.region;
-      this.isCreator =
-        data.creator.username == localStorage.getItem('username');
-
-      this.name = data.name;
-      this.price = data.price;
-    });
+    this.mLocation$ = this.tour$.pipe(map(t=> t.region));
+    this.isCreator$ = this.tour$.pipe(map(t=>t.creator.username==localStorage.getItem('username')));  
 
     this.userService.hasUserRole$().subscribe((data) => {
       if (data) {
-        this.store
-          .select(cart.findById(this.id))
-          .subscribe((r) => (this.isAdded = !!r));
+        this.store.select(cart.findById(this.id)).subscribe((r) => (this.isAdded = !!r));
       }
     });
   }
@@ -60,9 +54,15 @@ export class TourDescriptionComponent implements OnInit {
   }
 
   clickJoin() {
+    let name: string;
+    let price: number;
+    this.store.select(tour.selectById(this.id)).subscribe((data) => {
+      name = data.name;
+      price = data.price;
+    });
     this.store.dispatch(
       addTourToCart({
-        tour: { id: this.id, name: this.name, price: this.price },
+        tour: { id: this.id, name, price },
       })
     );
     this.router.navigate(['tour/tour-card']);

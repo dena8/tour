@@ -13,16 +13,18 @@ import { Observable } from 'rxjs';
 export class WeatherComponent implements OnInit {
 
   faWeather = faCloudSunRain;
-  @Input() mLocation: string;
+  @Input() mLocation$:Observable<string>;
   forecast$: Observable<IForecast>;
   @Output()
   isDateEmitter: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private tourService: TourService) { }
 
-  ngOnInit(): void {  
-    this.forecast$ = this.tourService.getWeatherForecast(this.mLocation);
-    this.tourService.getWeatherForecast(this.mLocation).subscribe(data => {    
+  ngOnInit(): void { 
+    let region:string;
+    this.mLocation$.subscribe(l=> region=l); 
+    this.forecast$ = this.tourService.getWeatherForecast(region);
+    this.tourService.getWeatherForecast(region).subscribe(data => {    
       this.isDateEmitter.emit(data.success);
     });
   }

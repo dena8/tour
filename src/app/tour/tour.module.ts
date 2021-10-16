@@ -19,11 +19,12 @@ import { EffectsModule } from '@ngrx/effects';
 import {GlobalEffects} from '../+store/global/effects';
 import {TourEffects} from '../+store/tour/effects';
 import {tourReducer} from '../+store/tour/reducer';
+import { TourListComponent } from './guide-tours/tour-list/tour-list.component';
 
 
 
 @NgModule({
-  declarations: [CreateComponent, TourCardComponent, DetailsComponent, RandomComponent, TourDescriptionComponent, UpdateComponent],
+  declarations: [CreateComponent, TourCardComponent, DetailsComponent, RandomComponent, TourDescriptionComponent, UpdateComponent, TourListComponent],
   imports: [
     CommonModule,
     FontAwesomeModule,
@@ -34,7 +35,8 @@ import {tourReducer} from '../+store/tour/reducer';
       { path: 'random', component: RandomComponent },
       {path:'tour-card', component:TourCardComponent},
       {path: 'description/:id', component: TourDescriptionComponent,canActivate:[AuthGuardGuard] },
-      {path:'update/:id',component: UpdateComponent, canActivate:[AuthGuardGuard,GuideGuard]}      
+      {path:'update/:id',component: UpdateComponent, canActivate:[AuthGuardGuard,GuideGuard]}, 
+      {path:'list',component:TourListComponent}     
     ]),
     StoreModule.forFeature('global',globalReducer),
     StoreModule.forFeature('tour',tourReducer),

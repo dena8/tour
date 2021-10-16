@@ -19,11 +19,10 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { BuyModule } from './buy/buy.module';
 
 import { StoreModule } from '@ngrx/store';
-import { reducer as cartReducer } from './+store/buy/reducer';
-import {authReducer} from './+store/auth/reducer'
 import { EffectsModule } from '@ngrx/effects';
 import {AuthEffects} from './+store/auth/effects'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import {reducers,metaReducers} from './+store/meta-reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -53,10 +52,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
         skipWhenExpired: true,
       },
     }),
-    StoreModule.forRoot({
-      cart: cartReducer,
-      auth:authReducer,
-    }),
+    StoreModule.forRoot(   
+    reducers,
+    {metaReducers}),
     EffectsModule.forRoot([AuthEffects]),
     StoreDevtoolsModule.instrument({}),
   ],
