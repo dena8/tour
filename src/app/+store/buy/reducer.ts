@@ -4,7 +4,7 @@ import {ITour} from '../model/index';
 
 const  initialState: ITour[] =[]
 
-export const cart = createReducer(
+export const reducer = createReducer(
     initialState, 
     on(item.addTourToCart,(state,{tour})=>{     
       return[...state,tour]
@@ -17,4 +17,8 @@ export const cart = createReducer(
 );
 
 export const featureKey = 'cart';
+
+export function cartReducer(state:ITour[] , action: Action): ITour[]{
+  return reducer(state, action);
+}
 

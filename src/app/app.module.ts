@@ -52,9 +52,10 @@ import {reducers,metaReducers} from './+store/meta-reducer';
         skipWhenExpired: true,
       },
     }),
-    StoreModule.forRoot(   
+    StoreModule.forRoot(  
     reducers,
-    {metaReducers}),
+    {metaReducers}
+    ),
     EffectsModule.forRoot([AuthEffects]),
     StoreDevtoolsModule.instrument({}),
   ],

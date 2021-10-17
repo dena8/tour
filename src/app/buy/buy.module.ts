@@ -22,7 +22,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
       {path:'order',component:OrderComponent, canActivate:[AdminGuard]},
       {path:'order-details/:id',component:OrderDetailsComponent,canActivate:[AdminGuard]},
       {path:'statistic', component:StatisticComponent,canActivate:[AdminGuard]}
-    ])
+    ]),   
   ]
 })
 export class BuyModule { }

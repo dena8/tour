@@ -20,7 +20,7 @@ import {GlobalEffects} from '../+store/global/effects';
 import {TourEffects} from '../+store/tour/effects';
 import {tourReducer} from '../+store/tour/reducer';
 import { TourListComponent } from './guide-tours/tour-list/tour-list.component';
-
+import {tourMetaReducer} from '../+store/meta-reducer';
 
 
 @NgModule({
@@ -31,15 +31,15 @@ import { TourListComponent } from './guide-tours/tour-list/tour-list.component';
     ReactiveFormsModule,
     SampleModule,
     RouterModule.forChild([
-      { path: 'create', pathMatch: 'full', component: CreateComponent,canActivate:[AuthGuardGuard,GuideGuard],  },
+      { path: 'create', pathMatch: 'full', component: CreateComponent,canActivate:[AuthGuardGuard,GuideGuard]},
       { path: 'random', component: RandomComponent },
       {path:'tour-card', component:TourCardComponent},
       {path: 'description/:id', component: TourDescriptionComponent,canActivate:[AuthGuardGuard] },
-      {path:'update/:id',component: UpdateComponent, canActivate:[AuthGuardGuard,GuideGuard]}, 
-      {path:'list',component:TourListComponent}     
+      {path:'update/:id',component: UpdateComponent,canActivate:[AuthGuardGuard,GuideGuard]}, 
+      {path:'list',component:TourListComponent,canActivate:[AuthGuardGuard,GuideGuard]}     
     ]),
-    StoreModule.forFeature('global',globalReducer),
-    StoreModule.forFeature('tour',tourReducer),
+    StoreModule.forFeature('global',globalReducer),  
+    StoreModule.forFeature('tour',tourReducer,{metaReducers:tourMetaReducer}),  
     EffectsModule.forFeature([GlobalEffects,TourEffects])
   ],
   exports: [
