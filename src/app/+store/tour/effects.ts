@@ -74,4 +74,24 @@ export class TourEffects {
       )
     )
   );
+
+  updateTour$ = createEffect(()=>this.actions$.pipe(
+    ofType<IAction>(ActionTypes.updateTour),
+    switchMap((action)=>
+       this.tourService.updateTour(action.id,action.tour).pipe(
+        tap(() => this.toastr.success('Successful update tour!')),
+         map(
+          (tour) => (
+            this.router.navigate(['tour/tour-card']),
+            { type: ActionTypes.updateTourSuccess, tour }
+          )
+         ),
+         catchError((err) =>
+            of({ type: ActionTypes.updateTourFailed, ...err })
+          )
+       )
+    )
+     
+  ));
+
 }

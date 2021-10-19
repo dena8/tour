@@ -47,8 +47,8 @@ export class TourService {
     return this.http.get<IForecast>(dbUrl + `/weather-forecast?region=${location}`);
   }
 
-  updateTour(id:string,formDate:FormData):Observable<any>{
-      return this.http.put(dbUrl +`/update/${id}`,formDate);
+  updateTour(id:string,formDate:FormData) {
+    return this.http.put(dbUrl +`/update/${id}`,formDate);
   }
 
 }

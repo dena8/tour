@@ -12,6 +12,8 @@ export const ActionTypes = {
     deleteTourSuccess: '[Delete Tour] Success',
     deleteTourFailed: '[Delete Tour] Failed',
     updateTour:'[Update ]',
+    updateTourSuccess:'[Update Tour] Success',
+    updateTourFailed:'[Update Tour] Failed',
     cancelRetrieve: '[Cancel Retrieve]'
 
 }
@@ -28,6 +30,10 @@ export const getAllTourFailed = createAction(ActionTypes.getAllTourFailed,props<
 export const deleteTour = createAction(ActionTypes.deleteTour,props<{id:string}>());
 export const deleteTourSuccess = createAction(ActionTypes.deleteTourSuccess,props<{id:string}>());
 export const deleteTourFailed = createAction(ActionTypes.deleteTourFailed,props<{err:any}>()); 
+
+export const updateTour = createAction(ActionTypes.updateTour,props <{id:string,tour:any}>());
+export const updateTourSuccess = createAction(ActionTypes.updateTourSuccess,props <{tour:any}>());
+export const updateTourFailed = createAction(ActionTypes.updateTourFailed,props<{err:any}>());
 
 export const cancelRetrieve = createAction(ActionTypes.cancelRetrieve);
 

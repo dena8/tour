@@ -15,7 +15,8 @@ export const reducer = createReducer(
         const tours = state.tour.filter(t=>t.id!==id);        
     return { ...state, tour:[...tours]};
     }),
-    on(tourAction.cancelRetrieve,(state)=>({...state,tour:[]})),  
+    on(tourAction.cancelRetrieve,(state)=>({...state,tour:[]})),
+    on(tourAction.updateTourSuccess,(state,{tour})=>({...state, tour:[...state.tour.filter(t=>t.id!==tour.id),tour]}))  
 );
 
 export const featureKey = 'tour';

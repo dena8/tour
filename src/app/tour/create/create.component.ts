@@ -5,7 +5,7 @@ import { ICategory } from '../../core/model/category';
 import { dateInTheFutureValidator } from '../../core/validator/custom-date-validator';
 
 import { Store } from '@ngrx/store';
-import { createTour } from '../../+store/tour/action';
+import { createTour} from '../../+store/tour/action';
 import { getAllCategories } from '../../+store/global/action';
 import { global } from '../../+store/index';
 
@@ -21,6 +21,7 @@ export class CreateComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private store: Store) {
     this.store.dispatch(getAllCategories());
+   
   }
 
   ngOnInit(): void {
