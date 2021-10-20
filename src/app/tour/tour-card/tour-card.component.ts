@@ -1,45 +1,32 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../../core/service/user.service';
-import { ICategory } from '../../core/model/category';
 import { ITour } from '../../core/model/tour-create';
-import { TourService } from '../../core/service/tour.service';
+import { Observable } from 'rxjs';
 
-
+import { Store } from '@ngrx/store';
+import { tour } from '../../+store';
+import { getAllTours, cancelRetrieve } from '../../+store/tour/action';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tour-card',
   templateUrl: './tour-card.component.html',
-  styleUrls: ['./tour-card.component.scss']
+  styleUrls: ['./tour-card.component.scss'],
 })
-export class TourCardComponent implements OnInit {
-  // tours$:Observable<any>;
-  tours: ITour<ICategory>[];
-  isTours: boolean;
-  myGuideTours: ITour<ICategory>[];
-  otherGuideTours: ITour<ICategory>[];
-  //guideTours:any;
+export class TourCardComponent implements OnDestroy {
+  tours$: Observable<ITour[]> = this.store.select(tour.getAll); 
+  localUsername = localStorage.getItem('username');
+  myGuideTours$: Observable<ITour[]> = this.store.select(tour.getAll).pipe(map((t) => t.filter((d) => d.creator.username === this.localUsername)));
+  otherGuideTours$: Observable<ITour[]> = this.store.select(tour.getAll).pipe(map((t) => t.filter((d) => d.creator.username !== this.localUsername)));
 
 
-  constructor(private tourService: TourService, public userService: UserService) { }
-
-  ngOnInit(): void {
-
-    this.tourService.getPopulatedTours().subscribe((data) => {
-      this.isTours = !!data.length;
-      if (this.userService.hasGuideRole()) {      
-        this.myGuideTours = data.filter(function (d) {
-          return d.creator.username === localStorage.getItem('username')
-        });
-
-        this.otherGuideTours = data.filter(function (d) {
-          return d.creator.username !== localStorage.getItem('username')
-        })      
-      } else {
-        this.tours = data       
-      }
-    }, err => {
-      console.log(err);
-    });
+  constructor(public userService: UserService, private store: Store) {
+    this.store.dispatch(getAllTours());
   }
 
+
+
+  ngOnDestroy() {
+    // this.store.dispatch(cancelRetrieve());
+  }
 }

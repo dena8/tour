@@ -1,53 +1,75 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { UserService } from '../../core/service/user.service';
-import { ICategory } from '../../core/model/category';
-import { ITour } from '../../core/model/tour-create';
-import { TourService } from '../../core/service/tour.service';
-import { BuyService } from '../../core/service/buy.service';
 import { WeatherComponent } from 'src/app/sample/weather/weather.component';
-import { async } from 'rxjs/internal/scheduler/async';
+
+import { Store } from '@ngrx/store';
+import { addTourToCart } from '../../+store/buy/action';
+import { deleteTour } from '../../+store/tour/action';
+import { tour } from '../../+store';
+import { cart } from '../../+store/buy/selector';
+import { TourService } from '../../core/service/tour.service';
+import {map} from 'rxjs/operators';
+import { ITour } from 'src/app/core/model/tour-create';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tour-description',
   templateUrl: './tour-description.component.html',
-  styleUrls: ['./tour-description.component.scss']
+  styleUrls: ['./tour-description.component.scss'],
 })
 export class TourDescriptionComponent implements OnInit {
-
-  tour$: Observable<ITour<ICategory>>;
+  tour$:Observable<ITour>;
   id: string;
-  public isAdded: Boolean;
-  mLocation: string; 
+  isAdded: Boolean;
+  mLocation$:Observable<string>;
   fromWeather: boolean;
-  isCreator:boolean;
+  isCreator$: Observable<boolean>; 
 
-  constructor(private tourService: TourService, public userService: UserService, private activatedRoute: ActivatedRoute, private router: Router, private buyService: BuyService) { }
+  constructor(
+    public userService: UserService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private store: Store,
+    private tourService: TourService
+  ) {}
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params.id;
-    this.tour$ = this.tourService.getTourById(this.id);
-    this.tourService.getTourById(this.id).subscribe(data => {     
-      this.mLocation = data.region;
-      this.isCreator = data.creator.username==localStorage.getItem('username');    
+    this.tour$ = this.store.select(tour.selectById(this.id));
+  
+
+    this.mLocation$ = this.tour$.pipe(map(t=> t.region));
+    this.isCreator$ = this.tour$.pipe(map(t=>t.creator.username==localStorage.getItem('username')));  
+
+    this.userService.hasUserRole$().subscribe((data) => {
+      if (data) {
+        this.store.select(cart.findById(this.id)).subscribe((r) => (this.isAdded = !!r));
+      }
     });
-    if (this.userService.hasUserRole()) {
-      this.buyService.checkIfAdded(this.id).subscribe((data) => this.isAdded = data);
-    }
   }
 
   emitClick(event) {
-    this.fromWeather = event;   
+    this.fromWeather = event;
   }
 
   clickJoin() {
-    this.buyService.addTourToCart(this.id)
-      .subscribe(() => this.router.navigate(['tour/tour-card']));
+    let name: string;
+    let price: number;
+    this.store.select(tour.selectById(this.id)).subscribe((data) => {
+      name = data.name;
+      price = data.price;
+    });
+    this.store.dispatch(
+      addTourToCart({
+        tour: { id: this.id, name, price },
+      })
+    );
+    this.router.navigate(['tour/tour-card']);
   }
 
   deleteTour() {
-    this.tourService.deleteTour(this.id).subscribe(()=>this.router.navigate(['tour/tour-card']) );
+    this.tourService.deleteTour1(this.id).subscribe((t) => console.log(t));
+    this.store.dispatch(deleteTour({ id: this.id }));
   }
-
 }

@@ -2,11 +2,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ITour } from '../../core/model/tour-create';
-import { UserService } from '../../core/service/user.service';
-import { IUser } from '../../core/model/user';
-import { TourService } from '../../core/service/tour.service';
 import { BuyService } from 'src/app/core/service/buy.service';
+
+import {ITour as ITourBuy,} from '../../+store/model/buy';
+import { Store } from '@ngrx/store';
+import {cart} from '../../+store/buy/selector';
+import {removeTour} from '../../+store/buy/action';
 
 @Component({
   selector: 'app-cart',
@@ -14,31 +15,27 @@ import { BuyService } from 'src/app/core/service/buy.service';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  user$: Observable<IUser<ITour>>
-  tourSum: number
-  userId:string;
+  
+  tourSum$: Observable<number>;
   username:string;
+  cart$:Observable<ITourBuy[]>;
 
-  constructor(private tourService: TourService,private userService:UserService,private buyService:BuyService,  private router: Router) { }
+
+  constructor(private buyService:BuyService,private store:Store,  private router: Router){}
+   
 
   ngOnInit(): void {
-    this.user$ = this.userService.getCurrentUser();
-    this.userService.getCurrentUser().subscribe(user => {
-      this.userId = user.id;  
-      this.username=user.username; 
-      this.tourSum = user.cart.filter(u=>u.price).reduce((acc, { price }) => acc + price, 0);
-    }, err => {
-      console.log(err);
-    })
+    this.cart$ = this.store.select(cart.get); 
+    this.tourSum$ = this.store.select(cart.sum);     
   }
 
   order() {  
     this.buyService.makeOrder({username:this.username}).subscribe((data)=>this.router.navigate(['home']));   
   }
 
-  removeItem(tourId: string) {
-    this.buyService.removeItemFromCart(this.userId,tourId).subscribe(()=>  this.ngOnInit());
-    }
-
+  removeItem(name: string) {
+    this.store.dispatch(removeTour({name}));
+    this.ngOnInit;    
+  }
  
 }

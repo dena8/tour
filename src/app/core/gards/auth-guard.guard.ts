@@ -1,30 +1,31 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, CanActivateChild } from '@angular/router';
+import { Store } from '@ngrx/store';
 import {UserService} from '../../core/service/user.service'
- 
+import { auth } from '../../+store';
+import { map, take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuardGuard implements CanActivateChild, CanActivate {
 
- constructor(private userService: UserService, private router: Router){}
+ constructor(private userService: UserService, private router: Router, private store : Store){}
 
-  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean  {
-    if(this.userService.getToken()){      
-          return true;
-        }
-        this.router.navigate(['home']);
-        return false;
+  canActivateChild():Observable<boolean>  {
+    return this.store.select(auth.getToken).pipe(take(1),map(v => {
+      if(v) { return true; }
+      this.router.navigate(['home']);
+    }));
   }
 
 
-  canActivate():boolean {
-    if(this.userService.getToken()){
-      return true;
-    }
-    this.router.navigate(['home']);
-    return false;
+  canActivate():Observable<boolean> {
+    return this.store.select(auth.getToken).pipe(take(1),map(v => {
+      if(v) { return true; }
+      this.router.navigate(['home']);
+    }));  
   }
 
 }

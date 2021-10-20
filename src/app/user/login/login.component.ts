@@ -1,50 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { UserService } from '../../core/service/user.service';
-import {invalidUsernameAsyncValidator} from '../../core/validator/async-username-not-exist-validator';
+import { Store } from '@ngrx/store';
+import { invalidUsernameAsyncValidator } from '../../core/validator/async-username-not-exist-validator';
+import { login, loginCancel } from '../../+store/auth/action';
+import { ILogin } from 'src/app/core/model/user-login';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   form: FormGroup;
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private jwtHelperService: JwtHelperService) { }
- 
-  ngOnInit(): void {
-    this.form = this.fb.group({     
-      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],    
-      password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-    })
+  constructor(private fb: FormBuilder, private store: Store) {}
 
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      username: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
+        ],
+      ],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
+        ],
+      ],
+    });
   }
 
   get f() {
     return this.form.controls;
   }
 
-  get av (){
+  get av() {
     return this.form.get('username');
   }
 
   postLogin() {
-
-    this.userService.postLogin(this.form.value).subscribe(data => {        
-      const token = data.headers.get('Authorization');
-      const decodeToken = this.jwtHelperService.decodeToken(token);     
-      localStorage.setItem('token', data.headers.get('Authorization'));      
-      localStorage.setItem('roles',JSON.stringify(decodeToken['roles']));
-      localStorage.setItem('username', data.body.username);         
-      this.router.navigate(['home']);
-    },
-      err => {
-        console.log(err);
-      }
-
-    )
+    const user: ILogin = { ...this.form.value };
+    this.store.dispatch(login({ ...this.form.value }));
   }
 
+  ngOnDestroy() {
+    this.store.dispatch(loginCancel());
+  }
 }

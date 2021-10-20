@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Router,ActivatedRoute } from '@angular/router';
+import {ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Observable } from 'rxjs';
 import { ICategory } from '../../core/model/category';
-import { CategoryService } from 'src/app/core/service/category.service';
 import { ITour } from 'src/app/core/model/tour-create';
 import { TourService } from 'src/app/core/service/tour.service';
 import {dateInTheFutureValidator} from '../../core/validator/custom-date-validator';
+
+import {Store} from "@ngrx/store";
+import * as selector from '../../+store';
+import {getAllCategories} from '../../+store/global/action';
+import {getAllTours,updateTour} from '../../+store/tour/action'
 
 @Component({
   selector: 'app-update',
@@ -16,20 +20,25 @@ import {dateInTheFutureValidator} from '../../core/validator/custom-date-validat
 export class UpdateComponent implements OnInit {
   form: FormGroup;
   categories$: Observable<ICategory[]>;
-  tour$: Observable<ITour<ICategory>>;
+  tour$: Observable<ITour>;
   id:string = this.activatedRoute.snapshot.params.id;
   loading:boolean = false;
  
 
-  constructor(private fb:FormBuilder,
-     private categoryService:CategoryService,
+  constructor(
+     private store:Store,
+     private fb:FormBuilder,    
      private tourService: TourService,
      private activatedRoute: ActivatedRoute,
-     private router:Router ) { }
+     )
+      {
+      this.store.dispatch(getAllCategories());
+      this.store.dispatch(getAllTours())  
+      }
 
-  ngOnInit(): void {
+  ngOnInit(): void {   
+   this.categories$ = this.store.select(selector.global.getAllCategories);
 
-    this.categories$=  this.categoryService.getAllCategories();
     this.tourService.getTourById(this.activatedRoute.snapshot.params.id).subscribe(data=>{
       this.form = this.fb.group({
         name: [data.name, [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[A-Za-z0-9\\s]+$')]],
@@ -45,7 +54,8 @@ export class UpdateComponent implements OnInit {
         validators: dateInTheFutureValidator('startDate')
       })
    })
-    this.tour$ = this.tourService.getTourById(this.activatedRoute.snapshot.params.id);
+   
+    this.tour$ = this.store.select(selector.tour.selectById(this.activatedRoute.snapshot.params.id))
  
   }
 
@@ -65,9 +75,9 @@ export class UpdateComponent implements OnInit {
     for (const [k,v] of Object.entries(this.form.value)) {     
       formDate.append(k,v as any);   
     } 
-    this.loading=true;
-    
-    this.tourService.updateTour(this.id,formDate).subscribe(()=>this.router.navigate(['tour/tour-card']));
+    this.loading=true;    
+   
+    this.store.dispatch(updateTour({id:this.id,tour:formDate}))
 
   }
 
