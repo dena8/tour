@@ -12,7 +12,11 @@ const initialState:IAuthState ={
 
 export const authReducer = createReducer(
     initialState,
-    on(authAction.loginSuccess,(state,data)=>({...state,...data})),
+    on(authAction.registerSuccess,(state,data)=>({...state,...data.user})),  
+    on(authAction.loginSuccess,(state,{user})=>{
+        console.log("FROM REDUCER", user);
+        return {...state,...user}
+    }),        
     on(authAction.loginCancel,(state)=>({...state})),  
     on(authAction.logout,(state)=>({ id:null,
         roles:null,

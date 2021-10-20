@@ -1,7 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IUserRegister } from '../../core/model/user-register';
-import { ILogin } from '../../core/model/user-login';
+import { ILogin,IAuthUser } from '../../core/model/index';
 import { IUser } from '../model/user';
 import { ITour } from '../model/tour-create';
 import { Observable, pipe } from 'rxjs';
@@ -27,9 +27,11 @@ export class UserService {
     return this.http.post<IUserRegister>(BE_URL + '/register', user);
   }
 
-  login(user: ILogin) {
-    return this.http.post<any>(BE_URL + '/login', user);
+  login(user: ILogin){
+    return this.http.post<IAuthUser>(BE_URL + '/login', user);
+    
   }
+
 
   isAuthenticated(): boolean {
     let result = null;
