@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { IOrder } from '../../core/model/order';
-import { BuyService } from '../../core/service/buy.service';
+import { Store } from '@ngrx/store';
+import {listOrders} from '../../+store/global/action';
+import {global} from '../../+store'
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-order',
@@ -8,12 +11,14 @@ import { BuyService } from '../../core/service/buy.service';
   styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit { 
-  orders: IOrder[];
+  orders$:Observable<IOrder[]>;
 
-  constructor(private buyService: BuyService) { }
+  constructor(private store:Store) {
+    this.store.dispatch(listOrders());
+   }
 
-  ngOnInit(): void {  
-    this.buyService.listOrders().subscribe((data) =>this.orders = data);   
+  ngOnInit(): void {   
+    this.orders$= this.store.select(global.getAllOrders);   
   }
 
 }

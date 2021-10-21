@@ -13,7 +13,8 @@ export const reducer = createReducer(
     on(item.removeTour,(state,{name})=>{     
      state= state.filter(t=>t.name!=name);
       return[...state]
-    })
+    }),
+    on(item.clearCart,(state)=>[]),
 );
 
 export const featureKey = 'cart';

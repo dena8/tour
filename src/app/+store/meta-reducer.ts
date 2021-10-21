@@ -28,7 +28,7 @@
       return localStorageSync({keys: rootReducerKeys, rehydrate: true})(reducer);
     };
 
-   export const tourReducerKeys = ['tour'];  
+   export const tourReducerKeys = ['tour',];  
 
    export function tourSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
     return localStorageSync({keys: tourReducerKeys, rehydrate: true})(reducer);

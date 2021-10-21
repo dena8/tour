@@ -1,6 +1,6 @@
 <div class="main">
-    <div *ngIf="orders?.length!=0" class="d-flex flex-column justify-content-start">
-        <div class="first" *ngFor="let order of orders">
+    <div *ngIf="(orders$|async)?.length!=0" class="d-flex flex-column justify-content-start">
+        <div class="first" *ngFor="let order of (orders$|async)">
             <ul>
                 <li>{{order.id}}
                     <a type="button" [routerLink]="['/buy','order-details',order.id]" class="btn btn-outline-primary"
@@ -10,7 +10,7 @@
             </ul>
         </div>
     </div>
-    <div *ngIf="orders?.length==0">
+    <div *ngIf="(orders$|async)?.length==0">
         <h1>No orders to confirm</h1>
     </div>
 </div>

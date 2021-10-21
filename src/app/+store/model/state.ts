@@ -1,5 +1,5 @@
 import { ICategory } from "../../core/model/category";
-import { ITour } from "../../core/model/tour-create";
+import { ITour,IOrder } from "../../core/model/index";
 
 export interface ITourState {
     tour: ITour[];
@@ -7,6 +7,7 @@ export interface ITourState {
 
 export interface IGlobalState {
     category : ICategory[];
+    order: IOrder[];
 }
 
 export interface IAuthState {

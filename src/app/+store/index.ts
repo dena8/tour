@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ITourState } from './model';
 import * as tourSelector from './tour/selector';
-import * as categorySelector from './global/selector';
+import * as globalSelector from './global/selector';
 import * as authSelector from './auth/selector';
 
 export const getTourStore = createFeatureSelector('tour') as any;
@@ -10,9 +10,10 @@ export const tour =  {
     selectById : (id:string)=> createSelector(getTourStore,(state:ITourState)=>state.tour.find(t=>t.id==id)),
 };
 
-export const getCategoryStore = createFeatureSelector('global');
+export const getGlobalStore = createFeatureSelector('global');
 export const global = {
-    getAllCategories:createSelector(getCategoryStore,categorySelector.getAll),
+    getAllCategories:createSelector(getGlobalStore, globalSelector.getAll),
+    getAllOrders:createSelector(getGlobalStore, globalSelector.listOrders),
 }
 
 export const getAuthStore = createFeatureSelector('auth');

@@ -7,7 +7,8 @@ import { BuyService } from 'src/app/core/service/buy.service';
 import {ITour as ITourBuy,} from '../../+store/model/buy';
 import { Store } from '@ngrx/store';
 import {cart} from '../../+store/buy/selector';
-import {removeTour} from '../../+store/buy/action';
+import {removeTour,clearCart} from '../../+store/buy/action';
+import {createOrder} from '../../+store/global/action'
 
 @Component({
   selector: 'app-cart',
@@ -29,8 +30,9 @@ export class CartComponent implements OnInit {
     this.tourSum$ = this.store.select(cart.sum);     
   }
 
-  order() {  
-    this.buyService.makeOrder({username:this.username}).subscribe((data)=>this.router.navigate(['home']));   
+  order() {     
+    this.store.dispatch(createOrder({username:localStorage.getItem('username')})); 
+    this.store.dispatch(clearCart());
   }
 
   removeItem(name: string) {
