@@ -15,8 +15,8 @@ export const ActionTypes = {
   logout: '[Logout]',
 };
 
-export const register = createAction(`${namespace} ${ActionTypes.register}`, props<{ user: IUserRegister }>());
-export const registerSuccess = createAction(`${namespace} ${ActionTypes.registerSuccess}`, props<{ user:IAuthUser}>());
+export const register = createAction(`${namespace} ${ActionTypes.register}`, props< {user:IUserRegister} >());
+export const registerSuccess = createAction(`${namespace} ${ActionTypes.registerSuccess}`, props<{user:IAuthUser}>());
 export const registerFailed = createAction(`${namespace} ${ActionTypes.registerFailed}`, props<{ error: HttpErrorResponse }>());
 
 export const login = createAction(`${namespace} ${ActionTypes.login}`, props<{ username: string; password: string }>());

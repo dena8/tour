@@ -24,11 +24,11 @@ export class UserService {
   ) {}
 
   postRegister(user: IUserRegister) {
-    return this.http.post<IUserRegister>(BE_URL + '/register', user);
+    return this.http.post<IAuthUser>(BE_URL + '/register', user);
   }
 
   login(user: ILogin){
-    return this.http.post<IAuthUser>(BE_URL + '/login', user);
+    return this.http.post<{ user: {user: IAuthUser} }>(BE_URL + '/login', user);
     
   }
 
