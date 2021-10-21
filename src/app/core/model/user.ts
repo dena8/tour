@@ -9,4 +9,6 @@ export interface IUser<T>{
     cart:T[]
     tours:T[]
     admin:boolean
+    token:string
+    roles:string
 }

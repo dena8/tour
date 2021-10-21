@@ -1,5 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
-import { IUserRegister } from '../../core/model/user-register';
+import { IUserRegister,IAuthUser,IUser, ITour } from '../../core/model';
+
+export const namespace = '[AUTH]';
 
 export const ActionTypes = {
   register: '[Register]',
@@ -12,28 +15,15 @@ export const ActionTypes = {
   logout: '[Logout]',
 };
 
-export const register = createAction(
-  ActionTypes.register,
-  props<{ user: IUserRegister }>()
-);
-export const registerSuccess = createAction(ActionTypes.registerSuccess);
-export const registerFailed = createAction(
-  ActionTypes.registerFailed,
-  props<{ err: any }>()
-);
+export const register = createAction(`${namespace} ${ActionTypes.register}`, props< {user:IUserRegister} >());
+export const registerSuccess = createAction(`${namespace} ${ActionTypes.registerSuccess}`, props<{user:IAuthUser}>());
+export const registerFailed = createAction(`${namespace} ${ActionTypes.registerFailed}`, props<{ error: HttpErrorResponse }>());
 
-export const login = createAction(
-  ActionTypes.login,
-  props<{ username: string; password: string }>()
-);
-export const loginSuccess = createAction(
-  ActionTypes.loginSuccess,
-  props<{ id: string; roles: string; token: string; username: string }>()
-);
-export const loginFailed = createAction(
-  ActionTypes.loginFailed,
-  props<{ err: any }>()
-);
-export const loginCancel = createAction(ActionTypes.loginCancel);
+export const login = createAction(`${namespace} ${ActionTypes.login}`, props<{ username: string; password: string }>());
+export const loginSuccess = createAction(`${namespace} ${ActionTypes.loginSuccess}`, props<{ user: IAuthUser }>());
+export const loginFailed = createAction(`${namespace} ${ActionTypes.loginFailed}`, props<{ error: HttpErrorResponse }>());
 
-export const logout = createAction(ActionTypes.logout);
+
+export const loginCancel = createAction(`${namespace} ${ActionTypes.loginCancel}`);
+
+export const logout = createAction(`${namespace} ${ActionTypes.logout}`);
