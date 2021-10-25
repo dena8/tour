@@ -12,8 +12,9 @@ export const tour =  {
 
 export const getGlobalStore = createFeatureSelector('global');
 export const global = {
-    getAllCategories:createSelector(getGlobalStore, globalSelector.getAll),
+    getAllCategories:createSelector(getGlobalStore, globalSelector.getAllCategories),
     getAllOrders:createSelector(getGlobalStore, globalSelector.listOrders),
+    selectOrderById:createSelector(getGlobalStore,globalSelector.getOrderById),
 }
 
 export const getAuthStore = createFeatureSelector('auth');

@@ -11,14 +11,14 @@ import { Observable } from 'rxjs';
   styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit { 
-  orders$:Observable<IOrder[]>;
+  orders$:Observable<IOrder[]> = this.store.select(global.getAllOrders);
 
   constructor(private store:Store) {
-    this.store.dispatch(listOrders());
+     this.store.dispatch(listOrders());
    }
 
   ngOnInit(): void {   
-    this.orders$= this.store.select(global.getAllOrders);   
+   
   }
 
 }

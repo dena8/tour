@@ -14,13 +14,15 @@ import { AuthGuardGuard } from '../core/gards/auth-guard.guard';
 import {GuideGuard} from '../core/gards/guide.guard';
 import { UpdateComponent } from './update/update.component';
 import {StoreModule} from '@ngrx/store';
-import {globalReducer} from '../+store/global/reducer';
+import {reducer} from '../+store/global/reducer';
 import { EffectsModule } from '@ngrx/effects';
 import {GlobalEffects} from '../+store/global/effects';
 import {TourEffects} from '../+store/tour/effects';
 import {tourReducer} from '../+store/tour/reducer';
 import { TourListComponent } from './guide-tours/tour-list/tour-list.component';
-import {tourMetaReducer} from '../+store/meta-reducer';
+import {globalMetaReducer,tourMetaReducer} from '../+store/meta-reducer';
+
+
 
 
 @NgModule({
@@ -37,9 +39,10 @@ import {tourMetaReducer} from '../+store/meta-reducer';
       {path: 'description/:id', component: TourDescriptionComponent,canActivate:[AuthGuardGuard] },
       {path:'update/:id',component: UpdateComponent,canActivate:[AuthGuardGuard,GuideGuard]}, 
       {path:'list',component:TourListComponent,canActivate:[AuthGuardGuard,GuideGuard]}     
-    ]),
-    StoreModule.forFeature('global',globalReducer),  
+    ]),    
     StoreModule.forFeature('tour',tourReducer,{metaReducers:tourMetaReducer}),  
+    StoreModule.forFeature('global',reducer,{metaReducers:globalMetaReducer}), 
+    
     EffectsModule.forFeature([GlobalEffects,TourEffects])
   ],
   exports: [

@@ -16,9 +16,7 @@ export const ActionTypes ={
 
     listOrders:'[List Orders]',
     listOrdersSuccess:'[List Orders] Success',
-    listOrdersFailed:'[List Orders] Failed' ,
-
-    
+    listOrdersFailed:'[List Orders] Failed',    
 }
 
 export const getAllCategories = createAction(`${namespace} ${ActionTypes.getAllCategories}`);

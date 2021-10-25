@@ -23,6 +23,7 @@ import { EffectsModule } from '@ngrx/effects';
 import {AuthEffects} from './+store/auth/effects'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {reducers,metaReducers} from './+store/meta-reducer';
+import {cartReducer} from './+store/buy/reducer'
 
 @NgModule({
   declarations: [AppComponent],
@@ -53,8 +54,8 @@ import {reducers,metaReducers} from './+store/meta-reducer';
       },
     }),
     StoreModule.forRoot(  
-    reducers,
-    {metaReducers}
+      reducers,
+     {metaReducers}   
     ),
     EffectsModule.forRoot([AuthEffects]),
     StoreDevtoolsModule.instrument({}),
