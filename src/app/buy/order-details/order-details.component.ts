@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IOrder } from 'src/app/core/model/order';
 import { BuyService } from 'src/app/core/service/buy.service';
+import {Store} from '@ngrx/store';
+import {global} from '../../+store/index'
+import { Observable } from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-order-details',
@@ -12,17 +16,15 @@ export class OrderDetailsComponent implements OnInit {
 
   order:IOrder;
   id:string;
-  tourSum: number;
+  tourSum$:Observable<number>;
+  order$: Observable<IOrder> ;
 
-  constructor(private buyService:BuyService, private rout: ActivatedRoute) { }
+  constructor(private buyService:BuyService, private rout: ActivatedRoute, private store:Store) { }
 
   ngOnInit(): void {
     this.id = this.rout.snapshot.paramMap.get('id'); 
-
-    this.buyService.getOrder(this.id).subscribe(data=>{       
-      this.order=data;
-      this.tourSum = this.order.buyingProducts.filter(u=>u.price).reduce((acc, { price }) => acc + price, 0);    
-    })
+    this.order$ = this.store.select(global.selectOrderById(this.id));
+    this.tourSum$ = this.order$.pipe(map(o=>o.buyingProducts.reduce((acc,{price})=> acc + price,0)));  
   }
 
 }

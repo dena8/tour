@@ -19,17 +19,17 @@ c/o Pegasus Medea</textarea>
             <table id="meta">
                 <tr>
                     <td class="meta-head">Invoice #</td>
-                    <td><textarea>000{{order?.id?.substring(0,5)}}</textarea></td>
+                    <td><textarea>000{{(order$|async)?.id?.substring(0,5)}}</textarea></td>
                 </tr>
                 <tr>
 
                     <td class="meta-head">Date</td>
-                    <td><textarea id="date">{{order?.buyDate?.substring(0,order.buyDate.indexOf("T"))}}</textarea></td>
+                      <td><textarea id="date">{{(order$|async).buyDate?.substring(0,(order$|async).buyDate.indexOf("T"))}} </textarea></td>
                 </tr>
                 <tr>
                     <td class="meta-head">Amount Due</td>
                     <td>
-                        <div class="due">{{tourSum}} lv.</div>
+                        <div class="due">{{(tourSum$|async)}} lv.</div>
                     </td>
                 </tr>
 
@@ -47,11 +47,17 @@ c/o Pegasus Medea</textarea>
                 <th></th>                
             </tr>
 
-            <tr *ngFor="let tour of order?.buyingProducts" class="item-row">
+            <tr *ngFor="let tour of (order$|async)?.buyingProducts" class="item-row">
                 <td class="description"><textarea>{{tour.name}}</textarea></td>
                 <td><textarea class="qty"></textarea></td>
                 <td><span class="price">{{tour.price}} lv.</span></td>
             </tr>
+
+            <!-- <tr  class="item-row"  >
+                <td class="description"><textarea>{{(order$|async).buyDate}}  </textarea></td>
+                <td><textarea class="qty"></textarea></td>
+                <td><span class="price"> lv.</span></td>
+            </tr> -->
   
 
             <tr id="hiderow">
@@ -62,14 +68,14 @@ c/o Pegasus Medea</textarea>
                 <td colspan="2" class="blank"> </td>
                 <td colspan="2" class="total-line">Subtotal</td>
                 <td class="total-value">
-                    <div id="subtotal">{{tourSum}} lv.</div>
+                    <div id="subtotal">{{(tourSum$|async)}} lv.</div>
                 </td>
             </tr>
             <tr>
                 <td colspan="2" class="blank"> </td>
                 <td colspan="2" class="total-line">Total</td>
                 <td class="total-value">
-                    <div id="total">{{tourSum}} lv</div>
+                    <div id="total">{{(tourSum$|async)}} lv</div>
                 </td>
             </tr>
             <tr>
@@ -82,7 +88,7 @@ c/o Pegasus Medea</textarea>
                 <td colspan="2" class="blank"> </td>
                 <td colspan="2" class="total-line balance">Balance Due</td>
                 <td class="total-value balance">
-                    <div class="due">{{tourSum}} lv</div>
+                    <div class="due">{{(tourSum$|async)}} lv</div>
                 </td>
             </tr>
 

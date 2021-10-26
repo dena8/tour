@@ -32,11 +32,12 @@ export class AuthEffects {
         return this.userService.postRegister(payload.user).pipe(
           tap(() => this.toastr.success('Successful register')),
           map((user) => {            
-            localStorage.setItem("username",user.username);
+            localStorage.setItem("username",user.username);            
             this.router.navigate(['home']);
             return registerSuccess({ user });
           }),
-          catchError((err) => of({ type: registerFailed, ...err }))
+          catchError((err) => of({ type: registerFailed, ...err })),      
+
         );
       })
     )

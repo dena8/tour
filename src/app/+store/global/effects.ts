@@ -34,7 +34,7 @@ export class GlobalEffects {
     this.actions$.pipe(
       ofType(action.createOrder),
       switchMap((payload) => {
-        return this.buyService.makeOrder(payload.username).pipe(
+        return this.buyService.makeOrder(payload.cartItems).pipe(
           map((order) => action.createOrderSuccess({ order })),
           catchError((err) => of({ type: action.createOrderFailed, ...err }))
         );

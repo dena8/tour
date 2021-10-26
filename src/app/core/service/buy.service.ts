@@ -14,9 +14,8 @@ export class BuyService {
 
   constructor(private httpClient:HttpClient, private toaster:ToastrService) { }
 
-
-  makeOrder(username:Object){   
-    return this.httpClient.post<IOrder>(dbUrl+'/cart/order',{username});
+  makeOrder(cartItems:string[]){  
+     return this.httpClient.post<IOrder>(dbUrl+'/cart/order',{cartItems});
   }
 
   listOrders(){

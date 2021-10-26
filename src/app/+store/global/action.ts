@@ -23,7 +23,7 @@ export const getAllCategories = createAction(`${namespace} ${ActionTypes.getAllC
 export const getAllCategoriesSuccess = createAction(`${namespace} ${ActionTypes.getAllCategoriesSuccess}`,props<{categories:ICategory[]}>());
 export const getAllCategoriesFailed = createAction(`${namespace} ${ActionTypes.getAllCategoriesFailed}`,props<{err:HttpErrorResponse}>());
 
-export const createOrder = createAction(`${namespace} ${ActionTypes.createOrder}`,props<{username:string}>());
+export const createOrder = createAction(`${namespace} ${ActionTypes.createOrder}`,props<{cartItems:string[]}>());
 export const createOrderSuccess = createAction(`${namespace} ${ActionTypes.createOrderSuccess}`,props<{order:IOrder}>());
 export const createOrderFailed = createAction(`${namespace} ${ActionTypes.createOrderFailed}`,props<{err:HttpErrorResponse}>());
 
