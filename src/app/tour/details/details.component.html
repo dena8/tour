@@ -1,22 +1,22 @@
 <div class="d-flex flex-column justify-content-center">
-    <div class="card bg-dark text-white">        
-        <img src="{{tour.image}}" class="card-img" alt="...">    
+    <div class="card bg-dark text-white">
+        <img src="{{tour.image}}" class="card-img" alt="...">
         <div class="card-img-overlay">
             <h6 class="card-title">{{tour.name}}</h6>
         </div>
     </div>
     <div>
         <ul class="list-group">
-            <li class="list-group-item">{{tour.name}}</li>           
-            <li class="list-group-item">Category: {{tour?.category?.name}}</li>        
+            <li class="list-group-item">{{tour.name}}</li>
+            <li class="list-group-item">Category: {{tour?.category?.name}}</li>
             <li class="list-group-item">Vacant place: {{tour.participants}}</li>
             <li class="list-group-item">Start day: {{tour.startDate}}</li>
-            <li class="list-group-item"> 
-                <div *ngIf="userService.isAuthenticated()">
+            <li class="list-group-item">
+                <div *ngIf="isAuthenticate">
                     <button [routerLink]="['/tour','description',tour.id]" class="btn btn-danger">Description</button>
                 </div>
             </li>
-        </ul> 
-            
-    </div>   
+        </ul>
+
+    </div>
 </div>

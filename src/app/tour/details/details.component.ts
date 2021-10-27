@@ -1,17 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ICategory } from 'src/app/core/model/category';
 import { ITour } from '../../core/model/tour-create';
-import { UserService } from '../../core/service/user.service';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent {
   @Input() tour: ITour<ICategory>;
+  @Input() isAuthenticate: boolean;
 
-  constructor(public userService: UserService) {}
+  constructor() { }
 
-  ngOnInit(): void {}
 }

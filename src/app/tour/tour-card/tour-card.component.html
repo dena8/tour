@@ -7,7 +7,7 @@
 
     <div class="col-md-3" *ngFor="let tour of tours$ | async">
       <div *ngIf="!(userService.hasGuideRole$() | async)">
-        <app-details [tour]="tour"></app-details>
+        <app-details [tour]="tour" [isAuthenticate]="(isAuthenticate$ | async)"></app-details>
       </div>
     </div>
 
