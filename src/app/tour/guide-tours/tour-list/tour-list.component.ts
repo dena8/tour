@@ -1,5 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
-import { UserService } from '../../../core/service/user.service';
+import { Component,Input } from '@angular/core';
 import { ITour } from '../../../core/model/tour-create';
 import { Observable } from 'rxjs';
 
@@ -8,18 +7,19 @@ import { Observable } from 'rxjs';
   templateUrl: './tour-list.component.html',
   styleUrls: ['./tour-list.component.scss']
 })
-export class TourListComponent implements OnInit {
+export class TourListComponent {
   @Input()
   tours$:Observable<ITour[]>;
   @Input()
   myTours$:Observable<ITour[]>;
   @Input()
   otherGuideTours$:Observable<ITour[]>
-  username:string = localStorage.getItem('username');
-  constructor() { }
+  @Input()
+  isAuthenticate:boolean;
+ 
 
-  ngOnInit(): void {
-   
-  }
+  username:string = localStorage.getItem('username');
+
+  constructor() {}  
 
 }

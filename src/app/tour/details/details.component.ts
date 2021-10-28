@@ -11,6 +11,6 @@ export class DetailsComponent {
   @Input() tour: ITour<ICategory>;
   @Input() isAuthenticate: boolean;
 
-  constructor() { }
+  constructor() {}
 
 }

@@ -19,4 +19,8 @@ export const getAuthStore = createFeatureSelector('auth');
 export const auth = {
     getToken: createSelector(getAuthStore, authSelector.getToken),
     getRole: createSelector(getAuthStore,authSelector.getRole),
+    isAuthenticate:createSelector(getAuthStore,authSelector.isAuthenticate),  
+    hasGuideRole:createSelector(getAuthStore,authSelector.hasGuideRole), 
+    hasUserRole: createSelector(getAuthStore,authSelector.hasUserRole),
+    hasAdminRole: createSelector(getAuthStore,authSelector.hasAdminRole),
 } 

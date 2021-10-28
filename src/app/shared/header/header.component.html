@@ -16,35 +16,31 @@
         <li class="nav-item active">
           <a class="nav-link" [routerLink]="['/tour','tour-card']">Tours</a>
         </li>
-        <li class="nav-item active" *ngIf="(userService.hasGuideRole$()|async)">
+        <li class="nav-item active" *ngIf="(hasGuideRole$|async)">
           <a class="nav-link" [routerLink]="['/tour','create']">Create tours</a>
         </li>   
-        <li class="nav-item active" *ngIf="userService.isAuthenticated() && (userService.hasUserRole$()|async)">         
+        <li class="nav-item active" *ngIf="(hasUserRole$|async)">         
           <a class="nav-link" [routerLink]="['/buy','cart']">Cart</a>
         </li>
-        <li class="nav-item active" *ngIf="!userService.isAuthenticated()">
+        <li class="nav-item active" *ngIf="!(isAuthenticated|async)">
           <a class="nav-link"  [routerLink]="['/user','register']">Register</a>
         </li>
-        <li class="nav-item active" *ngIf="!userService.isAuthenticated()">
+        <li class="nav-item active" *ngIf="!(isAuthenticated|async)">
           <a class="nav-link" [routerLink]="['/user','login']">Login</a>
         </li>        
-        <li class="nav-item" *ngIf="(userService.hasAdminRole$()|async)">         
+        <li class="nav-item" *ngIf="(hasAdminRole$|async)">         
           <a class="nav-link" [routerLink]="['/buy','order']" >Order</a>
         </li>
-        <li class="nav-item" *ngIf="userService.hasAdminRole$()|async">
+        <li class="nav-item" *ngIf="hasAdminRole$|async">
           <a class="nav-link" [routerLink]="['/buy','statistic']" >Statistic</a>
         </li>
-        <li class="nav-item" *ngIf="userService.isAuthenticated()">
+        <li class="nav-item" *ngIf="(isAuthenticated|async)">
           <a class="nav-link" (click)="logout()">Logout</a>
         </li>            
       </ul>
     </div>
-    <div *ngIf="userService.isAuthenticated()">
+    <div *ngIf="(isAuthenticated|async)">
       <p style="color: aliceblue;">Hello, {{username()}}</p>
-    </div>
-    <!-- <form class="form-inline">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form> -->
+    </div>  
   </nav>
 </div>

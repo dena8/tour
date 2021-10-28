@@ -45,7 +45,7 @@ import {tourMetaReducer} from '../+store/meta-reducer';
   exports: [
     CreateComponent,
     DetailsComponent,
-    TourCardComponent,      
+    TourCardComponent,       
   ]
 })
 export class TourModule { }

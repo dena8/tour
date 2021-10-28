@@ -15,16 +15,16 @@
             </ul>
         </div>
         <div class="buttons-box" >
-            <a class="btn-tour del" *ngIf="userService.hasAdminRole$()|async" (click)="deleteTour()">Delete</a>
-            <a  class="btn-tour del" *ngIf="(userService.hasGuideRole$()|async) && (isCreator$|async)" style="background-color: rgb(87, 165, 42);" [routerLink]="['/tour','update',(tour$ | async)?.id]" >Update</a>
+            <a class="btn-tour del" *ngIf="hasAdminRole$|async" (click)="deleteTour()">Delete</a>
+            <a  class="btn-tour del" *ngIf="(hasGuideRole$|async) && (isCreator$|async)" style="background-color: rgb(87, 165, 42);" [routerLink]="['/tour','update',(tour$ | async)?.id]" >Update</a>
             <a class="btn-tour"
-                *ngIf="!(userService.hasAdminRole$()|async) && !(userService.hasGuideRole$()|async) && (tour$|async)?.participants>0 && !isAdded"
+                *ngIf="!(hasAdminRole$|async) && !(hasGuideRole$|async) && (tour$|async)?.participants>0 && !isAdded"
                 type="button" (click)="clickJoin()">Join</a>
-            <a  class="btn-tour" *ngIf="userService.isAuthenticated()" [routerLink]="['/tour','tour-card']"
+            <a  class="btn-tour" *ngIf="isAuthenticated$|async" [routerLink]="['/tour','tour-card']"
                 type="button">Back</a>
             <a  class="btn-tour" *ngIf="isAdded" type="button">Already join</a>
             <a  class="btn-tour violet"
-                *ngIf="!(userService.hasGuideRole$()|async)&&(tour$|async)?.participants<1&& !(userService.hasAdminRole$()|async)&&!isAdded"
+                *ngIf="!(hasGuideRole$|async)&&(tour$|async)?.participants<1&& !(hasAdminRole$|async)&&!isAdded"
                 type="button">No vacant place</a>
            
             

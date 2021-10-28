@@ -7,9 +7,8 @@ import { ITour } from '../model/tour-create';
 import { Observable, pipe } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
-import { auth } from '../../+store';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs/operators';
+
 
 const BE_URL = 'http://localhost:5000/users';
 
@@ -30,46 +29,6 @@ export class UserService {
   login(user: ILogin){
     return this.http.post<{ user: {user: IAuthUser} }>(BE_URL + '/login', user);
     
-  }
-
-
-  isAuthenticated(): boolean {
-    let result = null;
-    this.store.select(auth.getToken).subscribe((t) => (result = t));
-    return !!result;
-  }
-
-  hasAdminRole$(): Observable<boolean> {
-    return this.store.select(auth.getRole).pipe(
-      map((role) => {
-        if (role !== null) {
-          return role.includes('ADMIN_ROLE') && this.isAuthenticated();
-        }
-        return false;
-      })
-    );
-  }
-
-  hasUserRole$(): Observable<boolean> {
-    return this.store.select(auth.getRole).pipe(
-      map((role) => {
-        if (role !== null) {
-          return role.includes('USER_ROLE') && this.isAuthenticated();
-        }
-        return false;
-      })
-    );
-  }
-
-  hasGuideRole$(): Observable<boolean> {
-    return this.store.select(auth.getRole).pipe(
-      map((role) => {
-        if (role !== null) {
-          return role.includes('GUIDE_ROLE') && this.isAuthenticated();
-        }
-        return false;
-      })
-    );
   }
 
   getCurrentUser(): Observable<IUser<ITour>> {

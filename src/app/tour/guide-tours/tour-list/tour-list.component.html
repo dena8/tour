@@ -9,14 +9,14 @@
       <h2 *ngIf="(myTours$ | async)"> {{username}}`s  tours </h2>      
       <div class="row">
         <div class="col-md-3" *ngFor="let tour of myTours$ | async">
-          <app-details [tour]="tour"></app-details>
+          <app-details [tour]="tour" [isAuthenticate]="isAuthenticate"></app-details>
         </div>
       </div>
       <div *ngIf="(otherGuideTours$ | async)" class="my">
         <h2>Other guide tours</h2>
         <div class="row">
           <div class="col-md-3" *ngFor="let tour of otherGuideTours$ | async">
-            <app-details [tour]="tour"></app-details>
+            <app-details [tour]="tour" [isAuthenticate]="isAuthenticate"></app-details>
           </div>
         </div>
       </div>

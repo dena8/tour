@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from '../../core/service/user.service';
 import { WeatherComponent } from 'src/app/sample/weather/weather.component';
 
 import { Store } from '@ngrx/store';
@@ -12,6 +11,7 @@ import { TourService } from '../../core/service/tour.service';
 import {map} from 'rxjs/operators';
 import { ITour } from 'src/app/core/model/tour-create';
 import { Observable } from 'rxjs';
+import{auth} from '../../+store/index';
 
 @Component({
   selector: 'app-tour-description',
@@ -25,9 +25,12 @@ export class TourDescriptionComponent implements OnInit {
   mLocation$:Observable<string>;
   fromWeather: boolean;
   isCreator$: Observable<boolean>; 
+  isAuthenticated$ = this.store.select(auth.isAuthenticate);
+  hasGuideRole$=this.store.select(auth.hasGuideRole);
+  hasAdminRole$=this.store.select(auth.hasAdminRole);
+  hasUserRole$=this.store.select(auth.hasUserRole);
 
-  constructor(
-    public userService: UserService,
+  constructor(   
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private store: Store,
@@ -42,7 +45,7 @@ export class TourDescriptionComponent implements OnInit {
     this.mLocation$ = this.tour$.pipe(map(t=> t.region));
     this.isCreator$ = this.tour$.pipe(map(t=>t.creator.username==localStorage.getItem('username')));  
 
-    this.userService.hasUserRole$().subscribe((data) => {
+    this.hasUserRole$.subscribe((data) => {
       if (data) {
         this.store.select(cart.findById(this.id)).subscribe((r) => (this.isAdded = !!r));
       }

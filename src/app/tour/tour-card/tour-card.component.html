@@ -6,14 +6,14 @@
     </h2>
 
     <div class="col-md-3" *ngFor="let tour of tours$ | async">
-      <div *ngIf="!(userService.hasGuideRole$() | async)">
+      <div *ngIf="!(hasGuideRole$ | async)">
         <app-details [tour]="tour" [isAuthenticate]="(isAuthenticate$ | async)"></app-details>
       </div>
     </div>
 
     <div class="col-md-3" >
-      <div *ngIf="(userService.hasGuideRole$() | async)">
-       <app-tour-list [tours$]="tours$" [myTours$]="myGuideTours$" [otherGuideTours$]="otherGuideTours$" ></app-tour-list>
+      <div *ngIf="(hasGuideRole$ | async)">
+       <app-tour-list [tours$]="tours$" [myTours$]="myGuideTours$" [otherGuideTours$]="otherGuideTours$" [isAuthenticate]="(isAuthenticate$ | async)" ></app-tour-list>
       </div>
     </div> 
   

@@ -4,6 +4,8 @@ import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../core/service/user.service';
 import { logout } from '../../+store/auth/action';
+import { Observable } from 'rxjs';
+import{auth} from '../../+store/index';
 
 @Component({
   selector: 'app-header',
@@ -14,9 +16,13 @@ export class HeaderComponent implements OnInit {
   username = function () {
     return localStorage.getItem('username');
   };
+  isAuthenticated:Observable<boolean> = this.store.select(auth.isAuthenticate);
+  hasGuideRole$:Observable<boolean> = this.store.select(auth.hasGuideRole);
+  hasUserRole$:Observable<boolean> = this.store.select(auth.hasUserRole);
+  hasAdminRole$:Observable<boolean> = this.store.select(auth.hasAdminRole);
 
   constructor(
-    public userService: UserService,
+    //public userService: UserService,
     private router: Router,
     private store: Store,
     private toastr: ToastrService

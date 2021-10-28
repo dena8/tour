@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { UserService } from '../../core/service/user.service';
 import { ITour } from '../../core/model/tour-create';
 import { Observable } from 'rxjs';
 
@@ -7,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { tour } from '../../+store';
 import { getAllTours, cancelRetrieve } from '../../+store/tour/action';
 import { map } from 'rxjs/operators';
-import { isAuthenticate } from '../../+store/auth/selector';
+import{auth} from '../../+store/index';
 
 @Component({
   selector: 'app-tour-card',
@@ -19,9 +18,10 @@ export class TourCardComponent implements OnDestroy {
   localUsername = localStorage.getItem('username');
   myGuideTours$: Observable<ITour[]> = this.store.select(tour.getAll).pipe(map((t) => t.filter((d) => d.creator.username === this.localUsername)));
   otherGuideTours$: Observable<ITour[]> = this.store.select(tour.getAll).pipe(map((t) => t.filter((d) => d.creator.username !== this.localUsername)));
-  isAuthenticate$ = this.store.select(isAuthenticate);
+  isAuthenticate$ = this.store.select(auth.isAuthenticate);
+  hasGuideRole$=this.store.select(auth.hasGuideRole);
 
-  constructor(public userService: UserService, private store: Store) {
+  constructor( private store: Store) {
     this.store.dispatch(getAllTours());
   }
 
