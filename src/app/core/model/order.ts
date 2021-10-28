@@ -7,4 +7,5 @@ export interface IOrder extends IBase{
     buyDate:string;
     customer: IUser<ITour>
     buyingProducts: ITour[]
+    customer_id:string
 }

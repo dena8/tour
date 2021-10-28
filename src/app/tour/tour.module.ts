@@ -39,9 +39,10 @@ import {globalMetaReducer,tourMetaReducer} from '../+store/meta-reducer';
       {path: 'description/:id', component: TourDescriptionComponent,canActivate:[AuthGuardGuard] },
       {path:'update/:id',component: UpdateComponent,canActivate:[AuthGuardGuard,GuideGuard]}, 
       {path:'list',component:TourListComponent,canActivate:[AuthGuardGuard,GuideGuard]}     
-    ]),    
+    ]),   
+    StoreModule.forFeature('global',reducer,{metaReducers:globalMetaReducer}),  
     StoreModule.forFeature('tour',tourReducer,{metaReducers:tourMetaReducer}),  
-    StoreModule.forFeature('global',reducer,{metaReducers:globalMetaReducer}), 
+  
     
     EffectsModule.forFeature([GlobalEffects,TourEffects])
   ],

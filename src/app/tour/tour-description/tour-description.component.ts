@@ -6,12 +6,13 @@ import { WeatherComponent } from 'src/app/sample/weather/weather.component';
 import { Store } from '@ngrx/store';
 import { addTourToCart } from '../../+store/buy/action';
 import { deleteTour } from '../../+store/tour/action';
-import { tour } from '../../+store';
+import { tour, global } from '../../+store';
 import { cart } from '../../+store/buy/selector';
 import { TourService } from '../../core/service/tour.service';
 import {map} from 'rxjs/operators';
 import { ITour } from 'src/app/core/model/tour-create';
 import { Observable } from 'rxjs';
+import{listOrders} from '../../+store/global/action';
 
 @Component({
   selector: 'app-tour-description',
@@ -32,7 +33,9 @@ export class TourDescriptionComponent implements OnInit {
     private router: Router,
     private store: Store,
     private tourService: TourService
-  ) {}
+  ) { 
+    this.store.dispatch(listOrders());
+  }
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params.id;
@@ -45,7 +48,21 @@ export class TourDescriptionComponent implements OnInit {
     this.userService.hasUserRole$().subscribe((data) => {
       if (data) {
         this.store.select(cart.findById(this.id)).subscribe((r) => (this.isAdded = !!r));
-      }
+        if(!this.isAdded){
+           this.store.select(global.getAllOrders).pipe(
+             map((orders)=>{
+               const asd =  orders.filter((order)=>order.customer_id=='90a22113-b261-4ced-8abc-d4b4ad396fa2');
+               if(!asd){
+                 return false;
+               }
+               const qwe = asd.find(t=>t.id==this.id );
+               return !!asd.find(t=>t.id==this.id );
+              })
+             
+
+           ).subscribe(data=> this.isAdded= data);
+        }
+         }
     });
   }
 

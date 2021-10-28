@@ -6,6 +6,7 @@ import {Store} from '@ngrx/store';
 import {global} from '../../+store/index'
 import { Observable } from 'rxjs';
 import {map} from 'rxjs/operators';
+import {listOrders} from '../../+store/global/action';
 
 @Component({
   selector: 'app-order-details',
@@ -19,7 +20,9 @@ export class OrderDetailsComponent implements OnInit {
   tourSum$:Observable<number>;
   order$: Observable<IOrder> ;
 
-  constructor(private buyService:BuyService, private rout: ActivatedRoute, private store:Store) { }
+  constructor(private buyService:BuyService, private rout: ActivatedRoute, private store:Store) {
+    this.store.dispatch(listOrders());
+   }
 
   ngOnInit(): void {
     this.id = this.rout.snapshot.paramMap.get('id'); 

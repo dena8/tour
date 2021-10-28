@@ -10,6 +10,5 @@ export interface ITour<T=string> extends IBase {
     price:number;
     startDate: Date; 
     region:string; 
-    creator:ILogin;
-      
+    creator:ILogin;      
 }
