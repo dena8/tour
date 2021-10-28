@@ -10,6 +10,7 @@ import {cart} from '../../+store/buy/selector';
 import {removeTour,clearCart} from '../../+store/buy/action';
 import {createOrder} from '../../+store/global/action';
 import {map} from 'rxjs/operators';
+import {getAllTours} from '../../+store/tour/action'
 
 @Component({
   selector: 'app-cart',
@@ -33,9 +34,13 @@ export class CartComponent implements OnInit {
 
   order() {   
     this.cart$.pipe(map(t=> t.reduce((acc,t)=>{
-     acc.push(t.name);  
-     return acc;   
-    },[]))).subscribe(cartItems=> this.store.dispatch(createOrder({cartItems})));  
+     acc.push(t.name);      return acc;
+      
+    },[]))).subscribe(cartItems=>{
+      console.log("CART ITEMS:", cartItems);
+     return  this.store.dispatch(createOrder({cartItems}))});  
+       
+    this.store.dispatch(getAllTours());
       
     this.store.dispatch(clearCart());
   }

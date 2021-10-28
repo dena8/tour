@@ -28,14 +28,14 @@ export function rootSyncReducer(reducer: ActionReducer<any>): ActionReducer<any>
 }
 
 export const tourReducerKeys = ['tour'];
-export const globalReducerKeys = ['global'];
+export const globalReducerKeys = ['order','category'];
 
 export function tourSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   return localStorageSync({ keys: tourReducerKeys, rehydrate: true })(reducer);
 }
 
 export function globalSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
-    return localStorageSync({ keys: globalReducerKeys, rehydrate:true  })( reducer);
+    return localStorageSync({ keys: globalReducerKeys, rehydrate:true, removeOnUndefined:true })( reducer);
 }
 
 export const metaReducers: MetaReducer<IState>[] = [rootSyncReducer];
