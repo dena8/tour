@@ -36,8 +36,7 @@ export class CartComponent implements OnInit {
     this.cart$.pipe(map(t=> t.reduce((acc,t)=>{
      acc.push(t.name);      return acc;
       
-    },[]))).subscribe(cartItems=>{
-      console.log("CART ITEMS:", cartItems);
+    },[]))).subscribe(cartItems=>{     
      return  this.store.dispatch(createOrder({cartItems}))});  
        
     this.store.dispatch(getAllTours());
