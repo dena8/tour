@@ -48,20 +48,19 @@ export class TourDescriptionComponent implements OnInit {
     this.userService.hasUserRole$().subscribe((data) => {
       if (data) {
         this.store.select(cart.findById(this.id)).subscribe((r) => (this.isAdded = !!r));
-        if(!this.isAdded){
-           this.store.select(global.getAllOrders).pipe(
-             map((orders)=>{
-               const asd =  orders.filter((order)=>order.customer_id=='90a22113-b261-4ced-8abc-d4b4ad396fa2');
-               if(!asd){
-                 return false;
-               }
-               const qwe = asd.find(t=>t.id==this.id );
-               return !!asd.find(t=>t.id==this.id );
-              })
-             
+        // if(!this.isAdded){
+        //    this.store.select(global.getAllOrders).pipe(
+        //      map((orders)=>{
+        //        const asd =  orders.filter((order)=>order.customer_id=='90a22113-b261-4ced-8abc-d4b4ad396fa2');
+        //        if(!asd){
+        //          return false;
+        //        }
+        //        const qwe = asd.find(t=>t.id==this.id );
+        //        return !!asd.find(t=>t.id==this.id );
+        //       })           
 
-           ).subscribe(data=> this.isAdded= data);
-        }
+        //    ).subscribe(data=> this.isAdded= data);
+        // }
          }
     });
   }
