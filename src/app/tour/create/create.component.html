@@ -4,7 +4,7 @@
       <h2>You need a new category?</h2>
       <p>Click this button</p>
       <button [routerLink]="['/category','create']" type="button" class="btn btn-outline-secondary"
-        style="color: white;">Create category</button>
+        [ngStyle]="{color: 'white'}">Create category</button>
     </div>
     <div class="white-panel">
       <h3>Create tour</h3>

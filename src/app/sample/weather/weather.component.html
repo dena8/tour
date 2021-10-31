@@ -3,12 +3,10 @@
     <div class='wave -two'></div>
     <div class='wave -three'></div>    
     <div class="weathercon">
-      <!-- <fa-icon [icon]="faWeather" class='fas fa-cloud-moon' style='color:aquamarine;'></fa-icon>/ -->
-      <fa-icon [icon]="faWeather" style='color: rgb(127, 225, 255);'></fa-icon>
+      <fa-icon [icon]="faWeather" style="color: rgb(127, 225, 255)" ></fa-icon>
     </div>  
     <div class="info">
-      <h4 class="location">{{(forecast$|async)?.location?.name}}</h4>
-      <!-- <p class="date">MONDAY | SEP 12 | 12:34</p> -->
+      <h4 class="location">{{(forecast$|async)?.location?.name}}</h4>     
       <p class="date">CLOUD COVER {{(forecast$|async)?.current?.cloudcover}} | WIND SPEED {{(forecast$|async)?.current?.wind_speed}}</p>
       <p class="date">{{(forecast$|async)?.location?.localtime}}</p>
       <h3 class="temp">{{(forecast$|async)?.current?.temperature}} &deg;C | {{(forecast$|async)?.current?.humidity}} &deg;Pa</h3>
