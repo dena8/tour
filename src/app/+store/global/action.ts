@@ -10,6 +10,10 @@ export const ActionTypes ={
     getAllCategoriesSuccess:'[Get All Categories] Success',
     getAllCategoriesFailed: '[Get All Categories] Failed',
 
+    createCategory:'[Create Category]',
+    createCategorySuccess:'[Create Category Success]',
+    createCategoryFailed: '[Create Category Failed]',
+
     createOrder:'[Create Order]',
     createOrderSuccess:'[Create Order Success]',
     createOrderFailed: '[Create Order Failed]',
@@ -22,6 +26,10 @@ export const ActionTypes ={
 export const getAllCategories = createAction(`${namespace} ${ActionTypes.getAllCategories}`);
 export const getAllCategoriesSuccess = createAction(`${namespace} ${ActionTypes.getAllCategoriesSuccess}`,props<{categories:ICategory[]}>());
 export const getAllCategoriesFailed = createAction(`${namespace} ${ActionTypes.getAllCategoriesFailed}`,props<{err:HttpErrorResponse}>());
+
+export const createCategory = createAction(`${namespace} ${ActionTypes.createCategory}`,props<{name:string}>());
+export const createCategorySuccess = createAction(`${namespace} ${ActionTypes.createCategorySuccess}`,props<{category:ICategory}>());
+export const createCategoryFailed = createAction(`${namespace} ${ActionTypes.createCategoryFailed}`,props<{err:HttpErrorResponse}>());
 
 export const createOrder = createAction(`${namespace} ${ActionTypes.createOrder}`,props<{cartItems:string[]}>());
 export const createOrderSuccess = createAction(`${namespace} ${ActionTypes.createOrderSuccess}`,props<{order:IOrder}>());

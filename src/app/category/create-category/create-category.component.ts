@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { CategoryService } from '../../core/service/category.service'
+import {Store} from '@ngrx/store';
+import {createCategory} from '../../+store/global/action'
 
 @Component({
   selector: 'app-create-category',
@@ -10,7 +10,7 @@ import { CategoryService } from '../../core/service/category.service'
 })
 export class CreateCategoryComponent implements OnInit {
   form: FormGroup;
-  constructor(private fb: FormBuilder, private categoryService: CategoryService, private router: Router) {}
+  constructor(private fb: FormBuilder,private store:Store) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -24,11 +24,8 @@ export class CreateCategoryComponent implements OnInit {
 
   createCategory() {
     if (this.form.invalid) { return; }
-    this.categoryService.createCategory(this.form.value).subscribe(data => {
-      this.form.reset()
-    }, err => {
-      console.log("ERROR", err);
-    })
+    this.store.dispatch(createCategory(this.form.value));
+    this.form.reset(); 
   }
 
 }
